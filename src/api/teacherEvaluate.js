@@ -23,7 +23,7 @@ export function getTeacherInfo(parems) {
     params: parems
   })
 }
-// 教师基本信息
+// 教师基本信息123
 export function getTeacherBase(token) {
   return request({
     url: '/api/teacher/teacherbaseinfo',
