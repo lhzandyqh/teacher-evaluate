@@ -3,9 +3,9 @@
  */
 
 export function isvalidUsername(str) {
-  const valid_map = ['admin', 'editor']
+  // const valid_map = ['admin', 'editor']
   // trim去除字符串2边的空格
-  return valid_map.indexOf(str.trim()) >= 0
+  return str.trim()
 }
 
 /* 合法uri*/
