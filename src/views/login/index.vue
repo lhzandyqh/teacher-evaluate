@@ -150,8 +150,8 @@ export default {
       activeIndex: '1',
       loginTitle: '登录',
       loginForm: {
-        user_name: 'admin',
-        password: 'admin'
+        user_name: '10010',
+        password: '123456'
       },
       loginRules: {
         user_name: [{ required: true, trigger: 'blur', validator: validateUsername }],

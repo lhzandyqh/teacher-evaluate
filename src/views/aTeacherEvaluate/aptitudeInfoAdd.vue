@@ -276,7 +276,7 @@
     <div v-if="stauts===2" class="firstCont">
       <div class="components-container">
         <div class="editor-container">
-          <dropzone id="myVueDropzone" url="http://58.119.112.11:11028/api/upload" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS"/>
+          <dropzone id="myVueDropzone" url="https://jsonplaceholder.typicode.com/posts/" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS"/>
         </div>
       </div>
     </div>
