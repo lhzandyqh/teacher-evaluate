@@ -372,22 +372,17 @@ $light_gray:#eee;
 }
 
 .el-carousel__item:nth-of-type(1) {
-  background: url("http://www.zgcschool.com/template/zgczx/img/01.jpg") no-repeat center;
+  background: url("http://58.119.112.11:11005/3da6ef7d-c9dd-4ca1-bdee-c83e88dd35bb.png") no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
 }
 .el-carousel__item:nth-of-type(2) {
-  background: url("http://www.zgcschool.com/template/zgczx/img/02.jpg") no-repeat center;
+  background: url("http://58.119.112.11:11005/5f2c2637-35f0-4b8d-a61c-7bcc67d84f31.jpg") no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
 }
 .el-carousel__item:nth-of-type(3) {
-  background: url("http://www.zgcschool.com/template/zgczx/img/banner03.png") no-repeat center;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.el-carousel__item:nth-of-type(4) {
-  background: url("../../assets/img/4.jpg") no-repeat;
+  background: url("http://58.119.112.11:11005/2edc2a5b-6a63-410a-a85a-6fb66186239f.jpg") no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
 }

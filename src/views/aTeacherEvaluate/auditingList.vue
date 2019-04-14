@@ -73,16 +73,41 @@
 
       <el-table-column align="center" label="操作" width="220">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" icon="el-icon-zoom-in">查看</el-button>
+          <el-button type="primary" size="small" icon="el-icon-zoom-in" @click="getAuditing(scope.row.id)">查看</el-button>
         </template>
       </el-table-column>
 
     </el-table>
+
+    <!--查看弹框-->
+    <el-dialog :visible.sync="dialogPvVisible" title="审核详情">
+      审核详情
+      <!--<el-table :data="pvData" fit highlight-current-row style="width: 100%">-->
+      <!--<el-table-column prop="cert_issued_time" label="申请时间"/>-->
+      <!--<el-table-column prop="cert_level" label="资质等级"/>-->
+      <!--<el-table-column prop="cert_type" label="资质类型"/>-->
+      <!--<el-table-column prop="comment" label="审核状态"/>-->
+      <!--<el-table-column prop="dept_level" label="扩展信息"/>-->
+      <!--</el-table>-->
+      <el-table :data="formAuditing" fit highlight-current-row style="width: 100%;margin-top: 40px;">
+        <el-table-column align="center" label="审核原因">
+          <template slot-scope="scope">
+            <textarea id="" v-model="scope.row.auditingReson" name="" style="width: 100%;" rows="10"/>
+          </template>
+        </el-table-column>
+      </el-table>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="success" @click="editAuditing(1)">审核通过</el-button>
+        <el-button type="danger" @click="editAuditing(0)">审核不通过</el-button>
+        <el-button type="primary" @click="dialogPvVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getAuditingList } from '@/api/teacherEvaluate'
+// import { getAuditingList, getAuditing, editAuditing } from '@/api/teacherEvaluate'
+import { getAuditingList, editAuditing } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -105,7 +130,10 @@ export default {
         page: 1,
         limit: 10
       },
-      token: getToken()
+      token: getToken(),
+      dialogPvVisible: false,
+      thisId: '',
+      formAuditing: [{ auditingReson: '' }]
     }
   },
   created() {
@@ -138,6 +166,23 @@ export default {
       this.$message({
         message: 'The title has been edited',
         type: 'success'
+      })
+    },
+    getAuditing(id) {
+      this.thisId = id
+      // let that = this
+      // getAuditing({ token: this.token, id: id }).then(response => {
+      //   console.log(response.data)
+      this.dialogPvVisible = true
+      //   that.pvData[0] = response.data
+      // })
+    },
+    editAuditing(onStatus) {
+      console.log(this.formAuditing[0].auditingReson)
+      editAuditing({ token: this.token, id: this.thisId, comment: this.formAuditing[0].auditingReson, data: onStatus }).then(response => {
+        console.log(response)
+        // this.pvData[0] = response.data
+        // this.dialogPvVisible = fasle
       })
     }
   }

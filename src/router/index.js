@@ -283,7 +283,7 @@ export const asyncRouterMap = [
   {
     path: '/icon',
     component: Layout,
-    hidden: true,
+    // hidden: true,
     children: [
       {
         path: 'index',

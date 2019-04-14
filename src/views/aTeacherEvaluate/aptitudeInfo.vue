@@ -38,7 +38,9 @@
 
       <el-table-column width="120" align="center" label="审核状态">
         <template slot-scope="scope">
-          <span>{{ scope.row.comment }}</span>
+          <el-button v-if="scope.row.status==='-1'" type="primary" size="small" plain>待审核</el-button>
+          <el-button v-if="scope.row.status==='1'" type="success" size="small" plain>审核通过</el-button>
+          <el-button v-if="scope.row.status==='0'" type="danger" size="small" plain>审核未通过</el-button>
         </template>
       </el-table-column>
 
@@ -76,20 +78,42 @@
       <!--</template>-->
       <!--</el-table-column>-->
 
-      <el-table-column align="center" label="操作" width="220">
+      <el-table-column align="center" label="操作" width="290">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.edit" type="success" size="small" icon="el-icon-circle-check-outline" @click="confirmEdit(scope.row)">确认</el-button>
-          <el-button v-else type="primary" size="small" icon="el-icon-edit">修改</el-button>
+          <el-button type="primary" size="small" icon="el-icon-zoom-in" @click="getApitiude(scope.row.id)">查看</el-button>
+          <el-button type="primary" size="small" icon="el-icon-edit" @click="goEdit(scope.row.id)">修改</el-button>
           <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteApitiude(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
 
     </el-table>
+
+    <!--查看弹框-->
+    <el-dialog :visible.sync="dialogPvVisible" title="资质详情">
+      <el-table :data="pvData" fit highlight-current-row style="width: 100%">
+        <el-table-column prop="cert_issued_time" label="申请时间"/>
+        <el-table-column prop="cert_level" label="资质等级"/>
+        <el-table-column prop="cert_type" label="资质类型"/>
+        <el-table-column prop="comment" label="审核状态"/>
+        <el-table-column prop="dept_level" label="扩展信息"/>
+      </el-table>
+      <el-table :data="pvData" fit highlight-current-row style="width: 100%;margin-top: 40px;">
+        <el-table-column prop="issuing_agency" label="代理机构"/>
+        <el-table-column prop="point" label="积分"/>
+        <el-table-column prop="reason" label="结果"/>
+        <el-table-column prop="t_qualification_name" label="授权类别"/>
+        <el-table-column prop="t_qualification_num" label="授权编号"/>
+      </el-table>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogPvVisible = false">确定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { getAptitudeInfo, getAptitudeDelete } from '@/api/teacherEvaluate'
+import { getAptitudeInfo, getAptitudeDelete, getAptitude } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -112,7 +136,9 @@ export default {
         page: 1,
         limit: 10
       },
-      token: getToken()
+      token: getToken(),
+      dialogPvVisible: false,
+      pvData: []
     }
   },
   created() {
@@ -145,6 +171,15 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    getApitiude(id) {
+      getAptitude({ token: this.token, id: id }).then(response => {
+        this.dialogPvVisible = true
+        this.pvData[0] = response.data
+      })
+    },
+    goEdit(id) {
+      this.$router.push({ path: '/teacherEvaluate/aptitudeInfoAdd', query: { id: id }})
     }
     // cancelEdit(row) {
     //   row.title = row.originalTitle
