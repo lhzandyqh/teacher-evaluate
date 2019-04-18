@@ -28,7 +28,7 @@ import nestedRouter from './modules/nested'
     title: 'title'               the name show in submenu and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar
     noCache: true                if true, the page will no be cached(default is false)
-    breadcrumb: false            if false, the item will hidden in breadcrumb(default is true)
+    breadcrumb: false resultCount           if false, the item will hidden in breadcrumb(default is true)
   }
 **/
 export const constantRouterMap = [
@@ -45,8 +45,8 @@ export const constantRouterMap = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
+    component: () => import('@/views/login/index')
+    // hidden: true
   },
   {
     path: '/auth-redirect',
@@ -66,8 +66,10 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: '/teacherEvaluate/teacherInfo',
+    redirect: '/webIndex',
+    // redirect: '/webIndex',
     hidden: true,
+    meta: { roles: ['elv', 'grow'] },
     children: [
       {
         path: 'dashboard',
@@ -76,6 +78,12 @@ export const constantRouterMap = [
         meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
       }
     ]
+  },
+  {
+    path: '/webIndex',
+    component: () => import('@/views/webIndex/index'),
+    name: 'webIndex',
+    meta: { roles: ['elv', 'grow'] }
   }
   // {
   //   path: '/documentation',
@@ -113,9 +121,181 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
+    path: '/teacherInfo',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/teacherInfo'),
+        name: 'TeacherInfo',
+        meta: { title: '教师信息', icon: 'documentation', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  {
+    path: '/aptitudeInfo',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/aptitudeInfo'),
+        name: 'aptitudeInfo',
+        meta: { title: '资质信息', icon: 'form', noCache: true, roles: ['elv'] }
+      },
+      {
+        path: 'aptitudeInfoAdd',
+        component: () => import('@/views/aTeacherEvaluate/aptitudeInfoAdd'),
+        name: 'aptitudeInfoAdd',
+        hidden: true,
+        meta: {
+          title: '添加资质信息'
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
+    path: '/integrationInfo',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/integrationInfo'),
+        name: 'IntegrationInfo',
+        meta: { title: '积分详情', icon: 'component', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  {
+    path: '/auditingList',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/auditingList'),
+        name: 'AuditingList',
+        meta: { title: '审核列表', icon: 'list', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  {
+    path: '/auditingHistory',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/auditingHistory'),
+        name: 'AuditingHistory',
+        meta: { title: '审核历史', icon: 'icon', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  {
+    path: '/countInfo',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/countInfo'),
+        name: 'CountInfo',
+        meta: { title: '统计信息', icon: 'table', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  {
+    path: '/authorityManage',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/authorityManage'),
+        name: 'AuthorityManage',
+        meta: { title: '权限管理', icon: 'peoples', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  {
+    path: '/integrationConfig',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['elv'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/integrationConfig'),
+        name: 'IntegrationConfig',
+        meta: { title: '积分配置', icon: 'edit', noCache: true, roles: ['elv'] }
+      }
+    ]
+  },
+  // 教师成长部分
+  {
+    path: '/resultCount',
+    component: Layout,
+    // hidden: true,
+    meta: {
+      roles: ['grow'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherGrow/resultCount'),
+        name: 'ResultCount',
+        meta: { title: '成果统计', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/workShare',
+    component: Layout,
+    // hidden: true,
+    meta: {
+      roles: ['grow'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherGrow/workShare'),
+        name: 'WorkShare',
+        meta: { title: '工作分享', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/workTask',
+    component: Layout,
+    // hidden: true,
+    meta: {
+      roles: ['grow'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherGrow/workTask'),
+        name: 'WorkTask',
+        meta: { title: '工作内容', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/teacherEvaluate',
     component: Layout,
     redirect: '/teacherEvaluate/index',
+    hidden: true,
     alwaysShow: true, // will always show the root menu
     meta: {
       title: '教师评价',
@@ -215,7 +395,7 @@ export const asyncRouterMap = [
     meta: {
       title: '教师成长',
       icon: 'people',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: ['other'] // you can set roles in root nav
     },
     children: [
       {
@@ -223,8 +403,8 @@ export const asyncRouterMap = [
         component: () => import('@/views/aTeacherGrow/resultCount'),
         name: 'resultCount',
         meta: {
-          title: '成果统计',
-          roles: ['admin'] // or you can only set roles in sub nav
+          title: '成果统计'
+          // roles: ['admin'] // or you can only set roles in sub nav
         }
       },
       {

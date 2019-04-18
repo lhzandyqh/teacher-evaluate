@@ -27,19 +27,19 @@
 
       <el-table-column align="center" label="资质类型">
         <template slot-scope="scope">
-          <span>{{ scope.row.qualificationType }}</span>
+          <span>{{ scope.row.qualification_type }}</span>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="隶属级别">
         <template slot-scope="scope">
-          <span>{{ scope.row.departmentLevel }}</span>
+          <span>{{ scope.row.department_level }}</span>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="资质等级">
         <template slot-scope="scope">
-          <span>{{ scope.row.qualificationLevel }}</span>
+          <span>{{ scope.row.qualification_level }}</span>
         </template>
       </el-table-column>
 
@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { integrationConfigList, integrationSearch, creatIntegration } from '@/api/teacherEvaluate'
+import { integrationConfigList, integrationSearch, creatIntegration, updateIntegration } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -122,7 +122,11 @@ export default {
       list: null,
       listLoading: true,
       token: getToken(),
-      listQuery: {},
+      listQuery: {
+        qualification_type: '',
+        department_level: '',
+        qualification_level: ''
+      },
       listCreate: {},
       dialogPvVisible: false
     }
@@ -134,7 +138,7 @@ export default {
     getList() {
       this.listLoading = true
       integrationConfigList(this.token).then(response => {
-        const items = response.data.points
+        const items = response.data
         this.list = items.map(v => {
           this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
           v.originalScore = v.score //  will be used when user click the cancel botton
@@ -152,11 +156,21 @@ export default {
       })
     },
     confirmEdit(row) {
-      row.edit = false
-      row.originalScore = row.score
-      this.$message({
-        message: '修改成功',
-        type: 'success'
+      updateIntegration({ ...row, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          row.edit = false
+          row.originalScore = row.score
+          this.$message({
+            message: '修改成功',
+            type: 'success'
+          })
+        } else {
+          row.edit = false
+          this.$message({
+            message: '修改失败',
+            type: 'warning'
+          })
+        }
       })
     },
     handleFilter() {

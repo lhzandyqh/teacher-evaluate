@@ -31,6 +31,14 @@ export function creatIntegration(parems) {
     params: parems
   })
 }
+// 修改积分
+export function updateIntegration(parems) {
+  return request({
+    url: '/api/pointcertificate/insert',
+    method: 'post',
+    params: parems
+  })
+}
 // 教师信息
 export function getTeacherInfo(parems) {
   return request({

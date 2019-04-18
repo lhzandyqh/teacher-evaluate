@@ -74,7 +74,14 @@ const user = {
             reject('Verification failed, please login again.')
           }
           // const data = response.data
-          commit('SET_ROLES', ['admin'])
+          const role = window.localStorage.getItem('role')
+          if (role) {
+            commit('SET_ROLES', [role])
+          } else {
+            commit('SET_ROLES', ['admin'])
+          }
+
+          console.log('getUserInfo')
           commit('SET_AVATAR', 'http://58.119.112.11:11001/img/avatar.jpg')
           // if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
           // commit('SET_ROLES', data.roles)
@@ -112,11 +119,24 @@ const user = {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
+          window.localStorage.setItem('role', '')
           removeToken()
           resolve()
         }).catch(error => {
           reject(error)
         })
+      })
+    },
+    LogOutRole({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        // logout(state.token).then(() => {
+        //   commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
+        // removeToken()
+        resolve()
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
 
