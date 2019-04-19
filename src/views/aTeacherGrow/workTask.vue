@@ -14,8 +14,49 @@
                 <education-jobs-table/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table/>
+              </div>
+            </el-row>
           </el-tab-pane>
-          <el-tab-pane label="二月" name="february">二月</el-tab-pane>
+          <el-tab-pane label="二月" name="february">
+            <el-row>
+              <div class="formContainer">
+                <teaching-jobs-table/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table/>
+              </div>
+            </el-row>
+          </el-tab-pane>
           <el-tab-pane label="三月" name="march">三月</el-tab-pane>
           <el-tab-pane label="四月" name="april">四月</el-tab-pane>
           <el-tab-pane label="五月" name="may">五月</el-tab-pane>
@@ -36,9 +77,12 @@
 import workForm from '@/views/aTeacherGrow/teacherWorkForm/teacherWorkForm'
 import teachingJobsTable from '@/views/aTeacherGrow/teacherWorkTable/teachingJobsTable'
 import educationJobsTable from '@/views/aTeacherGrow/teacherWorkTable/educationJobTable'
-
+import classSituationTable from '@/views/aTeacherGrow/teacherWorkTable/classSituationTable'
+import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organizeActivityTable'
+import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
+import guideTeacherTable from '@/views/aTeacherGrow/teacherWorkTable/guideTeacherTable'
 export default {
-  components: { workForm, teachingJobsTable, educationJobsTable },
+  components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable },
   data() {
     return {
       activeName: 'april'
