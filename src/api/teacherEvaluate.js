@@ -55,6 +55,14 @@ export function getTeacherBase(token) {
     params: { token }
   })
 }
+// 修改教师信息
+export function updateTeacherInfo(parems) {
+  return request({
+    url: '/api/teacher/update',
+    method: 'post',
+    params: parems
+  })
+}
 // 资质信息
 export function getAptitudeInfo(token) {
   return request({
