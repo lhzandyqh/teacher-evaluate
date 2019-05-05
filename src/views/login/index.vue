@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-button class="thirdparty-button" type="primary" @click="showDialog=true">登录</el-button>
     <!-- 登录弹框 -->
-    <el-dialog :title="loginTitle" :visible.sync="showDialog">
+    <el-dialog :title="loginTitle" :visible.sync="showDialog" width="30%">
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
         <el-form-item prop="user_name">
           <span class="svg-container">
@@ -148,7 +148,7 @@ export default {
       dialogNote: false,
       dialogNew: false,
       activeIndex: '1',
-      loginTitle: '登录',
+      loginTitle: '系统登录',
       loginForm: {
         user_name: '10010',
         password: '123456'

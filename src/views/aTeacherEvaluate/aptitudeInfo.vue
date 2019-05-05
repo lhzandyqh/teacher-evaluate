@@ -175,11 +175,11 @@ export default {
     getApitiude(id) {
       getAptitude({ token: this.token, id: id }).then(response => {
         this.dialogPvVisible = true
-        this.pvData[0] = response.data
+        this.pvData = [response.data]
       })
     },
     goEdit(id) {
-      this.$router.push({ path: '/teacherEvaluate/aptitudeInfoAdd', query: { id: id }})
+      this.$router.push({ path: '/aptitudeInfo/aptitudeInfoAdd', query: { id: id }})
     }
     // cancelEdit(row) {
     //   row.title = row.originalTitle

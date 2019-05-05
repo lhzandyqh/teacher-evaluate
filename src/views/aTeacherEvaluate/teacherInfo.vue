@@ -153,13 +153,14 @@ export default {
           row.edit = false
           row.originalScore = row.score
           this.$message({
-            message: '修改成功',
+            message: response.data.msg,
             type: 'success'
           })
         } else {
+          row.value = row.originalValue
           row.edit = false
           this.$message({
-            message: '修改失败',
+            message: response.data.msg,
             type: 'warning'
           })
         }

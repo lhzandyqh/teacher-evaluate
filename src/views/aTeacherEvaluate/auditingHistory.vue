@@ -101,13 +101,22 @@
     <!--查看弹框-->
     <el-dialog :visible.sync="dialogPvVisible" title="审核详情">
       审核历史详情
-      <!--<el-table :data="pvData" fit highlight-current-row style="width: 100%">-->
-      <!--<el-table-column prop="cert_issued_time" label="申请时间"/>-->
-      <!--<el-table-column prop="cert_level" label="资质等级"/>-->
-      <!--<el-table-column prop="cert_type" label="资质类型"/>-->
-      <!--<el-table-column prop="comment" label="审核状态"/>-->
-      <!--<el-table-column prop="dept_level" label="扩展信息"/>-->
-      <!--</el-table>-->
+      <el-table :data="pvData" fit highlight-current-row style="width: 100%">
+        <el-table-column prop="tQualificationName" label="资质名称"/>
+        <el-table-column prop="certLevel" label="资质等级"/>
+        <el-table-column prop="certType" label="资质类型"/>
+        <el-table-column prop="deptLevel" label="隶属级别"/>
+        <!--<el-table-column prop="certType" label="证书颁发日期"/>-->
+        <el-table-column prop="issuingAgency" label="颁发机构"/>
+        <el-table-column prop="tQualificationNum" label="证书编号"/>
+        <el-table-column label="审核状态" align="center">
+          <template slot-scope="scope">
+            <div v-if="scope.row.status==='-1'">审核待通过</div>
+            <div v-if="scope.row.status==='1'">审核通过</div>
+            <div v-if="scope.row.status==='0'">审核未通过</div>
+          </template>
+        </el-table-column>
+      </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button type="success" @click="editAuditing(1)">审核通过</el-button>
         <el-button type="danger" @click="editAuditing(0)">审核不通过</el-button>
@@ -119,7 +128,7 @@
 </template>
 
 <script>
-import { getAuditingHistory, editAuditingHistory } from '@/api/teacherEvaluate'
+import { getAuditingHistory, editAuditingHistory, getAuditing } from '@/api/teacherEvaluate'
 // import { getAuditingHistory, getAuditingListHistory, editAuditingHistory } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
@@ -145,7 +154,8 @@ export default {
       },
       token: getToken(),
       dialogPvVisible: false,
-      thisId: ''
+      thisId: '',
+      pvData: []
     }
   },
   created() {
@@ -156,11 +166,6 @@ export default {
       this.listLoading = true
       getAuditingHistory(this.token).then(response => {
         this.list = response.data.qualification
-        // this.list = items.map(v => {
-        //   this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
-        //   v.originalTitle = v.title //  will be used when user click the cancel botton
-        //   return v
-        // })
         this.listLoading = false
       })
     },
@@ -182,18 +187,16 @@ export default {
     },
     getAuditing(id) {
       this.thisId = id
-      // let that = this
-      // getAuditing({ token: this.token, id: id }).then(response => {
-      //   console.log(response.data)
-      this.dialogPvVisible = true
-      //   that.pvData[0] = response.data
-      // })
+      const that = this
+      getAuditing({ token: this.token, id: id }).then(response => {
+        console.log(response.data)
+        this.dialogPvVisible = true
+        that.pvData = [response.data]
+      })
     },
     editAuditing(onStatus) {
       editAuditingHistory({ token: this.token, id: this.thisId, data: onStatus }).then(response => {
-        console.log(response)
-        // this.pvData[0] = response.data
-        // this.dialogPvVisible = fasle
+        this.dialogPvVisible = false
       })
     }
   }
