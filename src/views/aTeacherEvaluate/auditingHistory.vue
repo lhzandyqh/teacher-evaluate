@@ -195,8 +195,14 @@ export default {
       })
     },
     editAuditing(onStatus) {
-      editAuditingHistory({ token: this.token, id: this.thisId, data: onStatus }).then(response => {
+      editAuditingHistory({ token: this.token, id: parseInt(this.thisId), data: onStatus }).then(response => {
         this.dialogPvVisible = false
+        if (response.data.code === 200) {
+          this.$message({
+            message: response.data.msg,
+            type: 'success'
+          })
+        }
       })
     }
   }

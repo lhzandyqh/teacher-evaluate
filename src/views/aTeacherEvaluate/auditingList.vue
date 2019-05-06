@@ -188,8 +188,14 @@ export default {
     },
     editAuditing(onStatus) {
       console.log(this.formAuditing[0].auditingReson)
-      editAuditing({ token: this.token, id: this.thisId, comment: this.formAuditing[0].auditingReson, data: onStatus }).then(response => {
+      editAuditing({ token: this.token, id: parseInt(this.thisId), comment: this.formAuditing[0].auditingReson, data: onStatus }).then(response => {
         this.dialogPvVisible = false
+        if (response.data.code === 200) {
+          this.$message({
+            message: response.data.msg,
+            type: 'success'
+          })
+        }
       })
     }
   }
