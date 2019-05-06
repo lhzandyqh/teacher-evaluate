@@ -1,7 +1,21 @@
 <template>
   <div class="app-container">
     <el-row>
-      <h3>工作分享(测试)</h3>
+      <h3>工作分享</h3>
+    </el-row>
+    <el-row>
+      <h5 style="float: left">分享文章标题</h5>
+    </el-row>
+    <el-row>
+      <el-input
+        :rows="1"
+        v-model="textarea"
+        type="textarea"
+        style="width: 50%"
+        placeholder="请输入文章标题"/>
+    </el-row>
+    <el-row>
+      <h5 style="float: left">分享文章内容</h5>
     </el-row>
     <el-row>
       <div class="innerContainer">
@@ -56,12 +70,17 @@ export default {
         { id: 1, noticeTitle: '第一篇', noticeTime: '1998-11-15' }, { id: 2, noticeTitle: '第二篇', noticeTime: '1998-11-15' },
         { id: 3, noticeTitle: '第三篇', noticeTime: '1998-11-15' }, { id: 4, noticeTitle: '第四篇', noticeTime: '1998-11-15' },
         { id: 5, noticeTitle: '第五篇', noticeTime: '1998-11-15' }, { id: 6, noticeTitle: '第六篇', noticeTime: '1998-11-15' }
-      ]
+      ],
+      textarea: '',
+      content: ''
     }
   },
   methods: {
     openNoteDialog() {
       console.log('喂喂喂')
+    },
+    print() {
+      console.log(this.content + this.textarea)
     }
   }
 }
