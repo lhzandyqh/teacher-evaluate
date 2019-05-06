@@ -15,6 +15,30 @@ export function integrationInfoList(token) {
     params: { token }
   })
 }
+// 积分详情查询
+export function integrationSearch(parems) {
+  return request({
+    url: '/api/pointcertificate/search',
+    method: 'get',
+    params: parems
+  })
+}
+// 新增积分
+export function creatIntegration(parems) {
+  return request({
+    url: '/api/pointcertificate/insert',
+    method: 'post',
+    params: parems
+  })
+}
+// 修改积分
+export function updateIntegration(parems) {
+  return request({
+    url: '/api/pointcertificate/insert',
+    method: 'post',
+    params: parems
+  })
+}
 // 教师信息
 export function getTeacherInfo(parems) {
   return request({
@@ -31,12 +55,28 @@ export function getTeacherBase(token) {
     params: { token }
   })
 }
+// 修改教师信息
+export function updateTeacherInfo(parems) {
+  return request({
+    url: '/api/teacher/update',
+    method: 'post',
+    params: parems
+  })
+}
 // 资质信息
 export function getAptitudeInfo(token) {
   return request({
     url: '/api/qualificationinfo',
     method: 'get',
     params: { token }
+  })
+}
+// 资质查看
+export function getAptitude(parmes) {
+  return request({
+    url: '/api/qualificationinfo/query',
+    method: 'post',
+    params: parmes
   })
 }
 // 资质信息删除
@@ -55,6 +95,24 @@ export function getAuditingList(token) {
     params: { token }
   })
 }
+// 审核列表查看
+export function getAuditing(parmes) {
+  return request({
+    url: '/api/qualificationauditlist/show',
+    method: 'post',
+    params: parmes
+  })
+}
+
+// 修改审核
+export function editAuditing(parmes) {
+  return request({
+    url: '/api/qualificationauditlist/update',
+    method: 'post',
+    params: parmes
+  })
+}
+
 // 审核历史
 export function getAuditingHistory(token) {
   return request({
@@ -63,6 +121,25 @@ export function getAuditingHistory(token) {
     params: { token }
   })
 }
+
+// 审核历史查看
+export function getAuditingListHistory(parmes) {
+  return request({
+    url: '/api/qualificationhistory/show',
+    method: 'post',
+    params: parmes
+  })
+}
+
+// 修改审核历史
+export function editAuditingHistory(parmes) {
+  return request({
+    url: '/api/qualificationhistory/update',
+    method: 'post',
+    params: parmes
+  })
+}
+
 // 统计信息
 export function getCountListAll(token) {
   return request({
@@ -71,6 +148,25 @@ export function getCountListAll(token) {
     params: { token }
   })
 }
+
+// 权限列表
+export function getAuthorityList(token) {
+  return request({
+    url: '/api/userrole',
+    method: 'get',
+    params: { token }
+  })
+}
+
+// 修改权限
+export function editAuthority(parmes) {
+  return request({
+    url: '/api/userrole/setTeacherRole',
+    method: 'post',
+    params: parmes
+  })
+}
+
 // 统计信息根据学科获取数据
 export function getCountList(parems) {
   return request({

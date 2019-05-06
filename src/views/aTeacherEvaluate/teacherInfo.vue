@@ -43,7 +43,17 @@
           </el-table-column>
           <el-table-column align="center" label="内容">
             <template slot-scope="scope">
-              <span>{{ scope.row.value }}</span>
+              <template v-if="scope.row.edit">
+                <el-input v-model="scope.row.value" class="edit-input" size="small"/>
+                <el-button class="cancel-btn" size="small" icon="el-icon-refresh" type="warning" @click="cancelEdit(scope.row)">取消</el-button>
+              </template>
+              <span v-else>{{ scope.row.value }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="操作" >
+            <template slot-scope="scope">
+              <el-button v-if="scope.row.edit" type="success" size="small" icon="el-icon-circle-check-outline" @click="confirmEdit(scope.row)">完成</el-button>
+              <el-button v-else type="primary" size="small" icon="el-icon-edit" @click="scope.row.edit=!scope.row.edit">修改</el-button>
             </template>
           </el-table-column>
           <!--<el-table-column min-width="300px" label="Title">-->
@@ -69,7 +79,7 @@
 </template>
 
 <script>
-import { getTeacherInfo, getTeacherBase } from '@/api/teacherEvaluate'
+import { getTeacherInfo, getTeacherBase, updateTeacherInfo } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -105,7 +115,12 @@ export default {
     getList() {
       this.listLoading = true
       getTeacherInfo({ token: this.token }).then(response => {
-        this.list = response.data
+        const items = response.data
+        this.list = items.map(v => {
+          this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
+          v.originalValue = v.value //  will be used when user click the cancel botton
+          return v
+        })
         this.listLoading = false
       })
     },
@@ -123,19 +138,31 @@ export default {
       })
     },
     cancelEdit(row) {
-      row.title = row.originalTitle
+      row.value = row.originalValue
       row.edit = false
       this.$message({
-        message: 'The title has been restored to the original value',
+        message: '取消修改',
         type: 'warning'
       })
     },
     confirmEdit(row) {
-      row.edit = false
-      row.originalTitle = row.title
-      this.$message({
-        message: 'The title has been edited',
-        type: 'success'
+      const prams = {}
+      prams[row.name] = row.value
+      updateTeacherInfo({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          row.edit = false
+          row.originalScore = row.score
+          this.$message({
+            message: '修改成功',
+            type: 'success'
+          })
+        } else {
+          row.edit = false
+          this.$message({
+            message: '修改失败',
+            type: 'warning'
+          })
+        }
       })
     }
   }

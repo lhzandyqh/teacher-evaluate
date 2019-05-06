@@ -93,16 +93,34 @@
 
       <el-table-column align="center" label="操作" width="220">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" icon="el-icon-zoom-in">查看</el-button>
+          <el-button type="primary" size="small" icon="el-icon-zoom-in" @click="getAuditing(scope.row.id)">查看</el-button>
         </template>
       </el-table-column>
 
     </el-table>
+    <!--查看弹框-->
+    <el-dialog :visible.sync="dialogPvVisible" title="审核详情">
+      审核历史详情
+      <!--<el-table :data="pvData" fit highlight-current-row style="width: 100%">-->
+      <!--<el-table-column prop="cert_issued_time" label="申请时间"/>-->
+      <!--<el-table-column prop="cert_level" label="资质等级"/>-->
+      <!--<el-table-column prop="cert_type" label="资质类型"/>-->
+      <!--<el-table-column prop="comment" label="审核状态"/>-->
+      <!--<el-table-column prop="dept_level" label="扩展信息"/>-->
+      <!--</el-table>-->
+      <span slot="footer" class="dialog-footer">
+        <el-button type="success" @click="editAuditing(1)">审核通过</el-button>
+        <el-button type="danger" @click="editAuditing(0)">审核不通过</el-button>
+        <el-button type="primary" @click="dialogPvVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { getAuditingHistory } from '@/api/teacherEvaluate'
+import { getAuditingHistory, editAuditingHistory } from '@/api/teacherEvaluate'
+// import { getAuditingHistory, getAuditingListHistory, editAuditingHistory } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -125,7 +143,9 @@ export default {
         page: 1,
         limit: 10
       },
-      token: getToken()
+      token: getToken(),
+      dialogPvVisible: false,
+      thisId: ''
     }
   },
   created() {
@@ -158,6 +178,22 @@ export default {
       this.$message({
         message: 'The title has been edited',
         type: 'success'
+      })
+    },
+    getAuditing(id) {
+      this.thisId = id
+      // let that = this
+      // getAuditing({ token: this.token, id: id }).then(response => {
+      //   console.log(response.data)
+      this.dialogPvVisible = true
+      //   that.pvData[0] = response.data
+      // })
+    },
+    editAuditing(onStatus) {
+      editAuditingHistory({ token: this.token, id: this.thisId, data: onStatus }).then(response => {
+        console.log(response)
+        // this.pvData[0] = response.data
+        // this.dialogPvVisible = fasle
       })
     }
   }

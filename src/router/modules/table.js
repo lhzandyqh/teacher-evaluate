@@ -7,7 +7,7 @@ const tableRouter = {
   component: Layout,
   redirect: '/table/complex-table',
   name: 'Table',
-  hidden: true,
+  // hidden: true,
   meta: {
     title: 'Table',
     icon: 'table'
