@@ -8,3 +8,12 @@ export function workShareUpload(parems) {
     params: parems
   })
 }
+
+// 文章公示
+export function articleExhibition(parems) {
+  return request({
+    url: '/api/jobSharing/displayArticle',
+    method: 'post',
+    params: parems
+  })
+}
