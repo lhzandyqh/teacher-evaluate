@@ -10,10 +10,10 @@ export function workShareUpload(parems) {
 }
 
 // 文章公示
-export function articleExhibition(parems) {
+export function articleExhibition(token) {
   return request({
     url: '/api/jobSharing/displayArticle',
     method: 'post',
-    params: parems
+    params: { token }
   })
 }

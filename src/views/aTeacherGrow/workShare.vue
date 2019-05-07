@@ -38,7 +38,7 @@
         <el-row>
           <div class="shareHistory">
             <div class="shareList">
-              <div v-for="(item, index) in items" :articlelist="items.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="noteLi">
+              <div v-for="(item, index) in items.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="noteLi">
                 <div class="leftPoint"/>
                 <div class="rightText">
                   <div class="noteTitle" @click="openNoteDialog(index)">{{ item.article_title }}</div>
@@ -54,7 +54,7 @@
               :current-page="currentPage"
               :page-sizes="[5, 8, 15, 20]"
               :page-size="10"
-              :total="40"
+              :total="items.length"
               layout="total, sizes, prev, pager, next, jumper"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"/>
@@ -108,7 +108,7 @@ export default {
         page: this.currentPage,
         size: this.pagesize
       }
-      articleExhibition({ ...prams, token: this.token }).then(response => {
+      articleExhibition(this.token).then(response => {
         this.items = response.data.jobSharing
       })
     },
