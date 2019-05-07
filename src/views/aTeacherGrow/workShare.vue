@@ -61,6 +61,8 @@
 </template>
 <script>
 import Tinymce from '../../components/Tinymce/index'
+import { workShareUpload } from '@/api/teacherGrow'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'WorkShare',
   components: { Tinymce },
@@ -72,7 +74,8 @@ export default {
         { id: 5, noticeTitle: '第五篇', noticeTime: '1998-11-15' }, { id: 6, noticeTitle: '第六篇', noticeTime: '1998-11-15' }
       ],
       textarea: '',
-      content: ''
+      content: '',
+      token: getToken()
     }
   },
   methods: {
@@ -80,6 +83,18 @@ export default {
       console.log('喂喂喂')
     },
     print() {
+      const prams = {
+        article_title: this.textarea,
+        article_content: this.content
+      }
+      console.log(this.token)
+      workShareUpload({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
       console.log(this.content + this.textarea)
     }
   }
