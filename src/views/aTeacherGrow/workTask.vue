@@ -70,6 +70,10 @@
         </el-tabs>
       </div>
     </el-row>
+    <el-row>
+      <el-button type="success" @click="getTeachJobTableData">成功按钮</el-button>
+      <test-table/>
+    </el-row>
   </div>
 </template>
 
@@ -81,16 +85,52 @@ import classSituationTable from '@/views/aTeacherGrow/teacherWorkTable/classSitu
 import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organizeActivityTable'
 import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
 import guideTeacherTable from '@/views/aTeacherGrow/teacherWorkTable/guideTeacherTable'
+import testTable from '@/views/aTeacherGrow/teacherWorkTable/testTable'
+import { teachJobInquire } from '@/api/teacherGrow'
+import { getToken } from '@/utils/auth'
 export default {
-  components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable },
+  components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
   data() {
     return {
-      activeName: 'april'
+      activeName: 'april',
+      month: 'april',
+      token: getToken(),
+      teachJobData: []
+    }
+  },
+  watch: {
+    activeName: function(val) {
+      console.log(val)
+      // this.getTeachJobTableData
+      // console.log(this.teachJobData)
+      this.mouth = val
+      console.log('mouth is ' + this.mouth)
     }
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
+      // console.log(value)
+      // this.getTeachJobTableData()
+      // console.log(this.teachJobData)
+    },
+    getTeachJobTableData() {
+      const prams = {
+        month: this.month
+      }
+      teachJobInquire({ ...prams, token: this.token }).then(response => {
+        // console.log(response.code)
+        // if (response.data.teachWork.code === 200) {
+        //   console.log(response.data.teachWork.code)
+        //   console.log('获取成功')
+        //   this.teachJobData = response.data.teachWork
+        // } else {
+        //   console.log(response.data.teachWork.code)
+        //   console.log('获取失败')
+        // }
+        this.teachJobData = response.data.teachWork
+        console.log(this.teachJobData)
+      })
     }
   }
 }

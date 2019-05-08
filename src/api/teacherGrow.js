@@ -17,3 +17,12 @@ export function articleExhibition(token) {
     params: { token }
   })
 }
+
+// 教学工作（按月查询）
+export function teachJobInquire(parems) {
+  return request({
+    url: '/api/taskWork/showTeachWorkByMon',
+    method: 'post',
+    params: parems
+  })
+}
