@@ -2,10 +2,10 @@
   <div class="appcontainer">
     <div class="innerContainer">
       <div class="titlecontainer">
-        <h4>完成教学工作情况</h4>
+        <h4>完成教育工作情况</h4>
       </div>
       <el-table
-        :data="teachJobData"
+        :data="tableData"
         border
         style="width: 100%">
         <el-table-column
@@ -14,7 +14,7 @@
           width="180">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.start_time }}</span>
+            <span style="margin-left: 10px">{{ scope.row.begindate }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -23,38 +23,38 @@
           width="180">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.end_time }}</span>
+            <span style="margin-left: 10px">{{ scope.row.enddate }}</span>
           </template>
         </el-table-column>
         <el-table-column
           align="center"
           label="任教学校"
-          prop="teach_chool"
+          prop="teachschool"
           width="140"/>
         <el-table-column
           align="center"
           label="任教年级"
-          prop="teach_grade"
+          prop="teachgrade"
           width="140"/>
         <el-table-column
           align="center"
           label="任教学科"
-          prop="teach_subject"
+          prop="teachsubject"
           width="140"/>
         <el-table-column
           align="center"
           label="每周课时"
-          prop="hour_per_week"
+          prop="weekclass"
           width="140"/>
         <el-table-column
           align="center"
           label="总课时数"
-          prop="total_hours"
+          prop="totalclass"
           width="140"/>
         <el-table-column
           align="center"
           label="成绩效果"
-          prop="score_result"
+          prop="achievementeffect"
           width="140"/>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
@@ -110,12 +110,6 @@
 <script>
 export default {
   name: 'TestTable',
-  props: {
-    teachJobData: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
       dialogFormVisible: false,
@@ -129,17 +123,17 @@ export default {
         totalclass: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px'
-      // teachJobData: [{
-      //   begindate: '2019-03-01',
-      //   enddate: '2019-07-23',
-      //   teachschool: '中关村中学',
-      //   teachgrade: '高三',
-      //   teachsubject: '物理',
-      //   weekclass: '8',
-      //   totalclass: '160',
-      //   achievementeffect: '效果良好'
-      // }]
+      formLabelWidth: '160px',
+      tableData: [{
+        begindate: '2019-03-01',
+        enddate: '2019-07-23',
+        teachschool: '中关村中学',
+        teachgrade: '高三',
+        teachsubject: '物理',
+        weekclass: '8',
+        totalclass: '160',
+        achievementeffect: '效果良好'
+      }]
     }
   },
   methods: {
@@ -160,7 +154,7 @@ export default {
     // 点击关闭dialog
     handleClose(done) {
       /* done();
-        location.reload();*/
+      location.reload();*/
       this.editFormVisible = false
     },
 
@@ -169,27 +163,27 @@ export default {
       this.editFormVisible = false
     },
     /* eslint-disable */
-      update(index, row) {
-        this.form.begindate=this.form.begindate.toString()
-        this.form.enddate=this.form.enddate.toString()
-        // this.tableData.push(this.form)
-        this.tableData.splice(index, 1)
-        this.tableData.push(this.form)
-        // this.tableData[0] = this.form
-        this.dialogFormVisible = false
-        this.dialogFormVisible = false
-        console.log(this.form)
-        console.log(this.tableData[0])
-        console.log(this.tableData)
-      },
-      formatBeginTime(time){
-        this.form.begindate = time
-      },
-      formatEndTime(time){
-        this.form.enddate = time
-      }
+    update(index, row) {
+      this.form.begindate=this.form.begindate.toString()
+      this.form.enddate=this.form.enddate.toString()
+      // this.tableData.push(this.form)
+      this.tableData.splice(index, 1)
+      this.tableData.push(this.form)
+      // this.tableData[0] = this.form
+      this.dialogFormVisible = false
+      this.dialogFormVisible = false
+      console.log(this.form)
+      console.log(this.tableData[0])
+      console.log(this.tableData)
+    },
+    formatBeginTime(time){
+      this.form.begindate = time
+    },
+    formatEndTime(time){
+      this.form.enddate = time
     }
   }
+}
 </script>
 
 <style scoped>

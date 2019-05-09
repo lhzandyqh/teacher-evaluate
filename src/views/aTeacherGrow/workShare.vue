@@ -4,6 +4,20 @@
       <h3>工作分享</h3>
     </el-row>
     <el-row>
+      <h5 style="float: left">分享文章标题</h5>
+    </el-row>
+    <el-row>
+      <el-input
+        :rows="1"
+        v-model="textarea"
+        type="textarea"
+        style="width: 50%"
+        placeholder="请输入文章标题"/>
+    </el-row>
+    <el-row>
+      <h5 style="float: left">分享文章内容</h5>
+    </el-row>
+    <el-row>
       <div class="innerContainer">
         <Tinymce id="tinymce" :height="300" v-model="content"/>
       </div>
@@ -24,11 +38,11 @@
         <el-row>
           <div class="shareHistory">
             <div class="shareList">
-              <div v-for="(item, index) in items" :key="item.id" class="noteLi">
+              <div v-for="(item, index) in items.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="noteLi">
                 <div class="leftPoint"/>
                 <div class="rightText">
-                  <div class="noteTitle" @click="openNoteDialog(index)">{{ item.noticeTitle }}</div>
-                  <div class="noteTime">{{ item.noticeTime }}</div>
+                  <div class="noteTitle" @click="openNoteDialog(index)">{{ item.article_title }}</div>
+                  <div class="noteTime">{{ item.upload_time }}</div>
                 </div>
               </div>
             </div>
@@ -37,8 +51,13 @@
         <el-row class="pagination-container">
           <div class="block">
             <el-pagination
-              :total="50"
-              layout="prev, pager, next"/>
+              :current-page="currentPage"
+              :page-sizes="[5, 8, 15, 20]"
+              :page-size="10"
+              :total="items.length"
+              layout="total, sizes, prev, pager, next, jumper"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"/>
           </div>
         </el-row>
       </div>
@@ -47,21 +66,65 @@
 </template>
 <script>
 import Tinymce from '../../components/Tinymce/index'
+import { workShareUpload, articleExhibition } from '@/api/teacherGrow'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'WorkShare',
   components: { Tinymce },
   data: function() {
     return {
-      items: [
-        { id: 1, noticeTitle: '第一篇', noticeTime: '1998-11-15' }, { id: 2, noticeTitle: '第二篇', noticeTime: '1998-11-15' },
-        { id: 3, noticeTitle: '第三篇', noticeTime: '1998-11-15' }, { id: 4, noticeTitle: '第四篇', noticeTime: '1998-11-15' },
-        { id: 5, noticeTitle: '第五篇', noticeTime: '1998-11-15' }, { id: 6, noticeTitle: '第六篇', noticeTime: '1998-11-15' }
-      ]
+      items: [],
+      textarea: '',
+      content: '',
+      token: getToken(),
+      currentPage: 1, // 初始页
+      pagesize: 10 //    每页的数据
     }
+  },
+  created() {
+    this.getItems()
   },
   methods: {
     openNoteDialog() {
       console.log('喂喂喂')
+    },
+    print() {
+      const prams = {
+        article_title: this.textarea,
+        article_content: this.content
+      }
+      console.log(this.token)
+      workShareUpload({ prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
+      console.log(this.content + this.textarea)
+    },
+    getItems() {
+      const prams = {
+        page: this.currentPage,
+        size: this.pagesize
+      }
+      articleExhibition(this.token).then(response => {
+        this.items = response.data.jobSharing
+      })
+    },
+    // splitList() {
+    //   this.articleList = this.items.slice((this.currentPage - 1) * this.pagesize, this.currentPage * this.pagesize)
+    // },
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+    handleSizeChange: function(size) {
+      this.pagesize = size
+      console.log(this.pagesize) // 每页下拉显示数据
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage
+      console.log(this.currentPage) // 点击第几页
+      this.articleList = this.items.slice((this.currentPage - 1) * this.pagesize, this.currentPage * this.pagesize)
+      console.log(this.articleList)
     }
   }
 }
