@@ -123,6 +123,7 @@ export default {
         totalclass: '',
         achievementeffect: ''
       },
+      formLabelWidth: '160px',
       tableData: [{
         begindate: '2019-03-01',
         enddate: '2019-07-23',

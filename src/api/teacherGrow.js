@@ -26,3 +26,12 @@ export function teachJobInquire(parems) {
     params: parems
   })
 }
+
+// 教学工作（全部查询）
+export function allTeachInquire(token) {
+  return request({
+    url: '/api/taskWork/showTeachWork',
+    method: 'post',
+    params: { token }
+  })
+}
