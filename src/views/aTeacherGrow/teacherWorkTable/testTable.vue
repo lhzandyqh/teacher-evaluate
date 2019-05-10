@@ -2,59 +2,55 @@
   <div class="appcontainer">
     <div class="innerContainer">
       <div class="titlecontainer">
-        <h4>完成教育工作情况</h4>
+        <h4>汇报课 观摩课 研究课情况</h4>
       </div>
       <el-table
-        :data="tableData"
+        :data="reportObserResData"
         border
         style="width: 100%">
         <el-table-column
           align="center"
-          label="起始时间"
+          label="开课日期"
           width="180">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.begindate }}</span>
+            <span style="margin-left: 10px">{{ scope.row.start_date }}</span>
           </template>
         </el-table-column>
         <el-table-column
           align="center"
-          label="终止时间"
-          width="180">
-          <template slot-scope="scope">
-            <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.enddate }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          align="center"
-          label="任教学校"
-          prop="teachschool"
+          label="开课类别"
+          prop="open_class"
           width="140"/>
         <el-table-column
           align="center"
-          label="任教年级"
-          prop="teachgrade"
+          label="课程内容"
+          prop="class_content"
           width="140"/>
         <el-table-column
           align="center"
-          label="任教学科"
-          prop="teachsubject"
+          label="目的要求"
+          prop="propose_req"
           width="140"/>
         <el-table-column
           align="center"
-          label="每周课时"
-          prop="weekclass"
+          label="市级听课范围人数"
+          prop="city_peop"
           width="140"/>
         <el-table-column
           align="center"
-          label="总课时数"
-          prop="totalclass"
+          label="区县级听课范围人数"
+          prop="county_peop"
+          width="180"/>
+        <el-table-column
+          align="center"
+          label="校级听课范围人数"
+          prop="school_peop"
           width="140"/>
         <el-table-column
           align="center"
           label="成绩效果"
-          prop="achievementeffect"
+          prop="score_results"
           width="140"/>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
@@ -74,28 +70,28 @@
     </div>
     <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
       <el-form :model="form">
-        <el-form-item :label-width="formLabelWidth" label="起始时间">
-          <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="开课日期">
+          <el-date-picker v-model="form.classbegindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="终止时间">
-          <el-date-picker v-model="form.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTime" />
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="开课类别">
+          <el-input v-model="form.classcategory" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="任教学校">
-          <el-input v-model="form.teachschool" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="课程内容">
+          <el-input v-model="form.classcontent" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="任教年级">
-          <el-input v-model="form.teachgrade" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="目的要求">
+          <el-input v-model="form.aimdemand" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="任教学科">
-          <el-input v-model="form.teachsubject" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="市级听课范围人数">
+          <el-input v-model="form.citynumber" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="每周课时">
-          <el-input v-model="form.weekclass" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="区县级听课范围人数">
+          <el-input v-model="form.regionnumber" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="总课时数">
-          <el-input v-model="form.totalclass" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="校级听课范围人数">
+          <el-input v-model="form.schoolnumber" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="成绩效果">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
           <el-input v-model="form.achievementeffect" autocomplete="off"/>
         </el-form-item>
       </el-form>
@@ -110,30 +106,36 @@
 <script>
 export default {
   name: 'TestTable',
+  props: {
+    reportObserResData: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       dialogFormVisible: false,
       form: {
-        begindate: '',
-        enddate: '',
-        teachschool: '',
-        teachgrade: '',
-        teachsubject: '',
-        weekclass: '',
-        totalclass: '',
+        classbegindate: '',
+        classcategory: '',
+        classcontent: '',
+        aimdemand: '',
+        citynumber: '',
+        regionnumber: '',
+        schoolnumber: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px',
-      tableData: [{
-        begindate: '2019-03-01',
-        enddate: '2019-07-23',
-        teachschool: '中关村中学',
-        teachgrade: '高三',
-        teachsubject: '物理',
-        weekclass: '8',
-        totalclass: '160',
-        achievementeffect: '效果良好'
-      }]
+      formLabelWidth: '160px'
+      // teachJobData: [{
+      //   begindate: '2019-03-01',
+      //   enddate: '2019-07-23',
+      //   teachschool: '中关村中学',
+      //   teachgrade: '高三',
+      //   teachsubject: '物理',
+      //   weekclass: '8',
+      //   totalclass: '160',
+      //   achievementeffect: '效果良好'
+      // }]
     }
   },
   methods: {
@@ -154,7 +156,7 @@ export default {
     // 点击关闭dialog
     handleClose(done) {
       /* done();
-      location.reload();*/
+          location.reload();*/
       this.editFormVisible = false
     },
 
@@ -163,27 +165,27 @@ export default {
       this.editFormVisible = false
     },
     /* eslint-disable */
-    update(index, row) {
-      this.form.begindate=this.form.begindate.toString()
-      this.form.enddate=this.form.enddate.toString()
-      // this.tableData.push(this.form)
-      this.tableData.splice(index, 1)
-      this.tableData.push(this.form)
-      // this.tableData[0] = this.form
-      this.dialogFormVisible = false
-      this.dialogFormVisible = false
-      console.log(this.form)
-      console.log(this.tableData[0])
-      console.log(this.tableData)
-    },
-    formatBeginTime(time){
-      this.form.begindate = time
-    },
-    formatEndTime(time){
-      this.form.enddate = time
+      update(index, row) {
+        this.form.begindate=this.form.begindate.toString()
+        this.form.enddate=this.form.enddate.toString()
+        // this.tableData.push(this.form)
+        this.tableData.splice(index, 1)
+        this.tableData.push(this.form)
+        // this.tableData[0] = this.form
+        this.dialogFormVisible = false
+        this.dialogFormVisible = false
+        console.log(this.form)
+        console.log(this.tableData[0])
+        console.log(this.tableData)
+      },
+      formatBeginTime(time){
+        this.form.begindate = time
+      },
+      formatEndTime(time){
+        this.form.enddate = time
+      }
     }
   }
-}
 </script>
 
 <style scoped>

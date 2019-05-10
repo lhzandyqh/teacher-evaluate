@@ -1,44 +1,74 @@
 <template>
-  <div class="app-container">
-    <el-row>
-      <div class="innerContainer">
+  <div class="appcontainer">
+    <div class="innerContainer">
+      <div class="titlecontainer">
         <h4>汇报课 观摩课 研究课情况</h4>
-        <el-table
-          :data="tableData"
-          stripe
-          border
-          style="width: 100%">
-          <el-table-column
-            prop="classbegindate"
-            label="开课日期"/>
-          <el-table-column
-            prop="classcategory"
-            label="开课类别"/>
-          <el-table-column
-            prop="classcontent"
-            label="课程内容"/>
-          <el-table-column
-            prop="aimdemand"
-            label="目的要求"/>
-          <el-table-column
-            prop="citynumber"
-            label="市级听课范围人数"/>
-          <el-table-column
-            prop="regionnumber"
-            label="区县级听课范围人数"/>
-          <el-table-column
-            prop="schoolnumber"
-            label="校级听课范围人数"/>
-          <el-table-column
-            prop="achievementeffect"
-            label="成绩和效果"/>
-        </el-table>
-        <div class="buttonContainer">
-          <el-button type="primary" plain @click="handleEdit">修改</el-button>
-        </div>
       </div>
-    </el-row>
-    <el-dialog :visible.sync="dialogFormVisible" title="汇报课 观摩课 研究课情况">
+      <el-table
+        :data="reportObserResData"
+        border
+        style="width: 100%">
+        <el-table-column
+          align="center"
+          label="开课日期"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.start_date }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="开课类别"
+          prop="open_class"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="课程内容"
+          prop="class_content"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="目的要求"
+          prop="propose_req"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="市级听课范围人数"
+          prop="city_peop"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="区县级听课范围人数"
+          prop="county_peop"
+          width="180"/>
+        <el-table-column
+          align="center"
+          label="校级听课范围人数"
+          prop="school_peop"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="成绩效果"
+          prop="score_results"
+          width="140"/>
+        <el-table-column align="center" label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="buttonContainer">
+        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+      </div>
+    </div>
+    <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
       <el-form :model="form">
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="开课日期">
           <el-date-picker v-model="form.classbegindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
@@ -75,11 +105,16 @@
 
 <script>
 export default {
+  name: 'TestTable',
+  props: {
+    reportObserResData: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      border: true,
       dialogFormVisible: false,
-      labelPosition: 'right',
       form: {
         classbegindate: '',
         classcategory: '',
@@ -90,21 +125,26 @@ export default {
         schoolnumber: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px',
-      formLabelWidthTwo: '160px',
-      tableData: [{
-        classbegindate: '2018-8-22',
-        classcategory: '2019-11-15',
-        classcontent: '汇报课',
-        aimdemand: '展示物理实验',
-        citynumber: '100',
-        regionnumber: '45',
-        schoolnumber: '60',
-        achievementeffect: '很好'
-      }]
+      formLabelWidth: '160px'
+      // teachJobData: [{
+      //   begindate: '2019-03-01',
+      //   enddate: '2019-07-23',
+      //   teachschool: '中关村中学',
+      //   teachgrade: '高三',
+      //   teachsubject: '物理',
+      //   weekclass: '8',
+      //   totalclass: '160',
+      //   achievementeffect: '效果良好'
+      // }]
     }
   },
   methods: {
+    handleEditTwo(index, row) {
+      console.log(index, row)
+    },
+    handleDelete(index, row) {
+      console.log(index, row)
+    },
     // 点击编辑
     handleEdit(index, row) {
       // this.form = this.tableData
@@ -116,7 +156,7 @@ export default {
     // 点击关闭dialog
     handleClose(done) {
       /* done();
-        location.reload();*/
+            location.reload();*/
       this.editFormVisible = false
     },
 
@@ -126,7 +166,8 @@ export default {
     },
     /* eslint-disable */
       update(index, row) {
-        this.form.classbegindate=this.form.classbegindate.toString()
+        this.form.begindate=this.form.begindate.toString()
+        this.form.enddate=this.form.enddate.toString()
         // this.tableData.push(this.form)
         this.tableData.splice(index, 1)
         this.tableData.push(this.form)
@@ -154,9 +195,14 @@ export default {
     width: 100%;
     height: 100%;
     padding-bottom: 5px;
+    text-align: center;
   }
   .buttonContainer{
     padding-top: 10px;
+    text-align: center;
+  }
+  .innerContainer{
+    text-align: center;
   }
 
 </style>

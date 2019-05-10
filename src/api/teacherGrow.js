@@ -35,3 +35,21 @@ export function allTeachInquire(token) {
     params: { token }
   })
 }
+
+// 教育工作(按月查询)
+export function eductionJobInquire(parems) {
+  return request({
+    url: '/api/taskWork/eduWorkByMonth',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 汇报观摩研究课程(按月查询)
+export function reportObsResearchInquire(parems) {
+  return request({
+    url: '/api/taskWork/reportObsResearchByMonth',
+    method: 'post',
+    params: parems
+  })
+}

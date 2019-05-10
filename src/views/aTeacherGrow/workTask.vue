@@ -11,12 +11,12 @@
             </el-row>
             <el-row>
               <div class="formContainer">
-                <education-jobs-table/>
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
               </div>
             </el-row>
             <el-row>
               <div class="formContainer">
-                <class-situation-table/>
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
             <el-row>
@@ -43,12 +43,12 @@
             </el-row>
             <el-row>
               <div class="formContainer">
-                <education-jobs-table/>
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
               </div>
             </el-row>
             <el-row>
               <div class="formContainer">
-                <class-situation-table/>
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
             <el-row>
@@ -63,11 +63,31 @@
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="四月" name="april">
             <el-row>
               <div class="formContainer">
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -77,11 +97,31 @@
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="六月" name="june">
             <el-row>
               <div class="formContainer">
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -91,11 +131,31 @@
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="八月" name="august">
             <el-row>
               <div class="formContainer">
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -105,11 +165,31 @@
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="十月" name="october">
             <el-row>
               <div class="formContainer">
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -119,6 +199,16 @@
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="十二月" name="december">
             <el-row>
@@ -126,9 +216,22 @@
                 <teaching-jobs-table :teach-job-data="teachJobData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <education-jobs-table :eduction-job-data="eductionJobData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
         </el-tabs>
       </div>
+    </el-row>
+    <el-row>
+      <test-table :report-obser-res-data="reportObserResData"/>
     </el-row>
   </div>
 </template>
@@ -142,7 +245,7 @@ import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organiz
 import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
 import guideTeacherTable from '@/views/aTeacherGrow/teacherWorkTable/guideTeacherTable'
 import testTable from '@/views/aTeacherGrow/teacherWorkTable/testTable'
-import { teachJobInquire, allTeachInquire } from '@/api/teacherGrow'
+import { teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
@@ -151,7 +254,9 @@ export default {
       activeName: 'april',
       month: 'may',
       token: getToken(),
-      teachJobData: []
+      teachJobData: [],
+      eductionJobData: [],
+      reportObserResData: []
     }
   },
   watch: {
@@ -172,6 +277,12 @@ export default {
     teachJobInquire({ ...prams, token: this.token }).then(response => {
       this.teachJobData = response.data.teacher
     })
+    eductionJobInquire({ ...prams, token: this.token }).then(response => {
+      this.eductionJobData = response.data.eduWork
+    })
+    reportObsResearchInquire({ ...prams, token: this.token }).then(response => {
+      this.reportObserResData = response.data.reportObserRes
+    })
   },
   methods: {
     handleClick(tab, event) {
@@ -181,7 +292,9 @@ export default {
       console.log('我是' + tab.name)
       this.month = tab.name
       this.getTeachJobTableData()
-      console.log(this.teachJobData)
+      this.getEducationJobTableData()
+      this.getReportObserResData()
+      // console.log(this.teachJobData)
     },
     getTeachJobTableData() {
       const prams = {
@@ -199,8 +312,51 @@ export default {
         //   console.log('获取失败')
         // }
         this.teachJobData = response.data.teacher
-        console.log('获取数据成功')
+        console.log('获取教学工作数据成功')
         // console.log(this.teachJobData)
+        console.log('结束')
+      })
+    },
+    getEducationJobTableData() {
+      const prams = {
+        month: this.month
+      }
+      console.log('现在是' + prams.month + '准备取数据了')
+      eductionJobInquire({ ...prams, token: this.token }).then(response => {
+        // console.log(response.code)
+        // if (response.data.code === 200) {
+        //   console.log(response.data.teachWork.code)
+        //   console.log('获取成功')
+        //   this.teachJobData = response.data.teacher
+        // } else {
+        //   console.log(response.data.code)
+        //   console.log('获取失败')
+        // }
+        this.eductionJobData = response.data.eduWork
+        console.log('获取教育工作数据成功')
+        // console.log(this.teachJobData)
+        console.log('结束')
+      })
+    },
+    getReportObserResData() {
+      const prams = {
+        month: this.month
+      }
+      console.log('现在是' + prams.month + '准备取数据了')
+      reportObsResearchInquire({ ...prams, token: this.token }).then(response => {
+        // console.log(response.code)
+        // if (response.data.code === 200) {
+        //   console.log(response.data.teachWork.code)
+        //   console.log('获取成功')
+        //   this.teachJobData = response.data.teacher
+        // } else {
+        //   console.log(response.data.code)
+        //   console.log('获取失败')
+        // }
+        this.reportObserResData = response.data.reportObserRes
+        console.log('获取汇报课数据成功')
+        // console.log(this.teachJobData)
+        console.log(this.reportObserResData)
         console.log('结束')
       })
     },
