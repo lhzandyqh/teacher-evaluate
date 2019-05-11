@@ -21,17 +21,17 @@
             </el-row>
             <el-row>
               <div class="formContainer">
-                <organize-activity-table/>
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
               </div>
             </el-row>
             <el-row>
               <div class="formContainer">
-                <participate-education-table/>
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
               </div>
             </el-row>
             <el-row>
               <div class="formContainer">
-                <guide-teacher-table/>
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -53,7 +53,17 @@
             </el-row>
             <el-row>
               <div class="formContainer">
-                <guide-teacher-table/>
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -73,6 +83,21 @@
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="四月" name="april">
             <el-row>
@@ -88,6 +113,21 @@
             <el-row>
               <div class="formContainer">
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -107,6 +147,21 @@
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="六月" name="june">
             <el-row>
@@ -122,6 +177,21 @@
             <el-row>
               <div class="formContainer">
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -141,6 +211,21 @@
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="八月" name="august">
             <el-row>
@@ -156,6 +241,21 @@
             <el-row>
               <div class="formContainer">
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -175,6 +275,21 @@
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="十月" name="october">
             <el-row>
@@ -190,6 +305,21 @@
             <el-row>
               <div class="formContainer">
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
               </div>
             </el-row>
           </el-tab-pane>
@@ -209,6 +339,21 @@
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
           <el-tab-pane label="十二月" name="december">
             <el-row>
@@ -226,13 +371,28 @@
                 <class-situation-table :report-obser-res-data="reportObserResData"/>
               </div>
             </el-row>
+            <el-row>
+              <div class="formContainer">
+                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="formContainer">
+                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
+              </div>
+            </el-row>
           </el-tab-pane>
         </el-tabs>
       </div>
     </el-row>
-    <el-row>
-      <test-table :report-obser-res-data="reportObserResData"/>
-    </el-row>
+    <!--    <el-row>-->
+    <!--      <test-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--    </el-row>-->
   </div>
 </template>
 
@@ -245,7 +405,7 @@ import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organiz
 import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
 import guideTeacherTable from '@/views/aTeacherGrow/teacherWorkTable/guideTeacherTable'
 import testTable from '@/views/aTeacherGrow/teacherWorkTable/testTable'
-import { teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire } from '@/api/teacherGrow'
+import { teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire, organizeExtraInquire, furLeaContinueEduInquire, guidanceTrainTecInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
@@ -256,7 +416,10 @@ export default {
       token: getToken(),
       teachJobData: [],
       eductionJobData: [],
-      reportObserResData: []
+      reportObserResData: [],
+      organExtActiData: [],
+      furLeaContinueEduData: [],
+      guidanceTrainTecData: []
     }
   },
   watch: {
@@ -283,6 +446,15 @@ export default {
     reportObsResearchInquire({ ...prams, token: this.token }).then(response => {
       this.reportObserResData = response.data.reportObserRes
     })
+    organizeExtraInquire({ ...prams, token: this.token }).then(response => {
+      this.organExtActiData = response.data.organExtActi
+    })
+    furLeaContinueEduInquire({ ...prams, token: this.token }).then(response => {
+      this.furLeaContinueEduData = response.data.furLeaContinueEdu
+    })
+    guidanceTrainTecInquire({ ...prams, token: this.token }).then(response => {
+      this.guidanceTrainTecData = response.data.guidanceTrainTec
+    })
   },
   methods: {
     handleClick(tab, event) {
@@ -294,6 +466,9 @@ export default {
       this.getTeachJobTableData()
       this.getEducationJobTableData()
       this.getReportObserResData()
+      this.getOrganExtActiData()
+      this.getFurLeaContinueEduData()
+      this.getguidanceTrainTecData()
       // console.log(this.teachJobData)
     },
     getTeachJobTableData() {
@@ -357,6 +532,42 @@ export default {
         console.log('获取汇报课数据成功')
         // console.log(this.teachJobData)
         console.log(this.reportObserResData)
+        console.log('结束')
+      })
+    },
+    getOrganExtActiData() {
+      const prams = {
+        month: this.month
+      }
+      organizeExtraInquire({ ...prams, token: this.token }).then(response => {
+        this.organExtActiData = response.data.organExtActi
+        console.log('获取活动数据成功')
+        // console.log(this.teachJobData)
+        console.log(this.organExtActiData)
+        console.log('结束')
+      })
+    },
+    getFurLeaContinueEduData() {
+      const prams = {
+        month: this.month
+      }
+      furLeaContinueEduInquire({ ...prams, token: this.token }).then(response => {
+        this.furLeaContinueEduData = response.data.furLeaContinueEdu
+        console.log('获取继续教育数据成功')
+        // console.log(this.teachJobData)
+        console.log(this.furLeaContinueEduData)
+        console.log('结束')
+      })
+    },
+    getguidanceTrainTecData() {
+      const prams = {
+        month: this.month
+      }
+      guidanceTrainTecInquire({ ...prams, token: this.token }).then(response => {
+        this.guidanceTrainTecData = response.data.guidanceTrainTec
+        console.log('获取培养教师数据成功')
+        // console.log(this.teachJobData)
+        console.log(this.guidanceTrainTecData)
         console.log('结束')
       })
     },

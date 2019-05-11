@@ -2,51 +2,49 @@
   <div class="appcontainer">
     <div class="innerContainer">
       <div class="titlecontainer">
-        <h4>汇报课 观摩课 研究课情况</h4>
+        <h4>指导 培养教师情况</h4>
       </div>
       <el-table
-        :data="reportObserResData"
+        :data="guidanceTrainTecData"
         border
         style="width: 100%">
         <el-table-column
           align="center"
-          label="开课日期"
+          label="起始时间"
           width="180">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.start_date }}</span>
+            <span style="margin-left: 10px">{{ scope.row.start_time }}</span>
           </template>
         </el-table-column>
         <el-table-column
           align="center"
-          label="开课类别"
-          prop="open_class"
+          label="终止时间"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.end_time }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="指导培养何校何人"
+          width="260">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.school_who }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="形式"
+          prop="format"
           width="140"/>
         <el-table-column
           align="center"
-          label="课程内容"
-          prop="class_content"
-          width="140"/>
-        <el-table-column
-          align="center"
-          label="目的要求"
-          prop="propose_req"
-          width="140"/>
-        <el-table-column
-          align="center"
-          label="市级听课范围人数"
-          prop="city_peop"
-          width="140"/>
-        <el-table-column
-          align="center"
-          label="区县级听课范围人数"
-          prop="county_peop"
-          width="180"/>
-        <el-table-column
-          align="center"
-          label="校级听课范围人数"
-          prop="school_peop"
-          width="140"/>
+          label="内容"
+          prop="content"
+          width="220"/>
         <el-table-column
           align="center"
           label="成绩效果"
@@ -70,26 +68,20 @@
     </div>
     <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
       <el-form :model="form">
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="开课日期">
-          <el-date-picker v-model="form.classbegindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
+          <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="开课类别">
-          <el-input v-model="form.classcategory" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="终止时间">
+          <el-date-picker v-model="form.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTime" />
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="课程内容">
-          <el-input v-model="form.classcontent" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="指导培养何校何人">
+          <el-input v-model="form.teachwho" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="目的要求">
-          <el-input v-model="form.aimdemand" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="形式">
+          <el-input v-model="form.teachform" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="市级听课范围人数">
-          <el-input v-model="form.citynumber" autocomplete="off"/>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="区县级听课范围人数">
-          <el-input v-model="form.regionnumber" autocomplete="off"/>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="校级听课范围人数">
-          <el-input v-model="form.schoolnumber" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="内容">
+          <el-input v-model="form.teachcontent" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
           <el-input v-model="form.achievementeffect" autocomplete="off"/>
@@ -107,7 +99,7 @@
 export default {
   name: 'TestTable',
   props: {
-    reportObserResData: {
+    guidanceTrainTecData: {
       type: Array,
       required: true
     }
@@ -116,13 +108,11 @@ export default {
     return {
       dialogFormVisible: false,
       form: {
-        classbegindate: '',
-        classcategory: '',
-        classcontent: '',
-        aimdemand: '',
-        citynumber: '',
-        regionnumber: '',
-        schoolnumber: '',
+        begindate: '',
+        enddate: '',
+        teachwho: '',
+        teachform: '',
+        teachcontent: '',
         achievementeffect: ''
       },
       formLabelWidth: '160px'

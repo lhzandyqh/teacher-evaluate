@@ -50,12 +50,12 @@
           align="center"
           label="总课时数"
           prop="total_hours"
-          width="140"/>
+          width="100"/>
         <el-table-column
           align="center"
           label="成绩效果"
           prop="score_result"
-          width="140"/>
+          width="100"/>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button

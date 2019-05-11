@@ -53,3 +53,30 @@ export function reportObsResearchInquire(parems) {
     params: parems
   })
 }
+
+// 组织课外活动(按月查询)
+export function organizeExtraInquire(parems) {
+  return request({
+    url: '/api/taskWork/organizeExtraByMon',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 参加系统进修或继续教育情况(按月查询)
+export function furLeaContinueEduInquire(parems) {
+  return request({
+    url: '/api/taskWork/furLearnContinueEduByMon',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 指导 培养教师情况(按月查询)
+export function guidanceTrainTecInquire(parems) {
+  return request({
+    url: '/api/taskWork/guidanceTrainTeacByMon',
+    method: 'post',
+    params: parems
+  })
+}

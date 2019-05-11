@@ -26,12 +26,12 @@
           align="center"
           label="课程内容"
           prop="class_content"
-          width="140"/>
+          width="100"/>
         <el-table-column
           align="center"
           label="目的要求"
           prop="propose_req"
-          width="140"/>
+          width="100"/>
         <el-table-column
           align="center"
           label="市级听课范围人数"
@@ -51,7 +51,7 @@
           align="center"
           label="成绩效果"
           prop="score_results"
-          width="140"/>
+          width="100"/>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button
