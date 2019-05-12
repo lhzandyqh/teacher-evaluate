@@ -77,10 +77,10 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="指导培养何校何人">
           <el-input v-model="form.teachwho" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="形式">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="形式">
           <el-input v-model="form.teachform" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="内容">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="内容">
           <el-input v-model="form.teachcontent" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">

@@ -79,10 +79,10 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="课程内容">
           <el-input v-model="form.classcontent" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="目的要求">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="目的要求">
           <el-input v-model="form.aimdemand" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="市级听课范围人数">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="市级听课范围人数">
           <el-input v-model="form.citynumber" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="区县级听课范围人数">

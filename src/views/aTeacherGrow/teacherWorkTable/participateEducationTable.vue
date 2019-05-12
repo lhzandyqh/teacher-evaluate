@@ -87,10 +87,10 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="进修单位名称">
           <el-input v-model="form.organizationmame" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="进修内容">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="进修内容">
           <el-input v-model="form.educationcontent" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="进修形式">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="进修形式">
           <el-input v-model="form.educationform" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="完成课时">

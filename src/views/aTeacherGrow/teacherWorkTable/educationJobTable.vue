@@ -111,8 +111,7 @@ export default {
         othereducatejob: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px',
-      formLabelWidthTwo: '160px'
+      formLabelWidth: '160px'
       // teachJobData: [{
       //   begindate: '2019-03-01',
       //   enddate: '2019-07-23',

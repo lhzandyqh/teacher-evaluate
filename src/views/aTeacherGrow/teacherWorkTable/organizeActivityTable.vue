@@ -78,10 +78,10 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="组织名称">
           <el-input v-model="form.organizename" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="参加人数">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="参加人数">
           <el-input v-model="form.joinnumber" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="活动次数">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="活动次数">
           <el-input v-model="form.activitytimes" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="活动内容">

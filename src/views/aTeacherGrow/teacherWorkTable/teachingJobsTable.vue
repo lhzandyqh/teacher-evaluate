@@ -60,7 +60,7 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              @click="handleEditTwo(scope.$index, scope.row)">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
@@ -69,7 +69,7 @@
         </el-table-column>
       </el-table>
       <div class="buttonContainer">
-        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+        <el-button type="primary" plain @click="handleEdit">增加</el-button>
       </div>
     </div>
     <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
@@ -101,13 +101,15 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="update">确 定</el-button>
+        <el-button type="primary" @click="jobDataIncrease">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { teachJobIncrease } from '@/api/teacherGrow'
 export default {
   name: 'TestTable',
   props: {
@@ -119,6 +121,7 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
+      token: getToken(),
       form: {
         begindate: '',
         enddate: '',
@@ -169,27 +172,49 @@ export default {
       this.editFormVisible = false
     },
     /* eslint-disable */
-      update(index, row) {
-        this.form.begindate=this.form.begindate.toString()
-        this.form.enddate=this.form.enddate.toString()
-        // this.tableData.push(this.form)
-        this.tableData.splice(index, 1)
-        this.tableData.push(this.form)
-        // this.tableData[0] = this.form
-        this.dialogFormVisible = false
-        this.dialogFormVisible = false
-        console.log(this.form)
-        console.log(this.tableData[0])
-        console.log(this.tableData)
-      },
-      formatBeginTime(time){
-        this.form.begindate = time
-      },
-      formatEndTime(time){
-        this.form.enddate = time
+    update(index, row) {
+      this.form.begindate = this.form.begindate.toString()
+      this.form.enddate = this.form.enddate.toString()
+      // this.tableData.push(this.form)
+      this.tableData.splice(index, 1)
+      this.tableData.push(this.form)
+      // this.tableData[0] = this.form
+      this.dialogFormVisible = false
+      this.dialogFormVisible = false
+      console.log(this.form)
+      console.log(this.tableData[0])
+      console.log(this.tableData)
+    },
+    formatBeginTime(time) {
+      this.form.begindate = time
+    },
+    formatEndTime(time) {
+      this.form.enddate = time
+    },
+    jobDataIncrease() {
+      const prams = {
+        start_time: this.form.begindate,
+        end_time: this.form.enddate,
+        teach_chool: this.form.teachschool,
+        teach_grade: this.form.teachgrade,
+        teach_subject: this.form.teachsubject,
+        hour_per_week: this.form.weekclass,
+        total_hours: this.form.totalclass,
+        score_result: this.form.achievementeffect
       }
+      console.log(prams.teach_chool)
+      console.log(this.token)
+      teachJobIncrease({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
+      this.dialogFormVisible = false
     }
   }
+}
 </script>
 
 <style scoped>
