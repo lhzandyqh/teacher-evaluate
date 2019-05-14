@@ -1,6 +1,5 @@
 <template>
   <div class="login-container">
-    <el-button class="thirdparty-button" type="primary" @click="showDialog=true">登录</el-button>
     <!-- 登录弹框 -->
     <el-dialog :title="loginTitle" :visible.sync="showDialog" width="30%">
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
@@ -38,12 +37,8 @@
     <!--页面内容-->
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="1">全部</el-menu-item>
-          <el-menu-item index="2">学校简介</el-menu-item>
-          <el-menu-item index="3">党建工作</el-menu-item>
-          <el-menu-item index="4">工作动态</el-menu-item>
-        </el-menu>
+        <img :src="require('./headlogo.png')" alt="">
+        <el-button type="primary" @click="showDialog=true">登录</el-button>
       </el-header>
       <el-container>
         <el-main style="background: #f1f4fa;width: 80%;margin: 0 auto;">
@@ -70,11 +65,12 @@
               <!--<div>{{item.noticeContext}}</div>-->
               <!--</el-collapse-item>-->
               <!--</el-collapse>-->
+              <div/>
               <div class="noteT">
                 <div class="titleListLine"/>
                 <div class="schNot">经验分享</div>
               </div>
-              <div class="noteList">
+              <div class="noteList" style="height: 800px;overflow-y: auto;margin-bottom: 40px;">
                 <div v-for="(item, index) in schoolNotices" :key="item.id" class="noteLi">
                   <div class="leftPoint"/>
                   <div class="rightText">
@@ -306,7 +302,16 @@ export default {
 $bg:#fff;
 $dark_gray:#889aa4;
 $light_gray:#eee;
+.el-header{
+  height: 90px!important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img{
+    height: 60%;
+  }
 
+}
 .login-container {
   min-height: 100%;
   width: 100%;
@@ -357,12 +362,6 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
-  .thirdparty-button {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    z-index: 999;
-  }
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -391,6 +390,8 @@ $light_gray:#eee;
 .newList{
   margin-top: 30px;
   background: #fff;
+  overflow: auto;
+  height: 570px;
 }
 .newLi{
   border-bottom: 1px solid #ddd;

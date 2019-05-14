@@ -130,7 +130,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/teacherInfo'),
         name: 'TeacherInfo',
-        meta: { title: '教师信息', icon: 'documentation', noCache: true, roles: ['elv'] }
+        meta: { title: '教师信息', icon: 'documentation', roles: ['elv'] }
       }
     ]
   },
@@ -144,7 +144,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/aptitudeInfo'),
         name: 'aptitudeInfo',
-        meta: { title: '资质信息', icon: 'form', noCache: true, roles: ['elv'] }
+        meta: { title: '资质信息', icon: 'form', roles: ['elv'] }
       },
       {
         path: 'aptitudeInfoAdd',
@@ -168,7 +168,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/integrationInfo'),
         name: 'IntegrationInfo',
-        meta: { title: '积分详情', icon: 'component', noCache: true, roles: ['elv'] }
+        meta: { title: '积分详情', icon: 'component', roles: ['elv'] }
       }
     ]
   },
@@ -182,7 +182,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/auditingList'),
         name: 'AuditingList',
-        meta: { title: '审核列表', icon: 'list', noCache: true, roles: ['elv'] }
+        meta: { title: '审核列表', icon: 'list', roles: ['elv'] }
       }
     ]
   },
@@ -196,7 +196,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/auditingHistory'),
         name: 'AuditingHistory',
-        meta: { title: '审核历史', icon: 'icon', noCache: true, roles: ['elv'] }
+        meta: { title: '审核历史', icon: 'icon', roles: ['elv'] }
       }
     ]
   },
@@ -210,7 +210,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/countInfo'),
         name: 'CountInfo',
-        meta: { title: '统计信息', icon: 'table', noCache: true, roles: ['elv'] }
+        meta: { title: '统计信息', icon: 'table', roles: ['elv'] }
       }
     ]
   },
@@ -224,7 +224,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/authorityManage'),
         name: 'AuthorityManage',
-        meta: { title: '权限管理', icon: 'peoples', noCache: true, roles: ['elv'] }
+        meta: { title: '权限管理', icon: 'peoples', roles: ['elv'] }
       }
     ]
   },
@@ -238,7 +238,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherEvaluate/integrationConfig'),
         name: 'IntegrationConfig',
-        meta: { title: '积分配置', icon: 'edit', noCache: true, roles: ['elv'] }
+        meta: { title: '积分配置', icon: 'edit', roles: ['elv'] }
       }
     ]
   },
@@ -255,7 +255,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherGrow/resultCount'),
         name: 'ResultCount',
-        meta: { title: '成果统计', icon: 'icon', noCache: true }
+        meta: { title: '成果统计', icon: 'icon', roles: ['grow'] }
       }
     ]
   },
@@ -271,7 +271,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherGrow/workShare'),
         name: 'WorkShare',
-        meta: { title: '工作分享', icon: 'icon', noCache: true }
+        meta: { title: '工作分享', icon: 'icon', roles: ['grow'] }
       }
     ]
   },
@@ -287,7 +287,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/aTeacherGrow/workTask'),
         name: 'WorkTask',
-        meta: { title: '工作内容', icon: 'icon', noCache: true }
+        meta: { title: '工作内容', icon: 'icon', roles: ['grow'] }
       }
     ]
   },

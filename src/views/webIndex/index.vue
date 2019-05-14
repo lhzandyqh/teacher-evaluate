@@ -60,6 +60,7 @@ export default {
       this.$store.dispatch('LogOutRole').then(() => {
         window.localStorage.setItem('role', 'grow')
         this.$router.push({ path: `/${path}/index` })
+        console.log(`/${path}/index`)
       })
     }
   }
