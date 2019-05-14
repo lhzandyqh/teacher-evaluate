@@ -129,7 +129,8 @@ export default {
       console.log(index, row)
     },
     handleDelete(index, row) {
-      console.log(index, row)
+      console.log(row.id)
+      this.$emit('delete', row.id)
     },
     // 点击编辑
     handleEdit(index, row) {

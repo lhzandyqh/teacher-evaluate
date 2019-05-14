@@ -11,7 +11,7 @@
             </el-row>
             <el-row>
               <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
+                <education-jobs-table :eduction-job-data="eductionJobData" @delete="deleteEducationJob($event)"/>
               </div>
             </el-row>
             <el-row>
@@ -405,7 +405,7 @@ import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organiz
 import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
 import guideTeacherTable from '@/views/aTeacherGrow/teacherWorkTable/guideTeacherTable'
 import testTable from '@/views/aTeacherGrow/teacherWorkTable/testTable'
-import { teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire, organizeExtraInquire, furLeaContinueEduInquire, guidanceTrainTecInquire } from '@/api/teacherGrow'
+import { teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire, organizeExtraInquire, furLeaContinueEduInquire, guidanceTrainTecInquire, educationJobDelete } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
@@ -511,6 +511,19 @@ export default {
         console.log('获取教育工作数据成功')
         // console.log(this.teachJobData)
         console.log('结束')
+      })
+    },
+    deleteEducationJob(id) {
+      const prams = {
+        id: id
+      }
+      console.log('我要删除了')
+      educationJobDelete({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('删除成功')
+        } else {
+          console.log('删除失败')
+        }
       })
     },
     getReportObserResData() {

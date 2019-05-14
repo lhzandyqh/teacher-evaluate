@@ -36,6 +36,24 @@ export function teachJobIncrease(parems) {
   })
 }
 
+// 删除教学工作
+export function teachJobDelete(parems) {
+  return request({
+    url: '/api/teachWork/delete',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 修改教学工作
+export function teachJobUpdate(parems) {
+  return request({
+    url: '/api/teachWork/updateTeachWork',
+    method: 'post',
+    params: parems
+  })
+}
+
 // 教学工作（全部查询）
 export function allTeachInquire(token) {
   return request({
@@ -49,6 +67,24 @@ export function allTeachInquire(token) {
 export function eductionJobInquire(parems) {
   return request({
     url: '/api/EduWork/eduWorkByMonth',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 添加教育工作
+export function educationJobIncrease(parems) {
+  return request({
+    url: '/api/EduWork/addEduWork',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 删除教育工作
+export function educationJobDelete(parems) {
+  return request({
+    url: '/api/EduWork/deleteEduWork',
     method: 'post',
     params: parems
   })
