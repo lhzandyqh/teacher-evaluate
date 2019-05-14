@@ -50,26 +50,26 @@
           align="center"
           label="总课时数"
           prop="total_hours"
-          width="140"/>
+          width="100"/>
         <el-table-column
           align="center"
           label="成绩效果"
           prop="score_result"
-          width="140"/>
+          width="100"/>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              @click="handleEditTwo(scope.$index, scope.row)">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handleDelete(scope.$index, scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="buttonContainer">
-        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+        <el-button type="primary" plain @click="handleEdit">增加</el-button>
       </div>
     </div>
     <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
@@ -101,13 +101,47 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="update">确 定</el-button>
+        <el-button type="primary" @click="jobDataIncrease">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="updateDialogFormVisible" title="编辑完成教学工作情况">
+      <el-form :model="editForm">
+        <el-form-item :label-width="formLabelWidth" label="起始时间">
+          <el-date-picker v-model="editForm.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTimeTwo"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="终止时间">
+          <el-date-picker v-model="editForm.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTimeTwo" />
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="任教学校">
+          <el-input v-model="editForm.teachschool" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="任教年级">
+          <el-input v-model="editForm.teachgrade" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="任教学科">
+          <el-input v-model="editForm.teachsubject" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="每周课时">
+          <el-input v-model="editForm.weekclass" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="总课时数">
+          <el-input v-model="editForm.totalclass" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="成绩效果">
+          <el-input v-model="editForm.achievementeffect" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="updateDialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="upDateJobData">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { teachJobIncrease, teachJobDelete, teachJobUpdate } from '@/api/teacherGrow'
 export default {
   name: 'TestTable',
   props: {
@@ -119,6 +153,8 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
+      updateDialogFormVisible: false,
+      token: getToken(),
       form: {
         begindate: '',
         enddate: '',
@@ -128,6 +164,17 @@ export default {
         weekclass: '',
         totalclass: '',
         achievementeffect: ''
+      },
+      editForm: {
+        begindate: '',
+        enddate: '',
+        teachschool: '',
+        teachgrade: '',
+        teachsubject: '',
+        weekclass: '',
+        totalclass: '',
+        achievementeffect: '',
+        id: ''
       },
       formLabelWidth: '160px'
       // teachJobData: [{
@@ -145,9 +192,22 @@ export default {
   methods: {
     handleEditTwo(index, row) {
       console.log(index, row)
+      this.updateDialogFormVisible = true
+      this.editForm.id = row.id
+      console.log(this.editForm)
     },
     handleDelete(index, row) {
-      console.log(index, row)
+      // console.log(index, row)
+      const prams = {
+        id: row
+      }
+      teachJobDelete({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('删除成功')
+        } else {
+          console.log('删除失败')
+        }
+      })
     },
     // 点击编辑
     handleEdit(index, row) {
@@ -169,27 +229,80 @@ export default {
       this.editFormVisible = false
     },
     /* eslint-disable */
-      update(index, row) {
-        this.form.begindate=this.form.begindate.toString()
-        this.form.enddate=this.form.enddate.toString()
-        // this.tableData.push(this.form)
-        this.tableData.splice(index, 1)
-        this.tableData.push(this.form)
-        // this.tableData[0] = this.form
-        this.dialogFormVisible = false
-        this.dialogFormVisible = false
-        console.log(this.form)
-        console.log(this.tableData[0])
-        console.log(this.tableData)
-      },
-      formatBeginTime(time){
-        this.form.begindate = time
-      },
-      formatEndTime(time){
-        this.form.enddate = time
+    update(index, row) {
+      this.form.begindate = this.form.begindate.toString()
+      this.form.enddate = this.form.enddate.toString()
+      // this.tableData.push(this.form)
+      this.tableData.splice(index, 1)
+      this.tableData.push(this.form)
+      // this.tableData[0] = this.form
+      this.dialogFormVisible = false
+      this.dialogFormVisible = false
+      console.log(this.form)
+      console.log(this.tableData[0])
+      console.log(this.tableData)
+    },
+    formatBeginTime(time) {
+      this.form.begindate = time
+    },
+    formatEndTime(time) {
+      this.form.enddate = time
+    },
+    formatBeginTimeTwo(time) {
+      this.editForm.begindate = time
+    },
+    formatEndTimeTwo(time) {
+      this.editForm.enddate = time
+    },
+    jobDataIncrease() {
+      const prams = {
+        start_time: this.form.begindate,
+        end_time: this.form.enddate,
+        teach_chool: this.form.teachschool,
+        teach_grade: this.form.teachgrade,
+        teach_subject: this.form.teachsubject,
+        hour_per_week: this.form.weekclass,
+        total_hours: this.form.totalclass,
+        score_result: this.form.achievementeffect
       }
+      console.log(prams.teach_chool)
+      console.log(this.token)
+      teachJobIncrease({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
+      this.dialogFormVisible = false
+    },
+    upDateJobData() {
+      console.log(this.editForm.id)
+      const prams = {
+        start_time: this.editForm.begindate,
+        end_time: this.editForm.enddate,
+        teach_chool: this.editForm.teachschool,
+        teach_grade: this.editForm.teachgrade,
+        teach_subject: this.editForm.teachsubject,
+        hour_per_week: this.editForm.weekclass,
+        total_hours: this.editForm.totalclass,
+        score_result: this.editForm.achievementeffect,
+      }
+      // console.log(this.editForm.id)
+      console.log(this.editForm)
+      teachJobUpdate({ ...prams, token: this.token , id: this.editForm.id }).then(response => {
+        if (response.data.code === 200) {
+          console.log('更新成功')
+          console.log(this.editForm)
+          console.log(prams)
+        } else {
+          console.log('更新失败')
+        }
+      })
+      this.updateDialogFormVisible = false
     }
   }
+}
 </script>
 
 <style scoped>

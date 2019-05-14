@@ -94,7 +94,7 @@ export default {
         article_content: this.content
       }
       console.log(this.token)
-      workShareUpload({ prams, token: this.token }).then(response => {
+      workShareUpload({ ...prams, token: this.token }).then(response => {
         if (response.data.code === 200) {
           console.log('添加成功')
         } else {

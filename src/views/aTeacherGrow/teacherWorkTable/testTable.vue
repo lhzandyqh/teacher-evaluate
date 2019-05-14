@@ -2,10 +2,10 @@
   <div class="appcontainer">
     <div class="innerContainer">
       <div class="titlecontainer">
-        <h4>完成教育工作情况</h4>
+        <h4>指导 培养教师情况</h4>
       </div>
       <el-table
-        :data="tableData"
+        :data="guidanceTrainTecData"
         border
         style="width: 100%">
         <el-table-column
@@ -14,7 +14,7 @@
           width="180">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.begindate }}</span>
+            <span style="margin-left: 10px">{{ scope.row.start_time }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -23,38 +23,32 @@
           width="180">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
-            <span style="margin-left: 10px">{{ scope.row.enddate }}</span>
+            <span style="margin-left: 10px">{{ scope.row.end_time }}</span>
           </template>
         </el-table-column>
         <el-table-column
           align="center"
-          label="任教学校"
-          prop="teachschool"
+          label="指导培养何校何人"
+          width="260">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.school_who }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="形式"
+          prop="format"
           width="140"/>
         <el-table-column
           align="center"
-          label="任教年级"
-          prop="teachgrade"
-          width="140"/>
-        <el-table-column
-          align="center"
-          label="任教学科"
-          prop="teachsubject"
-          width="140"/>
-        <el-table-column
-          align="center"
-          label="每周课时"
-          prop="weekclass"
-          width="140"/>
-        <el-table-column
-          align="center"
-          label="总课时数"
-          prop="totalclass"
-          width="140"/>
+          label="内容"
+          prop="content"
+          width="220"/>
         <el-table-column
           align="center"
           label="成绩效果"
-          prop="achievementeffect"
+          prop="score_results"
           width="140"/>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
@@ -74,28 +68,22 @@
     </div>
     <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
       <el-form :model="form">
-        <el-form-item :label-width="formLabelWidth" label="起始时间">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
           <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="终止时间">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="终止时间">
           <el-date-picker v-model="form.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTime" />
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="任教学校">
-          <el-input v-model="form.teachschool" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="指导培养何校何人">
+          <el-input v-model="form.teachwho" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="任教年级">
-          <el-input v-model="form.teachgrade" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="形式">
+          <el-input v-model="form.teachform" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="任教学科">
-          <el-input v-model="form.teachsubject" autocomplete="off"/>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="内容">
+          <el-input v-model="form.teachcontent" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="每周课时">
-          <el-input v-model="form.weekclass" autocomplete="off"/>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="总课时数">
-          <el-input v-model="form.totalclass" autocomplete="off"/>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="成绩效果">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
           <el-input v-model="form.achievementeffect" autocomplete="off"/>
         </el-form-item>
       </el-form>
@@ -110,30 +98,34 @@
 <script>
 export default {
   name: 'TestTable',
+  props: {
+    guidanceTrainTecData: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       dialogFormVisible: false,
       form: {
         begindate: '',
         enddate: '',
-        teachschool: '',
-        teachgrade: '',
-        teachsubject: '',
-        weekclass: '',
-        totalclass: '',
+        teachwho: '',
+        teachform: '',
+        teachcontent: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px',
-      tableData: [{
-        begindate: '2019-03-01',
-        enddate: '2019-07-23',
-        teachschool: '中关村中学',
-        teachgrade: '高三',
-        teachsubject: '物理',
-        weekclass: '8',
-        totalclass: '160',
-        achievementeffect: '效果良好'
-      }]
+      formLabelWidth: '160px'
+      // teachJobData: [{
+      //   begindate: '2019-03-01',
+      //   enddate: '2019-07-23',
+      //   teachschool: '中关村中学',
+      //   teachgrade: '高三',
+      //   teachsubject: '物理',
+      //   weekclass: '8',
+      //   totalclass: '160',
+      //   achievementeffect: '效果良好'
+      // }]
     }
   },
   methods: {
@@ -154,7 +146,7 @@ export default {
     // 点击关闭dialog
     handleClose(done) {
       /* done();
-      location.reload();*/
+          location.reload();*/
       this.editFormVisible = false
     },
 
@@ -163,27 +155,27 @@ export default {
       this.editFormVisible = false
     },
     /* eslint-disable */
-    update(index, row) {
-      this.form.begindate=this.form.begindate.toString()
-      this.form.enddate=this.form.enddate.toString()
-      // this.tableData.push(this.form)
-      this.tableData.splice(index, 1)
-      this.tableData.push(this.form)
-      // this.tableData[0] = this.form
-      this.dialogFormVisible = false
-      this.dialogFormVisible = false
-      console.log(this.form)
-      console.log(this.tableData[0])
-      console.log(this.tableData)
-    },
-    formatBeginTime(time){
-      this.form.begindate = time
-    },
-    formatEndTime(time){
-      this.form.enddate = time
+      update(index, row) {
+        this.form.begindate=this.form.begindate.toString()
+        this.form.enddate=this.form.enddate.toString()
+        // this.tableData.push(this.form)
+        this.tableData.splice(index, 1)
+        this.tableData.push(this.form)
+        // this.tableData[0] = this.form
+        this.dialogFormVisible = false
+        this.dialogFormVisible = false
+        console.log(this.form)
+        console.log(this.tableData[0])
+        console.log(this.tableData)
+      },
+      formatBeginTime(time){
+        this.form.begindate = time
+      },
+      formatEndTime(time){
+        this.form.enddate = time
+      }
     }
   }
-}
 </script>
 
 <style scoped>

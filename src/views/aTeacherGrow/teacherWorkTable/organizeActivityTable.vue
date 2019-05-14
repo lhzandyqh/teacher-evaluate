@@ -1,41 +1,73 @@
 <template>
-  <div class="app-container">
-    <el-row>
-      <div class="innerContainer">
+  <div class="appcontainer">
+    <div class="innerContainer">
+      <div class="titlecontainer">
         <h4>组织指导课外活动情况</h4>
-        <el-table
-          :data="tableData"
-          stripe
-          border
-          style="width: 100%">
-          <el-table-column
-            prop="begindate"
-            label="起始时间"/>
-          <el-table-column
-            prop="enddate"
-            label="终止时间"/>
-          <el-table-column
-            prop="organizename"
-            label="组织名称"/>
-          <el-table-column
-            prop="joinnumber"
-            label="参加人数"/>
-          <el-table-column
-            prop="activitytimes"
-            label="活动次数"/>
-          <el-table-column
-            prop="activitycontent"
-            label="活动内容"/>
-          <el-table-column
-            prop="achievementeffect"
-            label="成绩和效果"/>
-        </el-table>
-        <div class="buttonContainer">
-          <el-button type="primary" plain @click="handleEdit">修改</el-button>
-        </div>
       </div>
-    </el-row>
-    <el-dialog :visible.sync="dialogFormVisible" title="组织指导课外活动情况">
+      <el-table
+        :data="organExtActiData"
+        border
+        style="width: 100%">
+        <el-table-column
+          align="center"
+          label="起始时间"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.start_time }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="终止时间"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.end_time }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="组织名称"
+          prop="organize_name"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="参加人数"
+          prop="num_of_peop"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="活动次数"
+          prop="activities_times"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="活动内容"
+          prop="activities_cont"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="成绩效果"
+          prop="score_results"
+          width="140"/>
+        <el-table-column align="center" label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="buttonContainer">
+        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+      </div>
+    </div>
+    <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
       <el-form :model="form">
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
           <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
@@ -46,10 +78,10 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="组织名称">
           <el-input v-model="form.organizename" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="参加人数">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="参加人数">
           <el-input v-model="form.joinnumber" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="活动次数">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="活动次数">
           <el-input v-model="form.activitytimes" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="活动内容">
@@ -69,11 +101,16 @@
 
 <script>
 export default {
+  name: 'TestTable',
+  props: {
+    organExtActiData: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      border: true,
       dialogFormVisible: false,
-      labelPosition: 'right',
       form: {
         begindate: '',
         enddate: '',
@@ -83,20 +120,26 @@ export default {
         activitycontent: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px',
-      formLabelWidthTwo: '160px',
-      tableData: [{
-        begindate: '2018-8-23',
-        enddate: '2018-9-1',
-        organizename: '中科院',
-        joinnumber: '34',
-        activitytimes: '提升科学素养',
-        activitycontent: '很多很多',
-        achievementeffect: '很好'
-      }]
+      formLabelWidth: '160px'
+      // teachJobData: [{
+      //   begindate: '2019-03-01',
+      //   enddate: '2019-07-23',
+      //   teachschool: '中关村中学',
+      //   teachgrade: '高三',
+      //   teachsubject: '物理',
+      //   weekclass: '8',
+      //   totalclass: '160',
+      //   achievementeffect: '效果良好'
+      // }]
     }
   },
   methods: {
+    handleEditTwo(index, row) {
+      console.log(index, row)
+    },
+    handleDelete(index, row) {
+      console.log(index, row)
+    },
     // 点击编辑
     handleEdit(index, row) {
       // this.form = this.tableData
@@ -108,7 +151,7 @@ export default {
     // 点击关闭dialog
     handleClose(done) {
       /* done();
-        location.reload();*/
+            location.reload();*/
       this.editFormVisible = false
     },
 
@@ -147,9 +190,14 @@ export default {
     width: 100%;
     height: 100%;
     padding-bottom: 5px;
+    text-align: center;
   }
   .buttonContainer{
     padding-top: 10px;
+    text-align: center;
+  }
+  .innerContainer{
+    text-align: center;
   }
 
 </style>

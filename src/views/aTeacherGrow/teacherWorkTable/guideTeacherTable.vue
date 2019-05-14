@@ -1,38 +1,72 @@
 <template>
-  <div class="app-container">
-    <el-row>
-      <div class="innerContainer">
+  <div class="appcontainer">
+    <div class="innerContainer">
+      <div class="titlecontainer">
         <h4>指导 培养教师情况</h4>
-        <el-table
-          :data="tableData"
-          stripe
-          border
-          style="width: 100%">
-          <el-table-column
-            prop="begindate"
-            label="起始时间"/>
-          <el-table-column
-            prop="enddate"
-            label="终止时间"/>
-          <el-table-column
-            prop="teachwho"
-            label="指导培养何校何人"/>
-          <el-table-column
-            prop="teachform"
-            label="形式"/>
-          <el-table-column
-            prop="teachcontent"
-            label="内容"/>
-          <el-table-column
-            prop="achievementeffect"
-            label="成绩和效果"/>
-        </el-table>
-        <div class="buttonContainer">
-          <el-button type="primary" plain @click="handleEdit">修改</el-button>
-        </div>
       </div>
-    </el-row>
-    <el-dialog :visible.sync="dialogFormVisible" title="指导 培养教师情况">
+      <el-table
+        :data="guidanceTrainTecData"
+        border
+        style="width: 100%">
+        <el-table-column
+          align="center"
+          label="起始时间"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.start_time }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="终止时间"
+          width="180">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.end_time }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="指导培养何校何人"
+          width="260">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/>
+            <span style="margin-left: 10px">{{ scope.row.school_who }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="形式"
+          prop="format"
+          width="140"/>
+        <el-table-column
+          align="center"
+          label="内容"
+          prop="content"
+          width="220"/>
+        <el-table-column
+          align="center"
+          label="成绩效果"
+          prop="score_results"
+          width="140"/>
+        <el-table-column align="center" label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="buttonContainer">
+        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+      </div>
+    </div>
+    <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
       <el-form :model="form">
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
           <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
@@ -43,10 +77,10 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="指导培养何校何人">
           <el-input v-model="form.teachwho" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="形式">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="形式">
           <el-input v-model="form.teachform" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="内容">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="内容">
           <el-input v-model="form.teachcontent" autocomplete="off"/>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
@@ -63,11 +97,16 @@
 
 <script>
 export default {
+  name: 'TestTable',
+  props: {
+    guidanceTrainTecData: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      border: true,
       dialogFormVisible: false,
-      labelPosition: 'right',
       form: {
         begindate: '',
         enddate: '',
@@ -76,19 +115,26 @@ export default {
         teachcontent: '',
         achievementeffect: ''
       },
-      formLabelWidth: '160px',
-      formLabelWidthTwo: '160px',
-      tableData: [{
-        begindate: '2019-2-13',
-        enddate: '2019-4-23',
-        teachwho: '张老师',
-        teachform: '委托培养',
-        teachcontent: '职称评定',
-        achievementeffect: '有效'
-      }]
+      formLabelWidth: '160px'
+      // teachJobData: [{
+      //   begindate: '2019-03-01',
+      //   enddate: '2019-07-23',
+      //   teachschool: '中关村中学',
+      //   teachgrade: '高三',
+      //   teachsubject: '物理',
+      //   weekclass: '8',
+      //   totalclass: '160',
+      //   achievementeffect: '效果良好'
+      // }]
     }
   },
   methods: {
+    handleEditTwo(index, row) {
+      console.log(index, row)
+    },
+    handleDelete(index, row) {
+      console.log(index, row)
+    },
     // 点击编辑
     handleEdit(index, row) {
       // this.form = this.tableData
@@ -100,7 +146,7 @@ export default {
     // 点击关闭dialog
     handleClose(done) {
       /* done();
-        location.reload();*/
+            location.reload();*/
       this.editFormVisible = false
     },
 
@@ -139,9 +185,14 @@ export default {
     width: 100%;
     height: 100%;
     padding-bottom: 5px;
+    text-align: center;
   }
   .buttonContainer{
     padding-top: 10px;
+    text-align: center;
+  }
+  .innerContainer{
+    text-align: center;
   }
 
 </style>
