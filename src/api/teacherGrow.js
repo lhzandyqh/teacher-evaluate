@@ -12,7 +12,7 @@ export function workShareUpload(parems) {
 // 文章公示
 export function articleExhibition(token) {
   return request({
-    url: '/api/jobSharing/displayArticle',
+    url: '/api/jobSharing/getAllArticle',
     method: 'post',
     params: { token }
   })
@@ -123,5 +123,13 @@ export function guidanceTrainTecInquire(parems) {
     url: '/api/guidTrainTeacWork/guidanceTrainTeacByMon',
     method: 'post',
     params: parems
+  })
+}
+
+// 获取考试信息
+export function getExamData() {
+  return request({
+    url: '/exam/findAllExaminfo',
+    method: 'get'
   })
 }

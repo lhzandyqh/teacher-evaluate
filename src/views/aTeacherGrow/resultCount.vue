@@ -36,9 +36,15 @@
 import Chart from '@/components/Charts/mixChart'
 import barChart from '@/components/Charts/barChart'
 import groupBarChart from '@/components/Charts/groupBarChart'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'ResultCount',
-  components: { Chart, barChart, groupBarChart }
+  components: { Chart, barChart, groupBarChart },
+  data: function() {
+    return {
+      token: getToken()
+    }
+  }
 }
 </script>
 

@@ -3,6 +3,14 @@
     <el-row>
       <h3>工作分享</h3>
     </el-row>
+    <!--    <el-row>-->
+    <!--      <div class="caogaoButtonContainer">-->
+    <!--        <el-button type="info" icon="el-icon-edit">我的草稿箱</el-button>-->
+    <!--      </div>-->
+    <!--    </el-row>-->
+    <el-row>
+      <draft-display-dialog @draft="getDraftData($event)"/>
+    </el-row>
     <el-row>
       <h5 style="float: left">分享文章标题</h5>
     </el-row>
@@ -25,6 +33,7 @@
     <el-row>
       <div class="buttonContainer">
         <el-button type="primary" plain @click="print">提交保存</el-button>
+        <el-button type="success" plain @click="uploadToDraft">保存到草稿箱</el-button>
       </div>
     </el-row>
     <el-row style="padding-top: 20px">
@@ -41,7 +50,11 @@
               <div v-for="(item, index) in items.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="noteLi">
                 <div class="leftPoint"/>
                 <div class="rightText">
-                  <div class="noteTitle" @click="openNoteDialog(index)">{{ item.article_title }}</div>
+                  <div class="noteTitle" @click="openNoteDialog(index)">
+                    <div class="titleContainer">
+                      {{ item.article_title }}
+                    </div>
+                  </div>
                   <div class="noteTime">{{ item.upload_time }}</div>
                 </div>
               </div>
@@ -62,17 +75,22 @@
         </el-row>
       </div>
     </el-row>
+    <share-article-dialog :draft-dialog-visible="draftDialogVisible" @stop="closeDiolog"/>
   </div>
 </template>
 <script>
 import Tinymce from '../../components/Tinymce/index'
 import { workShareUpload, articleExhibition } from '@/api/teacherGrow'
+import { draftDataUpload } from '@/api/workShareData'
 import { getToken } from '@/utils/auth'
+import draftDisplayDialog from '@/components/Dialog/draftDisplayDialog'
+import shareArticleDialog from '@/components/Dialog/shareArticleDialog'
 export default {
   name: 'WorkShare',
-  components: { Tinymce },
+  components: { Tinymce, draftDisplayDialog, shareArticleDialog },
   data: function() {
     return {
+      draftDialogVisible: false,
       items: [],
       textarea: '',
       content: '',
@@ -87,21 +105,66 @@ export default {
   methods: {
     openNoteDialog() {
       console.log('喂喂喂')
+      this.draftDialogVisible = true
+    },
+    closeDiolog() {
+      this.draftDialogVisible = false
+    },
+    getDraftData: function(newdata) {
+      this.textarea = newdata[0]
+      this.content = newdata[1]
+    },
+    uploadToDraft() {
+      const prams = {
+        article_title: this.textarea,
+        article_content: this.content
+      }
+      if (prams.article_title === '' || prams.article_content === '') {
+        this.$message({
+          message: '标题或内容不能为空',
+          type: 'warning'
+        })
+      } else {
+        console.log(this.token)
+        draftDataUpload({ ...prams, token: this.token }).then(response => {
+          if (response.data.code === 200) {
+            console.log('添加成功')
+          } else {
+            console.log('添加失败')
+          }
+        })
+        console.log(this.content + this.textarea)
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        })
+      }
     },
     print() {
       const prams = {
         article_title: this.textarea,
         article_content: this.content
       }
-      console.log(this.token)
-      workShareUpload({ ...prams, token: this.token }).then(response => {
-        if (response.data.code === 200) {
-          console.log('添加成功')
-        } else {
-          console.log('添加失败')
-        }
-      })
-      console.log(this.content + this.textarea)
+      if (prams.article_title === '' || prams.article_content === '') {
+        this.$message({
+          message: '标题或内容不能为空',
+          type: 'warning'
+        })
+      } else {
+        console.log(this.token)
+        workShareUpload({ ...prams, token: this.token }).then(response => {
+          if (response.data.code === 200) {
+            console.log('添加成功')
+          } else {
+            console.log('添加失败')
+          }
+        })
+        console.log(this.content + this.textarea)
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        })
+      }
     },
     getItems() {
       const prams = {
@@ -181,6 +244,10 @@ export default {
    .pagination-container{
      padding-top: 20px;
      text-align: center;
+   }
+   .caogaoButtonContainer{
+     float: right;
+     padding-right: 20px;
    }
 
 </style>

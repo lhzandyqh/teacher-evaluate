@@ -405,7 +405,7 @@ import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organiz
 import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
 import guideTeacherTable from '@/views/aTeacherGrow/teacherWorkTable/guideTeacherTable'
 import testTable from '@/views/aTeacherGrow/teacherWorkTable/testTable'
-import { teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire, organizeExtraInquire, furLeaContinueEduInquire, guidanceTrainTecInquire, educationJobDelete } from '@/api/teacherGrow'
+import { getExamData, teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire, organizeExtraInquire, furLeaContinueEduInquire, guidanceTrainTecInquire, educationJobDelete } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
@@ -419,7 +419,8 @@ export default {
       reportObserResData: [],
       organExtActiData: [],
       furLeaContinueEduData: [],
-      guidanceTrainTecData: []
+      guidanceTrainTecData: [],
+      examData: []
     }
   },
   watch: {
@@ -437,6 +438,10 @@ export default {
     const prams = {
       month: this.month
     }
+    getExamData().then(response => {
+      this.examData = response.data.info
+      console.log(this.examData)
+    })
     teachJobInquire({ ...prams, token: this.token }).then(response => {
       this.teachJobData = response.data.teacher
     })

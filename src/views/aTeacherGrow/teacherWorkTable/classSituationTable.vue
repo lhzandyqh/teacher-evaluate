@@ -190,13 +190,13 @@ export default {
 
 <style scoped>
   .innerContainer{
-    border: 1px solid #efefef;
-    padding: 10px;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 5px;
-    text-align: center;
-  }
+     border: 1px solid #efefef;
+     padding: 10px;
+     width: 100%;
+     height: 100%;
+     padding-bottom: 5px;
+     text-align: center;
+   }
   .buttonContainer{
     padding-top: 10px;
     text-align: center;

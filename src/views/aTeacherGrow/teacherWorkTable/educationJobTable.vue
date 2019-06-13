@@ -54,7 +54,7 @@
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handledelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -128,9 +128,14 @@ export default {
     handleEditTwo(index, row) {
       console.log(index, row)
     },
-    handleDelete(index, row) {
+    handledelete(index, row) {
       console.log(row.id)
-      this.$emit('delete', row.id)
+      setTimeout(() => {
+        this.$emit('delete', row.id)
+        console.log('我好了弟弟你呢')
+      }, 3000)
+      // this.$emit('delete', row.id)
+      // console.log('我好了弟弟你呢')
     },
     // 点击编辑
     handleEdit(index, row) {
