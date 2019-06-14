@@ -42,6 +42,10 @@
           <div class="noteT" style="padding-top: 30px">
             <div class="titleListLine"/>
             <div class="schNot">历史分享</div>
+            <div class="favorite">
+              <!--              <el-button type="danger" icon="el-icon-s-management">我的收藏</el-button>-->
+              <my-favorite-dialog/>
+            </div>
           </div>
         </el-row>
         <el-row>
@@ -50,7 +54,7 @@
               <div v-for="(item, index) in items.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="noteLi">
                 <div class="leftPoint"/>
                 <div class="rightText">
-                  <div class="noteTitle" @click="openNoteDialog(index)">
+                  <div class="noteTitle" @click="openNoteDialog(index,item)">
                     <div class="titleContainer">
                       {{ item.article_title }}
                     </div>
@@ -75,7 +79,7 @@
         </el-row>
       </div>
     </el-row>
-    <share-article-dialog :draft-dialog-visible="draftDialogVisible" @stop="closeDiolog"/>
+    <share-article-dialog :draft-dialog-visible="draftDialogVisible" :dialog-content="dialogContent" @stop="closeDiolog"/>
   </div>
 </template>
 <script>
@@ -85,9 +89,10 @@ import { draftDataUpload } from '@/api/workShareData'
 import { getToken } from '@/utils/auth'
 import draftDisplayDialog from '@/components/Dialog/draftDisplayDialog'
 import shareArticleDialog from '@/components/Dialog/shareArticleDialog'
+import myFavoriteDialog from '@/components/Dialog/myFavoriteDialog'
 export default {
   name: 'WorkShare',
-  components: { Tinymce, draftDisplayDialog, shareArticleDialog },
+  components: { Tinymce, draftDisplayDialog, shareArticleDialog, myFavoriteDialog },
   data: function() {
     return {
       draftDialogVisible: false,
@@ -95,6 +100,7 @@ export default {
       textarea: '',
       content: '',
       token: getToken(),
+      dialogContent: [],
       currentPage: 1, // 初始页
       pagesize: 10 //    每页的数据
     }
@@ -103,9 +109,13 @@ export default {
     this.getItems()
   },
   methods: {
-    openNoteDialog() {
+    openNoteDialog(index, content) {
       console.log('喂喂喂')
+      console.log(index)
       this.draftDialogVisible = true
+      this.dialogContent[0] = content.article_content
+      this.dialogContent[1] = content.id
+      console.log(content)
     },
     closeDiolog() {
       this.draftDialogVisible = false
@@ -248,6 +258,9 @@ export default {
    .caogaoButtonContainer{
      float: right;
      padding-right: 20px;
+   }
+   .favorite{
+     margin-left: 1400px;
    }
 
 </style>
