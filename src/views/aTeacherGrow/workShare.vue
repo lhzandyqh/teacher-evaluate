@@ -85,7 +85,7 @@
 <script>
 import Tinymce from '../../components/Tinymce/index'
 import { workShareUpload, articleExhibition } from '@/api/teacherGrow'
-import { draftDataUpload } from '@/api/workShareData'
+import { draftDataUpload, lookArticleStatus } from '@/api/workShareData'
 import { getToken } from '@/utils/auth'
 import draftDisplayDialog from '@/components/Dialog/draftDisplayDialog'
 import shareArticleDialog from '@/components/Dialog/shareArticleDialog'
@@ -115,7 +115,21 @@ export default {
       this.draftDialogVisible = true
       this.dialogContent[0] = content.article_content
       this.dialogContent[1] = content.id
+      const prams = {
+        article_id: this.dialogContent[1]
+      }
+      lookArticleStatus({ ...prams, token: this.token }).then(response => {
+        console.log(response.data.article_details[0].collect_status)
+        if (response.data.article_details[0].collect_status === 0) {
+          this.dialogContent[2] = false
+        } else {
+          this.dialogContent[2] = true
+        }
+      })
       console.log(content)
+      this.dialogContent[3] = content.article_title
+      console.log('我是要传给子组件的数据')
+      console.log(this.dialogContent)
     },
     closeDiolog() {
       this.draftDialogVisible = false
