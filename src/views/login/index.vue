@@ -37,50 +37,54 @@
     <!--页面内容-->
     <el-container>
       <el-header>
-        <img :src="require('./headlogo.png')" alt="">
+        <img :src="require('./img/headlogo.png')" alt="">
         <el-button type="primary" @click="showDialog=true">登录</el-button>
       </el-header>
       <el-container>
-        <el-main style="background: #f1f4fa;width: 80%;margin: 0 auto;">
-          <el-row :gutter="40">
-            <el-col :span="13" :offset="1">
-              <el-carousel :interval="5000" arrow="always">
-                <el-carousel-item v-for="(item, index) in schna" :key="index">
-                  <h3>{{ item }}</h3>
-                </el-carousel-item>
-              </el-carousel>
-              <div class="newList">
-                <div v-for="(item, index) in newList" :key="index" class="newLi">
-                  <div class="newTitle" @click="openNewDialog(index)">{{ item.newsName }}</div>
-                  <div class="newBot">
-                    <div class="newType">{{ item.newsType }}</div>
-                    <div class="newTime">{{ item.newsTime }}</div>
+        <el-main style="background: #f1f4fa;width: 80%;margin: 0 auto;padding-top: 0;">
+          <div style="max-width: 1300px;margin: 0 auto;">
+            <!--<div style="color: #569ef8;font-size: 23px;font-weight: 600;height: 80px;line-height: 80px;">精准绩效评价与教师发展促进平台</div>-->
+            <el-carousel :interval="5000" arrow="always" height="400px" style="margin-top: 30px;">
+              <el-carousel-item v-for="(item, index) in schna" :key="index">
+                <img :src="item" alt="">
+              </el-carousel-item>
+            </el-carousel>
+            <el-row :gutter="40">
+              <el-col :span="14">
+                <div class="newList">
+                  <div v-for="(item, index) in newList" :key="index" class="newLi">
+                    <div class="newTitle" @click="openNewDialog(index)">{{ item.newsName }}</div>
+                    <div class="newBot">
+                      <div class="newType">{{ item.newsType }}</div>
+                      <div class="newTime">{{ item.newsTime }}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </el-col>
-            <el-col :span="9" style="background: #fff;">
-              <!--<el-collapse @change="handleChange">-->
-              <!--<el-collapse-item v-for="item in schoolNotices" :title="item.noticeTitle" :name="item.id">-->
-              <!--<div>{{item.noticeContext}}</div>-->
-              <!--</el-collapse-item>-->
-              <!--</el-collapse>-->
-              <div/>
-              <div class="noteT">
-                <div class="titleListLine"/>
-                <div class="schNot">经验分享</div>
-              </div>
-              <div class="noteList" style="height: 800px;overflow-y: auto;margin-bottom: 40px;">
-                <div v-for="(item, index) in schoolNotices" :key="item.id" class="noteLi">
-                  <div class="leftPoint"/>
-                  <div class="rightText">
-                    <div class="noteTitle" @click="openNoteDialog(index)">{{ item.noticeTitle }}</div>
-                    <div class="noteTime">{{ item.noticeTime }}</div>
+              </el-col>
+              <el-col :span="10" style="margin-top: 30px;">
+                <!--<el-collapse @change="handleChange">-->
+                <!--<el-collapse-item v-for="item in schoolNotices" :title="item.noticeTitle" :name="item.id">-->
+                <!--<div>{{item.noticeContext}}</div>-->
+                <!--</el-collapse-item>-->
+                <!--</el-collapse>-->
+                <div style="background: #fff;">
+                  <div class="noteT">
+                    <div class="titleListLine"/>
+                    <div class="schNot">经验分享</div>
+                  </div>
+                  <div class="noteList" style="height: 510px;overflow-y: auto;margin-bottom: 40px;">
+                    <div v-for="(item, index) in schoolNotices" :key="item.id" class="noteLi">
+                      <div class="leftPoint"/>
+                      <div class="rightText">
+                        <div class="noteTitle" @click="openNoteDialog(index)">{{ item.noticeTitle }}</div>
+                        <div class="noteTime">{{ item.noticeTime }}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </el-col>
-          </el-row>
+              </el-col>
+            </el-row>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -119,6 +123,8 @@
 import { isvalidUsername } from '@/utils/validate'
 import SocialSign from './socialsignin'
 import { getNewsList, getSchoolNotices } from '@/api/login'
+import banner01 from './img/banner01.jpg'
+import banner02 from './img/banner02.jpg'
 
 export default {
   name: 'Login',
@@ -126,28 +132,28 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!isvalidUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 4) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('请输入密码大于4位'))
       } else {
         callback()
       }
     }
     return {
-      schna: ['校训', '文化', '校园展示'],
+      schna: [banner01, banner02],
       noteInfo: { noticeContext: '' },
       dialogNote: false,
       dialogNew: false,
       activeIndex: '1',
       loginTitle: '系统登录',
       loginForm: {
-        user_name: '10010',
-        password: '123456'
+        user_name: '',
+        password: ''
       },
       loginRules: {
         user_name: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -207,9 +213,14 @@ export default {
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
             this.loading = false
+            this.$message({
+              message: '登录成功',
+              type: 'success'
+            })
             // this.$router.push({ path: this.redirect || '/' })
             this.$router.push({ path: '/' })
-          }).catch(() => {
+          }).catch((msg) => {
+            this.$message.error(msg)
             this.loading = false
           })
         } else {
@@ -262,7 +273,7 @@ export default {
   /* 修复input 背景不协调 和光标变色 */
   /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-  $bg:#283443;
+  $bg:#fff;
   $light_gray:#eee;
   $cursor: #fff;
 
@@ -303,7 +314,7 @@ $bg:#fff;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 .el-header{
-  height: 90px!important;
+  height: 100px!important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -311,6 +322,10 @@ $light_gray:#eee;
     height: 60%;
   }
 
+}
+.el-carousel__container img{
+  width: 100%;
+  height: 400px;
 }
 .login-container {
   min-height: 100%;
@@ -371,21 +386,21 @@ $light_gray:#eee;
   margin: 0;
 }
 
-.el-carousel__item:nth-of-type(1) {
-  background: url("http://58.119.112.11:11005/3da6ef7d-c9dd-4ca1-bdee-c83e88dd35bb.png") no-repeat center;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.el-carousel__item:nth-of-type(2) {
-  background: url("http://58.119.112.11:11005/5f2c2637-35f0-4b8d-a61c-7bcc67d84f31.jpg") no-repeat center;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.el-carousel__item:nth-of-type(3) {
-  background: url("http://58.119.112.11:11005/2edc2a5b-6a63-410a-a85a-6fb66186239f.jpg") no-repeat center;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
+/*.el-carousel__item:nth-of-type(1) {*/
+  /*background: url("http://58.119.112.11:11005/3da6ef7d-c9dd-4ca1-bdee-c83e88dd35bb.png") no-repeat center;*/
+  /*-webkit-background-size: cover;*/
+  /*background-size: cover;*/
+/*}*/
+/*.el-carousel__item:nth-of-type(2) {*/
+  /*background: url("http://58.119.112.11:11005/5f2c2637-35f0-4b8d-a61c-7bcc67d84f31.jpg") no-repeat center;*/
+  /*-webkit-background-size: cover;*/
+  /*background-size: cover;*/
+/*}*/
+/*.el-carousel__item:nth-of-type(3) {*/
+  /*background: url("http://58.119.112.11:11005/2edc2a5b-6a63-410a-a85a-6fb66186239f.jpg") no-repeat center;*/
+  /*-webkit-background-size: cover;*/
+  /*background-size: cover;*/
+/*}*/
 
 .newList{
   margin-top: 30px;

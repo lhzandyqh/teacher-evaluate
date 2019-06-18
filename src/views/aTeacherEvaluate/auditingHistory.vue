@@ -198,10 +198,18 @@ export default {
       editAuditingHistory({ token: this.token, id: parseInt(this.thisId), data: onStatus }).then(response => {
         this.dialogPvVisible = false
         if (response.data.code === 200) {
-          this.$message({
-            message: response.data.msg,
-            type: 'success'
-          })
+          if (response.data.msg === '审核通过') {
+            this.$message({
+              message: response.data.msg,
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: response.data.msg,
+              type: 'error'
+            })
+          }
+          this.getList()
         }
       })
     }

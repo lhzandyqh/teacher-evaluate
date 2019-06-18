@@ -53,12 +53,14 @@ export default {
     goElv(path) {
       this.$store.dispatch('LogOutRole').then(() => {
         window.localStorage.setItem('role', 'elv')
+        window.localStorage.setItem('prePath', path)
         this.$router.push({ path: `/${path}/index` })
       })
     },
     goGrow(path) {
       this.$store.dispatch('LogOutRole').then(() => {
         window.localStorage.setItem('role', 'grow')
+        window.localStorage.setItem('prePath', path)
         this.$router.push({ path: `/${path}/index` })
         console.log(`/${path}/index`)
       })
