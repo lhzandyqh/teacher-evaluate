@@ -51,6 +51,9 @@ const user = {
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
+          if (data.code === 405) {
+            reject(data.msg)
+          }
           commit('SET_TOKEN', data.result.token)
           // commit('SET_ROLES', ['admin'])
           // commit('SET_NAME', '123')
