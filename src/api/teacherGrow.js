@@ -90,6 +90,15 @@ export function educationJobDelete(parems) {
   })
 }
 
+// 修改教育工作
+export function educationJobUpdate(parems) {
+  return request({
+    url: '/api/EduWork/updateEduWork',
+    method: 'post',
+    params: parems
+  })
+}
+
 // 汇报观摩研究课程(按月查询)
 export function reportObsResearchInquire(parems) {
   return request({
@@ -99,6 +108,32 @@ export function reportObsResearchInquire(parems) {
   })
 }
 
+// 增加汇报观摩课
+export function reportObsResearchIncrease(parems) {
+  return request({
+    url: '/api/ReporObsResearch/addReporObsResearch',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 编辑汇报观摩课
+export function reportObsResearchUpdate(parems) {
+  return request({
+    url: '/api/ReporObsResearch/updateReporObsResearch',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 删除汇报观摩课
+export function reportObsResearchDelete(parems) {
+  return request({
+    url: '/api/ReporObsResearch/deleteReporObsResearch',
+    method: 'post',
+    params: parems
+  })
+}
 // 组织课外活动(按月查询)
 export function organizeExtraInquire(parems) {
   return request({
@@ -108,6 +143,32 @@ export function organizeExtraInquire(parems) {
   })
 }
 
+// 添加课外活动
+export function activityOrganizeIncrease(parems) {
+  return request({
+    url: '/api/organizeExtraWork/addOrganizeExtra',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 编辑课外活动
+export function activityOrganizeUpdate(parems) {
+  return request({
+    url: '/api/organizeExtraWork/updateOrangGuideExtraAct',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 删除课外活动
+export function activityOrganizeDelete(parems) {
+  return request({
+    url: '/api/organizeExtraWork/deleteOrganizeExtra',
+    method: 'post',
+    params: parems
+  })
+}
 // 参加系统进修或继续教育情况(按月查询)
 export function furLeaContinueEduInquire(parems) {
   return request({
@@ -117,10 +178,64 @@ export function furLeaContinueEduInquire(parems) {
   })
 }
 
+// 添加系统进修或继续教育情况
+export function furLeaContinueEduIncrease(parems) {
+  return request({
+    url: '/api/furLearnContinueEduWork/addFurLeaContiEdu',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 更新系统或进修或继续教育情况
+export function furLeaContinueEduUpdate(parems) {
+  return request({
+    url: '/api/furLearnContinueEduWork/updateFurLeaContinueEdu',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 删除系统进修或继续教育情况
+export function furLeaContinueEduDelete(parems) {
+  return request({
+    url: '/api/furLearnContinueEduWork/deleteFurLeaContinueEdu',
+    method: 'post',
+    params: parems
+  })
+}
+
 // 指导 培养教师情况(按月查询)
 export function guidanceTrainTecInquire(parems) {
   return request({
     url: '/api/guidTrainTeacWork/guidanceTrainTeacByMon',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 增加指导，培养教师情况
+export function guidanceTrainTecIncrease(parems) {
+  return request({
+    url: '/api/guidTrainTeacWork/addGuidTrainTeac',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 修改指导，培养教师情况
+export function guidanceTrainTecUpdate(parems) {
+  return request({
+    url: '/api/guidTrainTeacWork/updateGuidTrainTec',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 删除指导，培养教师情况
+export function guidanceTrainTecDelete(parems) {
+  return request({
+    url: '/api/guidTrainTeacWork/deleteGuidTrainTec',
     method: 'post',
     params: parems
   })

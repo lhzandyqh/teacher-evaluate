@@ -63,10 +63,10 @@
         </el-table-column>
       </el-table>
       <div class="buttonContainer">
-        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+        <el-button type="primary" plain @click="add">增加</el-button>
       </div>
     </div>
-    <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
+    <el-dialog :visible.sync="dialogFormVisible" title="指导 培养教师情况">
       <el-form :model="form">
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
           <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
@@ -89,13 +89,41 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="update">确 定</el-button>
+        <el-button type="primary" @click="guideAdd">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="dialogFormVisibleEdit" title="编辑指导 培养教师情况">
+      <el-form :model="formEdit">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
+          <el-date-picker v-model="formEdit.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="终止时间">
+          <el-date-picker v-model="formEdit.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTime" />
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="指导培养何校何人">
+          <el-input v-model="formEdit.teachwho" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="形式">
+          <el-input v-model="formEdit.teachform" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="内容">
+          <el-input v-model="formEdit.teachcontent" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
+          <el-input v-model="formEdit.achievementeffect" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
+        <el-button type="primary" @click="guideUpdate">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { guidanceTrainTecIncrease, guidanceTrainTecUpdate, guidanceTrainTecDelete } from '@/api/teacherGrow'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
   props: {
@@ -107,6 +135,8 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
+      dialogFormVisibleEdit: false,
+      token: getToken(),
       form: {
         begindate: '',
         enddate: '',
@@ -114,6 +144,15 @@ export default {
         teachform: '',
         teachcontent: '',
         achievementeffect: ''
+      },
+      formEdit: {
+        begindate: '',
+        enddate: '',
+        teachwho: '',
+        teachform: '',
+        teachcontent: '',
+        achievementeffect: '',
+        id: ''
       },
       formLabelWidth: '160px'
       // teachJobData: [{
@@ -129,18 +168,71 @@ export default {
     }
   },
   methods: {
-    handleEditTwo(index, row) {
-      console.log(index, row)
+    add: function() {
+      this.dialogFormVisible = true
     },
-    handleDelete(index, row) {
+    guideAdd: function() {
+      const prams = {
+        start_time: this.form.begindate,
+        end_time: this.form.enddate,
+        school_who: this.form.teachwho,
+        format: this.form.teachform,
+        content: this.form.teachcontent,
+        score_results: this.form.achievementeffect
+      }
+      console.log(this.token)
+      guidanceTrainTecIncrease({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
+      this.dialogFormVisible = false
+    },
+    guideUpdate: function() {
+      const prams = {
+        start_time: this.formEdit.begindate,
+        end_time: this.formEdit.enddate,
+        school_who: this.formEdit.teachwho,
+        format: this.formEdit.teachform,
+        content: this.formEdit.teachcontent,
+        score_results: this.formEdit.achievementeffect
+      }
+      guidanceTrainTecUpdate({ ...prams, token: this.token, id: this.formEdit.id }).then(response => {
+        if (response.data.code === 200) {
+          console.log('更新成功')
+          console.log(this.editForm)
+          console.log(prams)
+        } else {
+          console.log('更新失败')
+        }
+      })
+      this.dialogFormVisibleEdit = false
+    },
+    handleEditTwo(index, row) {
       console.log(index, row)
     },
     // 点击编辑
     handleEdit(index, row) {
       // this.form = this.tableData
       // this.currentIndex = index
-      this.dialogFormVisible = true
-      this.editForm = Object.assign({}, row)
+      this.dialogFormVisibleEdit = true
+      this.formEdit.id = row.id
+      // this.editForm = Object.assign({}, row)
+    },
+    handleDelete(index, row) {
+      console.log(index, row)
+      const prams = {
+        id: row.id
+      }
+      guidanceTrainTecDelete({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('删除成功')
+        } else {
+          console.log('删除失败')
+        }
+      })
     },
 
     // 点击关闭dialog

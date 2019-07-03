@@ -17,7 +17,7 @@
       <!--      </div>-->
       <div class="collect">
         <el-button v-show="dialogContent[2]" type="text" @click="collectFavoriteArticle">收藏</el-button>
-        <span v-show="!dialogContent[2]">已收藏</span>
+        <!--        <span v-show="dialogContent[2]">已收藏</span>-->
       </div>
       <span slot="footer" class="dialog-footer">
         <!--        <el-button @click="draftDialogVisible = false">取 消</el-button>-->

@@ -42,10 +42,10 @@
           <div class="noteT" style="padding-top: 30px">
             <div class="titleListLine"/>
             <div class="schNot">历史分享</div>
-            <div class="favorite">
-              <!--              <el-button type="danger" icon="el-icon-s-management">我的收藏</el-button>-->
-              <my-favorite-dialog/>
-            </div>
+          </div>
+          <div class="favorite">
+            <!--              <el-button type="danger" icon="el-icon-s-management">我的收藏</el-button>-->
+            <my-favorite-dialog/>
           </div>
         </el-row>
         <el-row>
@@ -118,14 +118,15 @@ export default {
       const prams = {
         article_id: this.dialogContent[1]
       }
-      lookArticleStatus({ ...prams, token: this.token }).then(response => {
-        console.log(response.data.article_details[0].collect_status)
-        if (response.data.article_details[0].collect_status === 0) {
-          this.dialogContent[2] = false
-        } else {
-          this.dialogContent[2] = true
-        }
-      })
+      // lookArticleStatus({ ...prams, token: this.token }).then(response => {
+      //   console.log(response.data.article_details[0].collect_status)
+      //   if (response.data.article_details[0].collect_status === 0) {
+      //     this.dialogContent[2] = false
+      //   } else {
+      //     this.dialogContent[2] = true
+      //   }
+      // })
+      this.dialogContent[2] = true
       console.log(content)
       this.dialogContent[3] = content.article_title
       console.log('我是要传给子组件的数据')
@@ -274,7 +275,9 @@ export default {
      padding-right: 20px;
    }
    .favorite{
-     margin-left: 1400px;
+     margin-left: 1300px;
    }
-
+   .schNot{
+     text-align: left;
+   }
 </style>
