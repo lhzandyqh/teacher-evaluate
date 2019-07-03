@@ -54,12 +54,16 @@ const user = {
           if (data.code === 405) {
             reject(data.msg)
           }
+          // 权限角色
+          // 1.学生 2.教师 3.审核员 4.系统管理员 5.教师组长
+          window.localStorage.setItem('userRole', response.data.result.rolesname)
           commit('SET_TOKEN', data.result.token)
           // commit('SET_ROLES', ['admin'])
           // commit('SET_NAME', '123')
           // commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
           // commit('SET_INTRODUCTION', '123')
-          setToken(response.data.result.token)
+          setToken(data.result.token)
+          // setToken(response.data.result.token)
           resolve()
         }).catch(error => {
           reject(error)

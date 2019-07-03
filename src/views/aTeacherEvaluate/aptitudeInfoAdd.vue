@@ -276,7 +276,17 @@
     <div v-if="stauts===2" class="firstCont">
       <div class="components-container">
         <div class="editor-container">
-          <dropzone id="myVueDropzone" url="http://58.119.112.11:11028/api/upload" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS"/>
+          <!--<dropzone id="myVueDropzone" url="http://58.119.112.11:11028/api/upload" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS"/>-->
+          <el-upload
+            :http-request="actionMyself"
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple>
+            <i class="el-icon-upload"/>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
         </div>
       </div>
     </div>
@@ -492,6 +502,7 @@
 import Dropzone from '@/components/Dropzone'
 import { getAptitude } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
+import axios from 'axios'
 
 export default {
   name: 'AptitudeInfoAdd',
@@ -530,6 +541,13 @@ export default {
     dropzoneR(file) {
       console.log(file)
       this.$message({ message: 'Delete success', type: 'success' })
+    },
+    actionMyself(params) {
+      const formData = new FormData()
+      formData.append('file', params.file)
+      axios.post('http://58.119.112.11:11028/api/upload', formData).then((res) => {
+        console.log(res)
+      })
     }
   }
 }
