@@ -1,10 +1,5 @@
 <template>
   <div class="app-container">
-    <el-button-group style="margin-bottom: 30px;">
-      <el-button type="primary" @click="setRole('教师')">教师</el-button>
-      <el-button type="primary" @click="setRole('教师组长')">教师组长</el-button>
-      <el-button type="primary" @click="setRole('系统管理员')">校领导</el-button>
-    </el-button-group>
     <div v-if="role === '教师'">
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
         <div class="title">{{ barChartData.title }}</div>
@@ -318,8 +313,7 @@ export default {
       listQuery1: '管理岗',
       list: ['总数', '教学成果', '发表论文个数', '资质获奖'],
       list1: ['教学成果', '发表论文个数', '资质获奖'],
-      // role: window.localStorage.getItem('userRole'),
-      role: '教师',
+      role: window.localStorage.getItem('userRole'),
       tableData1: [
         {name: '李二奎', date: 85, count: 50, address: 35, all: 150},
         {name: '赵玉梅', date: 35, count: 57, address: 25, all: 145},
@@ -339,9 +333,6 @@ export default {
   },
   methods: {
     getList() {
-    },
-    setRole(val) {
-      this.role = val
     },
     seaech() {
       const that = this

@@ -28,6 +28,7 @@ router.beforeEach((to, from, next) => {
         store.dispatch('GetUserInfo').then(res => { // 拉取user_info
           const roles = store.getters.roles // note: roles must be a array! such as: ['editor','develop']
           store.dispatch('GenerateRoutes', { roles }).then(() => { // 根据roles权限生成可访问的路由表
+            console.log(store.getters.addRouters)
             router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
             if(to.name){
               next({ ...to, replace: true })
@@ -44,11 +45,11 @@ router.beforeEach((to, from, next) => {
         })
       } else {
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
-        if (hasPermission(store.getters.roles, to.meta.roles)) {
+        // if (hasPermission(store.getters.roles, to.meta.roles)) {
           next()
-        } else {
-          next({ path: '/401', replace: true, query: { noGoBack: true }})
-        }
+        // } else {
+        //   next({ path: '/401', replace: true, query: { noGoBack: true }})
+        // }
         // 可删 ↑
       }
     }

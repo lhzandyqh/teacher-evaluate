@@ -1,4 +1,4 @@
-import { asyncRouterMap, constantRouterMap } from '@/router'
+import { asyncRouterMap, constantRouterMap, asyncRouterMapGrow } from '@/router'
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
@@ -6,6 +6,7 @@ import { asyncRouterMap, constantRouterMap } from '@/router'
  * @param route
  */
 function hasPermission(roles, route) {
+  console.log(roles, route, 999888)
   if (route.meta && route.meta.roles) {
     return roles.some(role => route.meta.roles.includes(role))
   } else {
@@ -53,8 +54,12 @@ const permission = {
         if (roles.includes('admin')) {
           accessedRouters = asyncRouterMap
         } else {
-          console.log(roles)
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
+          const role = window.localStorage.getItem('userRole')
+          if (roles.indexOf('elv') > -1) {
+            accessedRouters = filterAsyncRouter(asyncRouterMap, [role])
+          } else {
+            accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
+          }
         }
         commit('SET_ROUTERS', accessedRouters)
         resolve()

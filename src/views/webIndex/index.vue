@@ -9,25 +9,25 @@
         <div class="elvtitletext">教师评价</div>
       </div>
       <div class="elvul">
-        <div class="elvli">
+        <div v-if="role === '教师' || role === '教师组长' || role === '系统管理员'" class="elvli">
           <div class="elvlileft" @click="goElv('teacherInfo')">教师信息</div>
-          <div class="elvliright" @click="goElv('auditingHistory')">审核历史</div>
+          <div class="elvliright" @click="goElv('integrationInfo')">积分详情</div>
         </div>
-        <div class="elvli">
+        <div v-if="role === '教师' || role === '教师组长' || role === '系统管理员'" class="elvli">
           <div class="elvlileft" @click="goElv('aptitudeInfo')">资质信息</div>
           <div class="elvliright" @click="goElv('countInfo')">统计信息</div>
         </div>
-        <div class="elvli">
-          <div class="elvlileft" @click="goElv('integrationInfo')">积分详情</div>
-          <div class="elvliright" @click="goElv('authorityManage')">权限管理</div>
-        </div>
-        <div class="elvli">
-          <div class="elvlileft" @click="goElv('auditingList')">审核列表</div>
+        <div v-if="role === '系统管理员'" class="elvli">
+          <div class="elvlileft" @click="goElv('authorityManage')">权限管理</div>
           <div class="elvliright" @click="goElv('integrationConfig')">积分配置</div>
+        </div>
+        <div v-if="role === '系统管理员' || role === '系统审核员'" class="elvli">
+          <div class="elvlileft" @click="goElv('auditingList')">审核列表</div>
+          <div class="elvliright" @click="goElv('auditingHistory')">审核历史</div>
         </div>
       </div>
     </div>
-    <div class="growcontent">
+    <div v-if="role === '教师' || role === '教师组长' || role === '系统管理员'" class="growcontent">
       <div class="growtitle">
         <div><i class="el-icon-search"/></div>
         <div class="growtitletext">教师成长</div>
@@ -46,7 +46,8 @@ export default {
   name: 'Index',
   data() {
     return {
-      img: require('./img/bg.png')
+      img: require('./img/bg.png'),
+      role: window.localStorage.getItem('userRole')
     }
   },
   methods: {
