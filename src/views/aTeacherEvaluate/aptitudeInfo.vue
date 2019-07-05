@@ -2,7 +2,7 @@
   <div class="app-container">
     <div style="margin-bottom: 20px;">
       <router-link to="/aptitudeInfo/aptitudeInfoAdd"><el-button type="primary" >新增</el-button></router-link>
-      <el-button type="primary" >批量新增</el-button>
+      <el-button v-if="false" type="primary" >批量新增</el-button>
     </div>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
 
