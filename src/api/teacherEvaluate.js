@@ -18,7 +18,7 @@ export function integrationInfoList(token) {
 // 积分详情查询
 export function integrationSearch(parems) {
   return request({
-    url: '/api/pointcertificate/search',
+    url: '/api/qualification/getPointsByCertType',
     method: 'get',
     params: parems
   })
