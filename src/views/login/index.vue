@@ -145,7 +145,7 @@ export default {
       }
     }
     return {
-      schna: [banner01, banner02],
+      schna: ['http://58.119.112.11:11005/cd82b763-708f-42a4-9eeb-cd6c54e59981.jpg', 'http://58.119.112.11:11005/e58a0ba5-a7bd-4f7b-bcc9-5e268e2887ed.jpg'],
       noteInfo: { noticeContext: '' },
       dialogNote: false,
       dialogNew: false,
