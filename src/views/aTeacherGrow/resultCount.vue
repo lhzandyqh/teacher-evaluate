@@ -1,33 +1,39 @@
 <template>
   <div class="app-Container">
-    <el-row :gutter="5">
-      <el-col :span="12">
-        <div class="chartContainer">
-          <div class="innerContainer">
-            <div class="chart-container">
-              <barChart height="100%" width="100%"/>
-            </div>
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="12">
-        <div class="chartContainer">
-          <div class="innerContainer">
-            <div class="chart-container">
-              <groupBarChart height="100%" width="100%"/>
-            </div>
-          </div>
-        </div>
-      </el-col>
+    <!--    <el-row :gutter="5">-->
+    <!--      <el-col :span="12">-->
+    <!--        <div class="chartContainer">-->
+    <!--          <div class="innerContainer">-->
+    <!--            <div class="chart-container">-->
+    <!--              <barChart height="100%" width="100%"/>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </el-col>-->
+    <!--      <el-col :span="12">-->
+    <!--        <div class="chartContainer">-->
+    <!--          <div class="innerContainer">-->
+    <!--            <div class="chart-container">-->
+    <!--              <groupBarChart height="100%" width="100%"/>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </el-col>-->
+    <!--    </el-row>-->
+    <!--    <el-row>-->
+    <!--      <el-col :span="24">-->
+    <!--        <div class="chartContainer">-->
+    <!--          <div class="chart-container">-->
+    <!--            <Chart height="100%" width="100%"/>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </el-col>-->
+    <!--    </el-row>-->
+    <el-row>
+      <teacher-grow-like-charts/>
     </el-row>
     <el-row>
-      <el-col :span="24">
-        <div class="chartContainer">
-          <div class="chart-container">
-            <Chart height="100%" width="100%"/>
-          </div>
-        </div>
-      </el-col>
+      <teacher-grow-statistics/>
     </el-row>
   </div>
 </template>
@@ -36,10 +42,12 @@
 import Chart from '@/components/Charts/mixChart'
 import barChart from '@/components/Charts/barChart'
 import groupBarChart from '@/components/Charts/groupBarChart'
+import teacherGrowStatistics from '@/components/Charts/teacherGrowStatistics'
+import teacherGrowLikeCharts from '@/components/Charts/teacherGrowLikeChart'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'ResultCount',
-  components: { Chart, barChart, groupBarChart },
+  components: { Chart, barChart, groupBarChart, teacherGrowStatistics, teacherGrowLikeCharts },
   data: function() {
     return {
       token: getToken()
