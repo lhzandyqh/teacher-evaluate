@@ -32,14 +32,14 @@
             </el-form-item>
             <el-form-item label="刊物等级">
               <el-select v-model="form.paper_level" placeholder="请选择刊物等级">
-                <el-option label="一类" value="one"/>
-                <el-option label="二类" value="two"/>
+                <el-option label="一类" value="一类"/>
+                <el-option label="二类" value="二类"/>
               </el-select>
             </el-form-item>
             <el-form-item label="是否为核心期刊">
               <el-select v-model="form.is_center" placeholder="请选择是否为核心期刊">
-                <el-option label="是" value="yes"/>
-                <el-option label="否" value="no"/>
+                <el-option label="是" value="是"/>
+                <el-option label="否" value="否"/>
               </el-select>
             </el-form-item>
           </el-form>
@@ -51,34 +51,41 @@
               <el-input v-model="form.item_name"/>
             </el-form-item>
             <el-form-item label="起始时间">
-              <el-input v-model="form.item_start_time"/>
+              <el-date-picker
+                v-model="form.item_start_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="终止时间">
-              <el-input v-model="form.item_end_time"/>
+              <el-date-picker
+                v-model="form.item_end_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="个人角色">
               <el-input v-model="form.item_personal_role"/>
             </el-form-item>
             <el-form-item label="课题批准单位">
               <el-select v-model="form.item_allowance" placeholder="请选择课题批准单位">
-                <el-option label="市级" value="shi"/>
-                <el-option label="区级" value="qu"/>
-                <el-option label="校级" value="xiao"/>
+                <el-option label="市级" value="市级"/>
+                <el-option label="区级" value="区级"/>
+                <el-option label="校级" value="校级"/>
               </el-select>
             </el-form-item>
             <div class="lunTiem" style="font-weight: 500;font-size: 14px;">项目课题年度完成情况</div>
             <el-form-item label="个人作用">
               <el-select v-model="form.item_personal_work" placeholder="请选择个人作用">
-                <el-option label="主持" value="shi"/>
-                <el-option label="参与" value="qu"/>
-                <el-option label="独立" value="xiao"/>
+                <el-option label="支持" value="支持"/>
+                <el-option label="参与" value="参与"/>
               </el-select>
             </el-form-item>
             <el-form-item label="成果类型">
               <el-select v-model="form.item_result_type" placeholder="请选择成果类型">
-                <el-option label="奖励" value="shi"/>
-                <el-option label="效益" value="qu"/>
-                <el-option label="专利" value="xiao"/>
+                <el-option label="奖励" value="奖励"/>
+                <el-option label="效益" value="效益"/>
+                <el-option label="专利" value="专利"/>
               </el-select>
             </el-form-item>
           </el-form>
@@ -87,7 +94,11 @@
           <el-form ref="form" :model="form" label-width="110px">
             <div class="lunTiem">参加会议/学术活动</div>
             <el-form-item label="发表时间">
-              <el-input v-model="form.activity_time"/>
+              <el-date-picker
+                v-model="form.activity_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="作者排位">
               <el-input v-model="form.activity_author_rank"/>
@@ -99,12 +110,16 @@
               <el-input v-model="form.activity_organizor"/>
             </el-form-item>
             <el-form-item label="参加时间">
-              <el-input v-model="form.activity_attend_time"/>
+              <el-date-picker
+                v-model="form.activity_attend_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="会议上是否发言">
               <el-select v-model="form.activity_speak_or_not" placeholder="请选择会议上是否发言">
-                <el-option label="是" value="shi"/>
-                <el-option label="否" value="qu"/>
+                <el-option label="是" value="是"/>
+                <el-option label="否" value="否"/>
               </el-select>
             </el-form-item>
             <el-form-item label="发言内容">
@@ -112,8 +127,8 @@
             </el-form-item>
             <el-form-item label="参会身份">
               <el-select v-model="form.activity_identity" placeholder="请选择参会身份">
-                <el-option label="受邀专家" value="shi"/>
-                <el-option label="一般参与" value="qu"/>
+                <el-option label="受邀专家" value="受邀专家"/>
+                <el-option label="一般参与" value="一般参与"/>
               </el-select>
             </el-form-item>
           </el-form>
@@ -128,16 +143,20 @@
               <el-input v-model="form.teaching_achievement"/>
             </el-form-item>
             <el-form-item label="教学奖时间">
-              <el-input v-model="form.teaching_time"/>
+              <el-date-picker
+                v-model="form.teaching_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="教学奖名称">
               <el-input v-model="form.teaching_name"/>
             </el-form-item>
             <el-form-item label="获奖级别">
               <el-select v-model="form.teaching_level" placeholder="请选择获奖级别">
-                <el-option label="市级" value="shi"/>
-                <el-option label="区级" value="qu"/>
-                <el-option label="校级" value="xiao"/>
+                <el-option label="市级" value="市级"/>
+                <el-option label="区级" value="区级"/>
+                <el-option label="校级" value="校级"/>
               </el-select>
             </el-form-item>
           </el-form>
@@ -172,8 +191,8 @@
             </el-form-item>
             <el-form-item label="课程级别">
               <el-select v-model="form.proj_level" placeholder="请选择课程级别">
-                <el-option label="市级" value="shi"/>
-                <el-option label="区级" value="qu"/>
+                <el-option label="市级" value="市级"/>
+                <el-option label="区级" value="区级"/>
               </el-select>
             </el-form-item>
           </el-form>
@@ -186,19 +205,23 @@
             <div class="lunTiem"/>
             <el-form-item label="获奖名称">
               <el-select v-model="form.adm_name" placeholder="请选择获奖名称">
-                <el-option label="优秀教师" value="youjiao"/>
-                <el-option label="青年优秀工作者" value="qing"/>
-                <el-option label="优秀班主任" value="youban"/>
+                <el-option label="优秀教师" value="优秀教师"/>
+                <el-option label="青年优秀工作者" value="青年优秀工作者"/>
+                <el-option label="优秀班主任" value="优秀班主任"/>
               </el-select>
             </el-form-item>
             <el-form-item label="获奖时间">
-              <el-input v-model="form.adm_time"/>
+              <el-date-picker
+                v-model="form.adm_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="获奖级别">
               <el-select v-model="form.adm_level" placeholder="请选择获奖级别">
-                <el-option label="市级" value="shi"/>
-                <el-option label="区级" value="qu"/>
-                <el-option label="校级" value="xiao"/>
+                <el-option label="市级" value="市级"/>
+                <el-option label="区级" value="区级"/>
+                <el-option label="校级" value="校级"/>
               </el-select>
             </el-form-item>
             <el-form-item label="主办单位">
@@ -206,14 +229,14 @@
             </el-form-item>
             <el-form-item label="获奖形式">
               <el-select v-model="form.adm_set" placeholder="请选择获奖形式">
-                <el-option label="团队" value="tuan"/>
-                <el-option label="个人" value="ge"/>
+                <el-option label="团队" value="团队"/>
+                <el-option label="个人" value="个人"/>
               </el-select>
             </el-form-item>
             <el-form-item label="获奖类型">
               <el-select v-model="form.adm_type" placeholder="请选择获奖类型">
-                <el-option label="一类" value="one"/>
-                <el-option label="二类" value="two"/>
+                <el-option label="一类" value="一类"/>
+                <el-option label="二类" value="二类"/>
               </el-select>
             </el-form-item>
           </el-form>
@@ -230,31 +253,31 @@
           <el-form ref="form" :model="form" label-width="110px" style="padding-top:20px;">
             <el-form-item label="资质类型">
               <el-select v-model="form.cert_type" placeholder="请选择资质类型">
-                <el-option label="学术科研(论文发表)" value="shi"/>
-                <el-option label="学术科研(项目课题)" value="shi"/>
-                <el-option label="学术科研(会议活动)" value="shi"/>
-                <el-option label="教育教学(教育成果)" value="shi"/>
-                <el-option label="教育教学(项目课题)" value="shi"/>
-                <el-option label="行政获奖" value="shi"/>
-                <el-option label="其他" value="shi"/>
+                <el-option label="学术科研(论文发表)" value="学术科研(论文发表)"/>
+                <el-option label="学术科研(项目课题)" value="学术科研(项目课题)"/>
+                <el-option label="学术科研(会议活动)" value="学术科研(会议活动)"/>
+                <el-option label="教育教学(教育成果)" value="教育教学(教育成果)"/>
+                <el-option label="教育教学(项目课题)" value="教育教学(项目课题)"/>
+                <el-option label="行政获奖" value="行政获奖"/>
+                <el-option label="其他" value="其他"/>
               </el-select>
             </el-form-item>
             <el-form-item label="隶属级别">
               <el-select v-model="form.dept_level" placeholder="请选择隶属级别">
-                <el-option label="国际级" value="shi"/>
-                <el-option label="国家级" value="qu"/>
-                <el-option label="省部级" value="qu"/>
-                <el-option label="区县级" value="qu"/>
-                <el-option label="校级" value="qu"/>
+                <el-option label="国际级" value="国际级"/>
+                <el-option label="国家级" value="国家级"/>
+                <el-option label="省部级" value="省部级"/>
+                <el-option label="区县级" value="区县级"/>
+                <el-option label="校级" value="校级"/>
               </el-select>
             </el-form-item>
             <el-form-item label="资质等级">
               <el-select v-model="form.cert_level" placeholder="请选择资质等级">
-                <el-option label="一等奖" value="shi"/>
-                <el-option label="二等奖" value="qu"/>
-                <el-option label="三等奖" value="qu"/>
-                <el-option label="独立奖项" value="qu"/>
-                <el-option label="其他" value="qu"/>
+                <el-option label="一等奖" value="一等奖"/>
+                <el-option label="二等奖" value="二等奖"/>
+                <el-option label="三等奖" value="三等奖"/>
+                <el-option label="独立奖项" value="独立奖项"/>
+                <el-option label="其他" value="其他"/>
               </el-select>
             </el-form-item>
             <el-form-item label="颁发机构">
@@ -264,7 +287,11 @@
               <el-input v-model="form.reason"/>
             </el-form-item>
             <el-form-item label="证书颁发日期">
-              <el-input v-model="form.cert_issued_time"/>
+              <el-date-picker
+                v-model="form.cert_issued_time"
+                value-format="yyyy-MM-dd HH:mm:ss"
+                type="datetime"
+                placeholder="选择日期时间"/>
             </el-form-item>
             <el-form-item label="证书编号">
               <el-input v-model="form.t_qualification_num"/>
@@ -492,7 +519,7 @@
     <div class="footerBtn">
       <el-button v-if="stauts>0" type="primary" @click="jianStatus">上一页</el-button>
       <el-button v-if="stauts<3" type="primary" @click="addStatus">下一页</el-button>
-      <el-button v-if="stauts===3" type="success" @click="addStatus">完成</el-button>
+      <el-button v-if="stauts===3" type="success" @click="submit">完成</el-button>
     </div>
   </div>
 </template>
@@ -500,7 +527,7 @@
 <script>
 
 import Dropzone from '@/components/Dropzone'
-import { getAptitude } from '@/api/teacherEvaluate'
+import { getAptitude, addAptitude } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 import axios from 'axios'
 
@@ -547,6 +574,18 @@ export default {
       formData.append('file', params.file)
       axios.post('http://58.119.112.11:11028/api/upload', formData).then((res) => {
         console.log(res)
+        this.form.imageurl = res.data.result.imageUrl
+      })
+    },
+    submit() {
+      addAptitude(this.form).then(response => {
+        if (response.data.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '新增成功'
+          })
+          this.$router.push({ name: 'aptitudeInfoAdd' })
+        }
       })
     }
   }
