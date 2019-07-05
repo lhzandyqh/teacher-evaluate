@@ -79,6 +79,14 @@ export function getAptitude(parmes) {
     params: parmes
   })
 }
+// 资质新增
+export function addAptitude(parmes) {
+  return request({
+    url: '/api/qualificationinfo/add_qualification',
+    method: 'post',
+    params: parmes
+  })
+}
 // 资质信息删除
 export function getAptitudeDelete(parmes) {
   return request({

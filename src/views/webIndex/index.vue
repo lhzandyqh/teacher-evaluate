@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <div class="bg"><img :src="img" alt=""></div>
+    <div class="goIndex" @click="$router.push({ name: 'Login' })">平台首页</div>
     <div class="title1">教师评价</div>
     <div class="title2">教师成长</div>
     <div class="elvcontent">
@@ -73,6 +74,15 @@ export default {
 <style scoped>
   .content{
     position: relative;
+  }
+  .goIndex{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #5a4939;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer
   }
   .bg img{
     width: 100%;
