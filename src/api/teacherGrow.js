@@ -241,10 +241,10 @@ export function guidanceTrainTecDelete(parems) {
   })
 }
 
-// 获取考试信息
-export function getExamData() {
-  return request({
-    url: '/exam/findAllExaminfo',
-    method: 'get'
-  })
-}
+// // 获取考试信息
+// export function getExamData() {
+//   return request({
+//     url: '/exam/findAllExaminfo',
+//     method: 'get'
+//   })
+// }

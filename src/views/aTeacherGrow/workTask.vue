@@ -438,10 +438,10 @@ export default {
     const prams = {
       month: this.month
     }
-    getExamData().then(response => {
-      this.examData = response.data.info
-      console.log(this.examData)
-    })
+    // getExamData().then(response => {
+    //   this.examData = response.data.info
+    //   console.log(this.examData)
+    // })
     teachJobInquire({ ...prams, token: this.token }).then(response => {
       this.teachJobData = response.data.teacher
     })
