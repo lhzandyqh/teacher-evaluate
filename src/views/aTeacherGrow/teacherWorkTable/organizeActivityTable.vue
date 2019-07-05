@@ -64,10 +64,10 @@
         </el-table-column>
       </el-table>
       <div class="buttonContainer">
-        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+        <el-button type="primary" plain @click="add">增加</el-button>
       </div>
     </div>
-    <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
+    <el-dialog :visible.sync="dialogFormVisible" title="组织指导课外活动情况">
       <el-form :model="form">
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
           <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
@@ -93,13 +93,44 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="update">确 定</el-button>
+        <el-button type="primary" @click="activityAdd">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="dialogFormVisibleEdit" title="编辑组织指导课外活动情况">
+      <el-form :model="form">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
+          <el-date-picker v-model="formEdit.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="终止时间">
+          <el-date-picker v-model="formEdit.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTime" />
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="组织名称">
+          <el-input v-model="formEdit.organizename" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="参加人数">
+          <el-input v-model="formEdit.joinnumber" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="活动次数">
+          <el-input v-model="formEdit.activitytimes" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="活动内容">
+          <el-input v-model="formEdit.activitycontent" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
+          <el-input v-model="formEdit.achievementeffect" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="activityUpdate">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { activityOrganizeIncrease, activityOrganizeUpdate, activityOrganizeDelete } from '@/api/teacherGrow'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
   props: {
@@ -111,6 +142,8 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
+      dialogFormVisibleEdit: false,
+      token: getToken(),
       form: {
         begindate: '',
         enddate: '',
@@ -119,6 +152,16 @@ export default {
         activitytimes: '',
         activitycontent: '',
         achievementeffect: ''
+      },
+      formEdit: {
+        begindate: '',
+        enddate: '',
+        organizename: '',
+        joinnumber: '',
+        activitytimes: '',
+        activitycontent: '',
+        achievementeffect: '',
+        id: ''
       },
       formLabelWidth: '160px'
       // teachJobData: [{
@@ -134,18 +177,73 @@ export default {
     }
   },
   methods: {
-    handleEditTwo(index, row) {
-      console.log(index, row)
+    add: function() {
+      this.dialogFormVisible = true
+    },
+    activityAdd: function() {
+      const prams = {
+        start_time: this.form.begindate,
+        end_time: this.form.enddate,
+        organize_name: this.form.organizename,
+        num_of_peop: this.form.joinnumber,
+        activities_times: this.form.activitytimes,
+        activities_cont: this.form.activitycontent,
+        score_results: this.form.achievementeffect
+      }
+      console.log(this.token)
+      activityOrganizeIncrease({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
+      this.dialogFormVisible = false
+    },
+    activityUpdate: function() {
+      const prams = {
+        start_time: this.formEdit.begindate,
+        end_time: this.formEdit.enddate,
+        organize_name: this.formEdit.organizename,
+        num_of_peop: this.formEdit.joinnumber,
+        activities_times: this.formEdit.activitytimes,
+        activities_cont: this.formEdit.activitycontent,
+        score_results: this.formEdit.achievementeffect
+      }
+      activityOrganizeUpdate({ ...prams, token: this.token, id: this.formEdit.id }).then(response => {
+        if (response.data.code === 200) {
+          console.log('更新成功')
+          console.log(this.editForm)
+          console.log(prams)
+        } else {
+          console.log('更新失败')
+        }
+      })
+      this.dialogFormVisibleEdit = false
     },
     handleDelete(index, row) {
+      console.log(index, row)
+      const prams = {
+        id: row.id
+      }
+      activityOrganizeDelete({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('删除成功')
+        } else {
+          console.log('删除失败')
+        }
+      })
+    },
+    handleEditTwo(index, row) {
       console.log(index, row)
     },
     // 点击编辑
     handleEdit(index, row) {
       // this.form = this.tableData
       // this.currentIndex = index
-      this.dialogFormVisible = true
-      this.editForm = Object.assign({}, row)
+      this.dialogFormVisibleEdit = true
+      this.formEdit.id = row.id
+      // this.editForm = Object.assign({}, row)
     },
 
     // 点击关闭dialog

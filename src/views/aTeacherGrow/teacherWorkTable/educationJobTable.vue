@@ -59,10 +59,10 @@
         </el-table-column>
       </el-table>
       <div class="buttonContainer">
-        <el-button type="primary" plain @click="handleEditTwo">增加</el-button>
+        <el-button type="primary" plain @click="add">增加</el-button>
       </div>
     </div>
-    <el-dialog :visible.sync="dialogFormVisible" title="完成教学工作情况">
+    <el-dialog :visible.sync="dialogFormVisible" title="完成教育工作情况">
       <el-form :model="form">
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
           <el-date-picker v-model="form.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
@@ -85,13 +85,41 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="update">确 定</el-button>
+        <el-button type="primary" @click="educationDataIncrease">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="updateDialogFormVisible" title="编辑完成教育工作情况">
+      <el-form :model="form">
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="起始时间">
+          <el-date-picker v-model="editForm.begindate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatBeginTime"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="终止时间">
+          <el-date-picker v-model="editForm.enddate" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatEndTime" />
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="担任班主任年级">
+          <el-input v-model="editForm.headteachergrade" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="累计班主任工作年限">
+          <el-input v-model="editForm.headteacheryear" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidthTwo" label-position="labelPosition" label="担任其他教育工作职务">
+          <el-input v-model="editForm.othereducatejob" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
+          <el-input v-model="editForm.achievementeffect" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateEducationData">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { educationJobIncrease, educationJobDelete, educationJobUpdate } from '@/api/teacherGrow'
+import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
   props: {
@@ -103,6 +131,8 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
+      updateDialogFormVisible: false,
+      token: getToken(),
       form: {
         begindate: '',
         enddate: '',
@@ -110,6 +140,15 @@ export default {
         headteacheryear: '',
         othereducatejob: '',
         achievementeffect: ''
+      },
+      editForm: {
+        begindate: '',
+        enddate: '',
+        headteachergrade: '',
+        headteacheryear: '',
+        othereducatejob: '',
+        achievementeffect: '',
+        id: ''
       },
       formLabelWidth: '160px'
       // teachJobData: [{
@@ -125,19 +164,82 @@ export default {
     }
   },
   methods: {
+    add: function() {
+      this.dialogFormVisible = true
+    },
+    handleDelete(index, row) {
+      // console.log(index, row)
+      const prams = {
+        id: row.id
+      }
+      educationJobDelete({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('删除成功')
+        } else {
+          console.log('删除失败')
+        }
+      })
+    },
+    educationDataIncrease: function() {
+      const prams = {
+        start_time: this.form.begindate,
+        end_time: this.form.enddate,
+        grade_head_teacher: this.form.headteachergrade,
+        years_head_teacher: this.form.headteacheryear,
+        other_edu_tasks: this.form.othereducatejob,
+        score_results: this.form.achievementeffect
+      }
+      console.log(this.token)
+      educationJobIncrease({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('添加成功')
+        } else {
+          console.log('添加失败')
+        }
+      })
+      this.dialogFormVisible = false
+    },
+    updateEducationData: function() {
+      const prams = {
+        start_time: this.editForm.begindate,
+        end_time: this.editForm.enddate,
+        grade_head_teacher: this.editForm.headteachergrade,
+        years_head_teacher: this.editForm.headteacheryear,
+        other_edu_tasks: this.editForm.othereducatejob,
+        score_results: this.editForm.achievementeffect
+      }
+      console.log(this.editForm)
+      educationJobUpdate({ ...prams, token: this.token, id: this.editForm.id }).then(response => {
+        if (response.data.code === 200) {
+          console.log('更新成功')
+          console.log(this.editForm)
+          console.log(prams)
+        } else {
+          console.log('更新失败')
+        }
+      })
+      this.updateDialogFormVisible = false
+    },
     handleEditTwo(index, row) {
       console.log(index, row)
     },
-    handleDelete(index, row) {
+    handledelete(index, row) {
       console.log(row.id)
-      this.$emit('delete', row.id)
+      setTimeout(() => {
+        this.$emit('delete', row.id)
+        console.log('我好了弟弟你呢')
+      }, 3000)
+      // this.$emit('delete', row.id)
+      // console.log('我好了弟弟你呢')
     },
     // 点击编辑
     handleEdit(index, row) {
       // this.form = this.tableData
       // this.currentIndex = index
-      this.dialogFormVisible = true
-      this.editForm = Object.assign({}, row)
+      console.log(index, row)
+      this.updateDialogFormVisible = true
+      this.editForm.id = row.id
+      console.log(this.editForm)
     },
 
     // 点击关闭dialog
