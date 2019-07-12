@@ -19,6 +19,9 @@ import './errorLog' // error log
 import './permission' // permission control
 import './mock' // simulation data
 
+import Blob from './excel/Blob.js'
+import Export2Excel from './excel/Export2Excel.js'
+
 import * as filters from './filters' // global filters
 
 Vue.use(Element, {

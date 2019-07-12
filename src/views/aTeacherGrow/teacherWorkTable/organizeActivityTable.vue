@@ -129,18 +129,19 @@
 </template>
 
 <script>
-import { activityOrganizeIncrease, activityOrganizeUpdate, activityOrganizeDelete } from '@/api/teacherGrow'
+import { activityOrganizeIncrease, activityOrganizeUpdate, activityOrganizeDelete, allActivityInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
-  props: {
-    organExtActiData: {
-      type: Array,
-      required: true
-    }
-  },
+  // props: {
+  //   organExtActiData: {
+  //     type: Array,
+  //     required: true
+  //   }
+  // },
   data() {
     return {
+      organExtActiData: [],
       dialogFormVisible: false,
       dialogFormVisibleEdit: false,
       token: getToken(),
@@ -176,7 +177,18 @@ export default {
       // }]
     }
   },
+  mounted() {
+    this.getActivityData()
+  },
   methods: {
+    getActivityData: function() {
+      const prams = {
+        month: this.month
+      }
+      allActivityInquire(this.token).then(response => {
+        this.organExtActiData = response.data.organExtActi
+      })
+    },
     add: function() {
       this.dialogFormVisible = true
     },
@@ -197,6 +209,16 @@ export default {
         } else {
           console.log('添加失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allActivityInquire(this.token).then(response => {
+          this.organExtActiData = response.data.organExtActi
+        })
+        this.$message({
+          message: '恭喜你，添加成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisible = false
     },
@@ -218,6 +240,13 @@ export default {
         } else {
           console.log('更新失败')
         }
+        allActivityInquire(this.token).then(response => {
+          this.organExtActiData = response.data.organExtActi
+        })
+        this.$message({
+          message: '恭喜你，编辑成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisibleEdit = false
     },
@@ -232,6 +261,13 @@ export default {
         } else {
           console.log('删除失败')
         }
+        allActivityInquire(this.token).then(response => {
+          this.organExtActiData = response.data.organExtActi
+        })
+        this.$message({
+          message: '恭喜你，删除成功',
+          type: 'success'
+        })
       })
     },
     handleEditTwo(index, row) {

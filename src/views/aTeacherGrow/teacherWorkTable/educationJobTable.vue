@@ -118,13 +118,17 @@
 </template>
 
 <script>
-import { educationJobIncrease, educationJobDelete, educationJobUpdate } from '@/api/teacherGrow'
+import { educationJobIncrease, educationJobDelete, educationJobUpdate, eductionJobInquire, allEducationInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
   props: {
-    eductionJobData: {
-      type: Array,
+    // eductionJobData: {
+    //   type: Array,
+    //   required: true
+    // },
+    month: {
+      type: String,
       required: true
     }
   },
@@ -132,6 +136,7 @@ export default {
     return {
       dialogFormVisible: false,
       updateDialogFormVisible: false,
+      eductionJobData: [],
       token: getToken(),
       form: {
         begindate: '',
@@ -163,7 +168,18 @@ export default {
       // }]
     }
   },
+  mounted() {
+    this.getEducationJobData()
+  },
   methods: {
+    getEducationJobData: function() {
+      const prams = {
+        month: this.month
+      }
+      allEducationInquire(this.token).then(response => {
+        this.eductionJobData = response.data.eduWork
+      })
+    },
     add: function() {
       this.dialogFormVisible = true
     },
@@ -178,6 +194,16 @@ export default {
         } else {
           console.log('删除失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allEducationInquire(this.token).then(response => {
+          this.eductionJobData = response.data.eduWork
+        })
+        this.$message({
+          message: '恭喜你，删除成功',
+          type: 'success'
+        })
       })
     },
     educationDataIncrease: function() {
@@ -196,6 +222,16 @@ export default {
         } else {
           console.log('添加失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allEducationInquire(this.token).then(response => {
+          this.eductionJobData = response.data.eduWork
+        })
+        this.$message({
+          message: '恭喜你，添加成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisible = false
     },
@@ -217,6 +253,16 @@ export default {
         } else {
           console.log('更新失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allEducationInquire(this.token).then(response => {
+          this.eductionJobData = response.data.eduWork
+        })
+        this.$message({
+          message: '恭喜你，更新成功',
+          type: 'success'
+        })
       })
       this.updateDialogFormVisible = false
     },

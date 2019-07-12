@@ -1,398 +1,430 @@
 <template>
   <div class="app-container">
-    <el-row>
-      <div class="navigationBar">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="一月" name="january">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData" @delete="deleteEducationJob($event)"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="二月" name="february">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="三月" name="march">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="四月" name="april">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="五月" name="may">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="六月" name="june">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="七月" name="july">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="八月" name="august">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="九月" name="september">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="十月" name="october">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="十一月" name="november">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="十二月" name="december">
-            <el-row>
-              <div class="formContainer">
-                <teaching-jobs-table :teach-job-data="teachJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <education-jobs-table :eduction-job-data="eductionJobData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <class-situation-table :report-obser-res-data="reportObserResData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="formContainer">
-                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>
-              </div>
-            </el-row>
-          </el-tab-pane>
-        </el-tabs>
-      </div>
-    </el-row>
+    <!--    <el-row>-->
+    <!--      <div class="navigationBar">-->
+    <!--        <el-tabs v-model="activeName" @tab-click="handleClick">-->
+    <!--          <el-tab-pane label="一月" name="january">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :month="month"/>-->
+    <!--                &lt;!&ndash;                //:teach-job-data="teachJobData"&ndash;&gt;-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month" @delete="deleteEducationJob($event)"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="二月" name="february">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="三月" name="march">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="四月" name="april">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="五月" name="may">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="六月" name="june">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="七月" name="july">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="八月" name="august">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="九月" name="september">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="十月" name="october">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="十一月" name="november">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--          <el-tab-pane label="十二月" name="december">-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <teaching-jobs-table :teach-job-data="teachJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <education-jobs-table :eduction-job-data="eductionJobData" :month="month"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <class-situation-table :report-obser-res-data="reportObserResData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <organize-activity-table :organ-ext-acti-data="organExtActiData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <participate-education-table :fur-lea-continue-edu-data="furLeaContinueEduData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--            <el-row>-->
+    <!--              <div class="formContainer">-->
+    <!--                <guide-teacher-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
+    <!--              </div>-->
+    <!--            </el-row>-->
+    <!--          </el-tab-pane>-->
+    <!--        </el-tabs>-->
+    <!--      </div>-->
+    <!--    </el-row>-->
     <!--    <el-row>-->
     <!--      <test-table :guidance-train-tec-data="guidanceTrainTecData"/>-->
     <!--    </el-row>-->
+    <el-row>
+      <div class="formContainer">
+        <teaching-jobs-table :month="month"/>
+        <!--                //:teach-job-data="teachJobData"-->
+      </div>
+    </el-row>
+    <el-row>
+      <div class="formContainer">
+        <education-jobs-table :month="month" @delete="deleteEducationJob($event)"/>
+      </div>
+    </el-row>
+    <el-row>
+      <div class="formContainer">
+        <class-situation-table :month="month"/>
+      </div>
+    </el-row>
+    <el-row>
+      <div class="formContainer">
+        <organize-activity-table :month="month"/>
+      </div>
+    </el-row>
+    <el-row>
+      <div class="formContainer">
+        <participate-education-table/>
+      </div>
+    </el-row>
+    <el-row>
+      <div class="formContainer">
+        <guide-teacher-table/>
+      </div>
+    </el-row>
   </div>
 </template>
 
@@ -411,8 +443,8 @@ export default {
   components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
   data() {
     return {
-      activeName: 'april',
-      month: 'may',
+      activeName: 'june',
+      month: 'june',
       token: getToken(),
       teachJobData: [],
       eductionJobData: [],
@@ -593,6 +625,11 @@ export default {
       allTeachInquire(this.token).then(response => {
         this.teachJobData = response.data.teacher
       })
+    },
+    teachJobViewUpdate: function(data) {
+      console.log('准备更新')
+      this.teachJobData = data
+      console.log('更新结束')
     }
   }
 }

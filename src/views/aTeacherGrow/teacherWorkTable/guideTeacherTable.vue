@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import { guidanceTrainTecIncrease, guidanceTrainTecUpdate, guidanceTrainTecDelete } from '@/api/teacherGrow'
+import { guidanceTrainTecIncrease, guidanceTrainTecUpdate, guidanceTrainTecDelete, allGuidanceInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
@@ -167,7 +167,15 @@ export default {
       // }]
     }
   },
+  mounted() {
+    this.getGuideData()
+  },
   methods: {
+    getGuideData: function() {
+      allGuidanceInquire(this.token).then(response => {
+        this.guidanceTrainTecData = response.data.guidanceTrainTec
+      })
+    },
     add: function() {
       this.dialogFormVisible = true
     },
@@ -187,6 +195,13 @@ export default {
         } else {
           console.log('添加失败')
         }
+        allGuidanceInquire(this.token).then(response => {
+          this.guidanceTrainTecData = response.data.guidanceTrainTec
+        })
+        this.$message({
+          message: '恭喜你，添加成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisible = false
     },
@@ -207,6 +222,13 @@ export default {
         } else {
           console.log('更新失败')
         }
+        allGuidanceInquire(this.token).then(response => {
+          this.guidanceTrainTecData = response.data.guidanceTrainTec
+        })
+        this.$message({
+          message: '恭喜你，编辑成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisibleEdit = false
     },
@@ -232,6 +254,13 @@ export default {
         } else {
           console.log('删除失败')
         }
+        allGuidanceInquire(this.token).then(response => {
+          this.guidanceTrainTecData = response.data.guidanceTrainTec
+        })
+        this.$message({
+          message: '恭喜你，删除成功',
+          type: 'success'
+        })
       })
     },
 

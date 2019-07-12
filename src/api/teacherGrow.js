@@ -63,6 +63,14 @@ export function allTeachInquire(token) {
   })
 }
 
+// 教育工作（全部查询）
+export function allEducationInquire(token) {
+  return request({
+    url: '/api/EduWork/eduWork',
+    method: 'post',
+    params: { token }
+  })
+}
 // 教育工作(按月查询)
 export function eductionJobInquire(parems) {
   return request({
@@ -98,7 +106,14 @@ export function educationJobUpdate(parems) {
     params: parems
   })
 }
-
+// 汇报观摩课（全部查询）
+export function allReportInquire(token) {
+  return request({
+    url: '/api/ReporObsResearch/reportObsResearch',
+    method: 'post',
+    params: { token }
+  })
+}
 // 汇报观摩研究课程(按月查询)
 export function reportObsResearchInquire(parems) {
   return request({
@@ -134,6 +149,15 @@ export function reportObsResearchDelete(parems) {
     params: parems
   })
 }
+
+// 组织课外活动（全部查询）
+export function allActivityInquire(token) {
+  return request({
+    url: '/api/organizeExtraWork/organizeExtra',
+    method: 'post',
+    params: { token }
+  })
+}
 // 组织课外活动(按月查询)
 export function organizeExtraInquire(parems) {
   return request({
@@ -167,6 +191,15 @@ export function activityOrganizeDelete(parems) {
     url: '/api/organizeExtraWork/deleteOrganizeExtra',
     method: 'post',
     params: parems
+  })
+}
+
+// 参加系统进修或继续教育情况（全部查询）
+export function allfurLearInquire(token) {
+  return request({
+    url: '/api/furLearnContinueEduWork/furLearnContinueEdu',
+    method: 'post',
+    params: { token }
   })
 }
 // 参加系统进修或继续教育情况(按月查询)
@@ -213,6 +246,14 @@ export function guidanceTrainTecInquire(parems) {
     params: parems
   })
 }
+// 指导 培养教师情况（全部查询）
+export function allGuidanceInquire(token) {
+  return request({
+    url: '/api/guidTrainTeacWork/guidanceTrainTeac',
+    method: 'post',
+    params: { token }
+  })
+}
 
 // 增加指导，培养教师情况
 export function guidanceTrainTecIncrease(parems) {
@@ -248,3 +289,13 @@ export function guidanceTrainTecDelete(parems) {
 //     method: 'get'
 //   })
 // }
+
+// 打印全年的教学工作任务，获取全年数据
+export function getAllTeacherJobDataByYear(parems) {
+  return request({
+    url: '/api/teachWork/findTeachWorkByYear',
+    method: 'post',
+    params: parems
+  })
+}
+

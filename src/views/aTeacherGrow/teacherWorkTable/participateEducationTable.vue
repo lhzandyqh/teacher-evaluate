@@ -144,20 +144,21 @@
 </template>
 
 <script>
-import { furLeaContinueEduIncrease, furLeaContinueEduUpdate, furLeaContinueEduDelete } from '@/api/teacherGrow'
+import { furLeaContinueEduIncrease, furLeaContinueEduUpdate, furLeaContinueEduDelete, allfurLearInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
   props: {
-    furLeaContinueEduData: {
-      type: Array,
-      required: true
-    }
+    // furLeaContinueEduData: {
+    //   type: Array,
+    //   required: true
+    // }
   },
   data() {
     return {
       dialogFormVisible: false,
       dialogFormVisibleEdit: false,
+      furLeaContinueEduData: [],
       token: getToken(),
       form: {
         begindate: '',
@@ -193,7 +194,15 @@ export default {
       // }]
     }
   },
+  mounted() {
+    this.getParticipateData()
+  },
   methods: {
+    getParticipateData: function() {
+      allfurLearInquire(this.token).then(response => {
+        this.furLeaContinueEduData = response.data.furLeaContinueEdu
+      })
+    },
     add: function() {
       this.dialogFormVisible = true
     },
@@ -215,6 +224,13 @@ export default {
         } else {
           console.log('添加失败')
         }
+        allfurLearInquire(this.token).then(response => {
+          this.furLeaContinueEduData = response.data.furLeaContinueEdu
+        })
+        this.$message({
+          message: '恭喜你，添加成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisible = false
     },
@@ -237,6 +253,13 @@ export default {
         } else {
           console.log('更新失败')
         }
+        allfurLearInquire(this.token).then(response => {
+          this.furLeaContinueEduData = response.data.furLeaContinueEdu
+        })
+        this.$message({
+          message: '恭喜你，编辑成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisibleEdit = false
     },
@@ -251,6 +274,13 @@ export default {
         } else {
           console.log('删除失败')
         }
+        allfurLearInquire(this.token).then(response => {
+          this.furLeaContinueEduData = response.data.furLeaContinueEdu
+        })
+        this.$message({
+          message: '恭喜你，删除成功',
+          type: 'success'
+        })
       })
     },
     handleEditTwo(index, row) {

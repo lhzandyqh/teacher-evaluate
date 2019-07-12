@@ -136,13 +136,17 @@
 </template>
 
 <script>
-import { reportObsResearchIncrease, reportObsResearchUpdate, reportObsResearchDelete } from '@/api/teacherGrow'
+import { reportObsResearchIncrease, reportObsResearchUpdate, reportObsResearchDelete, allReportInquire } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'TestTable',
   props: {
-    reportObserResData: {
-      type: Array,
+    // reportObserResData: {
+    //   type: Array,
+    //   required: true
+    // },
+    month: {
+      type: String,
       required: true
     }
   },
@@ -150,6 +154,7 @@ export default {
     return {
       dialogFormVisible: false,
       dialogFormVisibleEdit: false,
+      reportObserResData: [],
       token: getToken(),
       form: {
         classbegindate: '',
@@ -185,7 +190,18 @@ export default {
       // }]
     }
   },
+  mounted() {
+    this.getReportData()
+  },
   methods: {
+    getReportData: function() {
+      const prams = {
+        month: this.month
+      }
+      allReportInquire(this.token).then(response => {
+        this.reportObserResData = response.data.reportObserRes
+      })
+    },
     add: function() {
       this.dialogFormVisible = true
     },
@@ -207,6 +223,16 @@ export default {
         } else {
           console.log('添加失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allReportInquire(this.token).then(response => {
+          this.reportObserResData = response.data.reportObserRes
+        })
+        this.$message({
+          message: '恭喜你，添加成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisible = false
     },
@@ -230,6 +256,16 @@ export default {
         } else {
           console.log('更新失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allReportInquire(this.token).then(response => {
+          this.reportObserResData = response.data.reportObserRes
+        })
+        this.$message({
+          message: '恭喜你，更新成功',
+          type: 'success'
+        })
       })
       this.dialogFormVisibleEdit = false
     },
@@ -247,6 +283,16 @@ export default {
         } else {
           console.log('删除失败')
         }
+        const prams = {
+          month: this.month
+        }
+        allReportInquire(this.token).then(response => {
+          this.reportObserResData = response.data.reportObserRes
+        })
+        this.$message({
+          message: '恭喜你，删除成功',
+          type: 'success'
+        })
       })
     },
     // 点击编辑
