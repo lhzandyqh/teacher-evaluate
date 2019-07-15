@@ -175,15 +175,19 @@ export default {
     },
     handleFilter() {
       // this.listLoading = true
-      integrationSearch({ ...this.listQuery, token: this.token }).then(response => {
-        const items = response.data
-        this.list = items.map(v => {
-          this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
-          v.originalScore = v.score //  will be used when user click the cancel botton
-          return v
+      if (this.listQuery.qualification_type || this.listQuery.department_level || this.listQuery.qualification_level) {
+        integrationSearch({ ...this.listQuery, token: this.token }).then(response => {
+          const items = response.data
+          this.list = items.map(v => {
+            this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
+            v.originalScore = v.score //  will be used when user click the cancel botton
+            return v
+          })
+          this.listLoading = false
         })
-        this.listLoading = false
-      })
+      } else {
+        this.getList()
+      }
     },
     handleCreate() {
       creatIntegration({ ...this.listCreate, token: this.token }).then(response => {
