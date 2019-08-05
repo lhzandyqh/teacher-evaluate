@@ -54,11 +54,11 @@ const permission = {
           accessedRouters = asyncRouterMap
         } else {
           const role = window.localStorage.getItem('userRole')
-          if (roles.indexOf('elv') > -1) {
-            accessedRouters = filterAsyncRouter(asyncRouterMap, [role])
-          } else {
-            accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
-          }
+          // if (roles.indexOf('elv') > -1) {
+          accessedRouters = filterAsyncRouter(asyncRouterMap, [role])
+          // } else {
+          // accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
+          // }
         }
         commit('SET_ROUTERS', accessedRouters)
         resolve()

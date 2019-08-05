@@ -67,7 +67,7 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: '/webIndex',
+    redirect: '/countInfo',
     // redirect: '/webIndex',
     hidden: true,
     meta: { roles: ['elv', 'grow'] },
@@ -119,64 +119,78 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
-export const asyncRouterMapGrow = [
-  // 教师成长部分
-  {
-    path: '/workTask',
-    component: Layout,
-    // hidden: true,
-    meta: {
-      roles: ['教师', '教师组长', '系统管理员'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/aTeacherGrow/workTask'),
-        name: 'WorkTask',
-        meta: { title: '工作任务', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
-      }
-    ]
-  },
-  {
-    path: '/workShare',
-    component: Layout,
-    // hidden: true,
-    meta: {
-      roles: ['教师', '教师组长', '系统管理员'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/aTeacherGrow/workShare'),
-        name: 'WorkShare',
-        meta: { title: '工作分享', icon: 'link', roles: ['教师', '教师组长', '系统管理员'] }
-      }
-    ]
-  },
-  {
-    path: '/resultCount',
-    component: Layout,
-    // hidden: true,
-    meta: {
-      roles: ['教师', '教师组长', '系统管理员'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/aTeacherGrow/resultCount'),
-        name: 'ResultCount',
-        meta: { title: '成果统计', icon: 'chart', roles: ['教师', '教师组长', '系统管理员'] }
-      }
-    ]
-  }
-]
+// export const asyncRouterMapGrow = [
+//   // 教师成长部分
+//   {
+//     path: '/workTask',
+//     component: Layout,
+//     // hidden: true,
+//     meta: {
+//       roles: ['教师', '教师组长', '系统管理员'] // you can set roles in root nav
+//     },
+//     children: [
+//       {
+//         path: 'index',
+//         component: () => import('@/views/aTeacherGrow/workTask'),
+//         name: 'WorkTask',
+//         meta: { title: '工作任务', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
+//       }
+//     ]
+//   },
+//   {
+//     path: '/workShare',
+//     component: Layout,
+//     // hidden: true,
+//     meta: {
+//       roles: ['教师', '教师组长', '系统管理员'] // you can set roles in root nav
+//     },
+//     children: [
+//       {
+//         path: 'index',
+//         component: () => import('@/views/aTeacherGrow/workShare'),
+//         name: 'WorkShare',
+//         meta: { title: '工作分享', icon: 'link', roles: ['教师', '教师组长', '系统管理员'] }
+//       }
+//     ]
+//   },
+//   {
+//     path: '/resultCount',
+//     component: Layout,
+//     // hidden: true,
+//     meta: {
+//       roles: ['教师', '教师组长', '系统管理员'] // you can set roles in root nav
+//     },
+//     children: [
+//       {
+//         path: 'index',
+//         component: () => import('@/views/aTeacherGrow/resultCount'),
+//         name: 'ResultCount',
+//         meta: { title: '成果统计', icon: 'chart', roles: ['教师', '教师组长', '系统管理员'] }
+//       }
+//     ]
+//   }
+// ]
 
 export const asyncRouterMap = [
+  {
+    path: '/countInfo',
+    component: Layout,
+    // hidden: true,
+    meta: { roles: ['教师', '教师组长', '系统管理员'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/countInfo'),
+        name: 'CountInfo',
+        meta: { title: '统计信息', icon: 'table', roles: ['教师', '教师组长', '系统管理员'] }
+      }
+    ]
+  },
   {
     path: '/teacherInfo',
     component: Layout,
     // hidden: true,
-    meta: { roles: ['教师', '教师组长', '系统管理员'] },
+    meta: { roles: ['教师', '教师组长'] },
     children: [
       {
         path: 'index',
@@ -253,20 +267,6 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/countInfo',
-    component: Layout,
-    // hidden: true,
-    meta: { roles: ['教师', '教师组长', '系统管理员'] },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/aTeacherEvaluate/countInfo'),
-        name: 'CountInfo',
-        meta: { title: '统计信息', icon: 'table', roles: ['教师', '教师组长', '系统管理员'] }
-      }
-    ]
-  },
-  {
     path: '/authorityManage',
     component: Layout,
     // hidden: true,
@@ -291,6 +291,55 @@ export const asyncRouterMap = [
         component: () => import('@/views/aTeacherEvaluate/integrationConfig'),
         name: 'IntegrationConfig',
         meta: { title: '积分配置', icon: 'edit', roles: ['系统管理员'] }
+      }
+    ]
+  },
+  // 教师成长部分
+  {
+    path: '/workTask',
+    component: Layout,
+    // hidden: true,
+    meta: {
+      roles: ['教师', '教师组长'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherGrow/workTask'),
+        name: 'WorkTask',
+        meta: { title: '工作任务', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
+      }
+    ]
+  },
+  {
+    path: '/workShare',
+    component: Layout,
+    // hidden: true,
+    meta: {
+      roles: ['教师', '教师组长'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherGrow/workShare'),
+        name: 'WorkShare',
+        meta: { title: '工作分享', icon: 'link', roles: ['教师', '教师组长', '系统管理员'] }
+      }
+    ]
+  },
+  {
+    path: '/resultCount',
+    component: Layout,
+    // hidden: true,
+    meta: {
+      roles: ['教师', '教师组长'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/aTeacherGrow/resultCount'),
+        name: 'ResultCount',
+        meta: { title: '成果统计', icon: 'chart', roles: ['教师', '教师组长', '系统管理员'] }
       }
     ]
   },
