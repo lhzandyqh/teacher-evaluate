@@ -116,6 +116,9 @@
         <el-button type="primary" @click="dialogNew = false">关 闭</el-button>
       </div>
     </el-dialog>
+    <div class="copyrightContainer">
+      <span style="font-size: 12px">Copyright&nbsp;&nbsp;&nbsp;中科智禾教育大数据中心   ©2019</span>
+    </div>
   </div>
 </template>
 
@@ -476,5 +479,10 @@ $light_gray:#eee;
   }
   .noteTitle{
     cursor: pointer;
+  }
+  .copyrightContainer{
+    padding-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
   }
 </style>

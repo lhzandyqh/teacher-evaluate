@@ -34,7 +34,8 @@
         <div class="growtitletext">教师成长</div>
       </div>
       <div class="growul">
-        <div class="growli" @click="goGrow('workTask')">工作任务</div>
+        <!--        <div class="growli" @click="goGrow('workTask')">基本工作</div>-->
+        <div class="growli" @click="goGrow('basicWork')">基本工作</div>
         <div class="growli" @click="goGrow('workShare')">工作分享</div>
         <div class="growli" @click="goGrow('resultCount')">成果统计</div>
       </div>

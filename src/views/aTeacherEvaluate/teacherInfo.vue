@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row :gutter="50">
-      <el-col :span="8">
+      <!--      <el-col :span="8">
         <div class="userInfoContent">
           <div class="headimg"><img src="http://58.119.112.11:11001/img/avatar.jpg" alt=""></div>
           <div class="uName">{{ thecherBase.nickname }}</div>
@@ -23,8 +23,8 @@
             </div>
           </div>
         </div>
-      </el-col>
-      <el-col :span="16">
+      </el-col>-->
+      <el-col :span="24">
         <el-form ref="form" label-width="75px">
           <el-form-item label="信息类型">
             <el-select v-model="infoType" placeholder="请选择信息类型" @change="changeType">

@@ -70,7 +70,6 @@
             <el-pagination
               :current-page="currentPage"
               :page-sizes="[5, 8, 15, 20]"
-              :page-size="10"
               :total="items.length"
               layout="total, sizes, prev, pager, next, jumper"
               @size-change="handleSizeChange"
@@ -102,7 +101,7 @@ export default {
       token: getToken(),
       dialogContent: [],
       currentPage: 1, // 初始页
-      pagesize: 10 //    每页的数据
+      pagesize: 5 //    每页的数据
     }
   },
   created() {
@@ -275,7 +274,7 @@ export default {
      padding-right: 20px;
    }
    .favorite{
-     margin-left: 1300px;
+     margin-left: 1000px;
    }
    .schNot{
      text-align: left;

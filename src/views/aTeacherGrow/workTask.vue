@@ -425,6 +425,11 @@
         <guide-teacher-table/>
       </div>
     </el-row>
+    <el-row>
+      <div class="formContainer">
+        <school-club-situation-table/>
+      </div>
+    </el-row>
   </div>
 </template>
 
@@ -432,6 +437,7 @@
 import workForm from '@/views/aTeacherGrow/teacherWorkForm/teacherWorkForm'
 import teachingJobsTable from '@/views/aTeacherGrow/teacherWorkTable/teachingJobsTable'
 import educationJobsTable from '@/views/aTeacherGrow/teacherWorkTable/educationJobTable'
+import schoolClubSituationTable from '@/views/aTeacherGrow/teacherWorkTable/schoolClubSituationTable'
 import classSituationTable from '@/views/aTeacherGrow/teacherWorkTable/classSituationTable'
 import organizeActivityTable from '@/views/aTeacherGrow/teacherWorkTable/organizeActivityTable'
 import participateEducationTable from '@/views/aTeacherGrow/teacherWorkTable/participateEducationTable'
@@ -440,7 +446,7 @@ import testTable from '@/views/aTeacherGrow/teacherWorkTable/testTable'
 import { getExamData, teachJobInquire, allTeachInquire, eductionJobInquire, reportObsResearchInquire, organizeExtraInquire, furLeaContinueEduInquire, guidanceTrainTecInquire, educationJobDelete } from '@/api/teacherGrow'
 import { getToken } from '@/utils/auth'
 export default {
-  components: { workForm, teachingJobsTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
+  components: { workForm, teachingJobsTable, schoolClubSituationTable, educationJobsTable, classSituationTable, organizeActivityTable, participateEducationTable, guideTeacherTable, testTable },
   data() {
     return {
       activeName: 'june',

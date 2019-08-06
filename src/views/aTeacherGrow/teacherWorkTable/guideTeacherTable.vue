@@ -31,7 +31,6 @@
           label="指导培养何校何人"
           width="260">
           <template slot-scope="scope">
-            <i class="el-icon-time"/>
             <span style="margin-left: 10px">{{ scope.row.school_who }}</span>
           </template>
         </el-table-column>

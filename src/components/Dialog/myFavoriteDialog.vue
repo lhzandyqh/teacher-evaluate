@@ -1,6 +1,6 @@
 <template>
   <div class="app_container">
-    <el-button type="danger" icon="el-icon-s-management" plain @click="outerVisible = true">我的收藏</el-button>
+    <el-button type="danger" icon="el-icon-s-management" style="margin-right: 130px" plain @click="outerVisible = true">我的收藏</el-button>
     <el-dialog :visible.sync="outerVisible" title="我的收藏">
       <el-dialog
         :visible.sync="innerVisible"
