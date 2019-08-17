@@ -425,11 +425,6 @@
         <guide-teacher-table/>
       </div>
     </el-row>
-    <el-row>
-      <div class="formContainer">
-        <school-club-situation-table/>
-      </div>
-    </el-row>
   </div>
 </template>
 

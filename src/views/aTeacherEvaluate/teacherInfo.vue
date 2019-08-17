@@ -225,7 +225,7 @@ export default {
     font-size: 16px;
     color: #409EFF;
     margin-bottom: 10px;
-  }
+  }s
   .tongMCon{
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;

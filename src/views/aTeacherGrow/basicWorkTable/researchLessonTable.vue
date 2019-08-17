@@ -9,32 +9,32 @@
         border
         style="width: 100%">
         <el-table-column
-          prop="date"
+          prop="research_course_type"
           align="center"
           label="研究课类型"
           width="180"/>
         <el-table-column
-          prop="name"
+          prop="organizers_of_research_course"
           align="center"
           label="主办单位"
           width="180"/>
         <el-table-column
-          prop="address"
+          prop="course_display_level"
           align="center"
           label="展示级别"
           width="180"/>
         <el-table-column
-          prop="address"
+          prop="teaching_time"
           align="center"
           label="授课时间"
           width="180"/>
         <el-table-column
-          prop="address"
+          prop="topic_name"
           align="center"
           label="课题名称"
           width="180"/>
         <el-table-column
-          prop="address"
+          prop="course_length"
           align="center"
           label="授课时长"
           width="180"/>
@@ -42,11 +42,11 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              @click="handleEdit(scope.$index, scope.row.id)">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handleDelete(scope.$index, scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -57,27 +57,29 @@
     <el-dialog :visible.sync="dialogFormVisible" title="增加研究课情况">
       <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="研究课类型">
-          <el-select v-model="form.region" placeholder="请选择获奖级别">
-            <el-option label="公开课" value="shanhai"/>
-            <el-option label="主题课" value="hunan"/>
-            <el-option label="观摩课" value="shanghai"/>
-            <el-option label="班会展示" value="hengyang"/>
+          <el-select v-model="form.type" placeholder="请选择研究课类型" @change="typeGet">
+            <el-option
+              v-for="item in keType "
+              :label="item.label"
+              :key="item.id"
+              :value="item.value"/>
           </el-select>
         </el-form-item>
         <el-form-item label="主办单位">
-          <el-input v-model="form.people"/>
+          <el-input v-model="form.danwei"/>
         </el-form-item>
         <el-form-item label="展示级别">
-          <el-select v-model="form.region" placeholder="请选择获奖级别">
-            <el-option label="国家级" value="shanhai"/>
-            <el-option label="区级" value="hunan"/>
-            <el-option label="市级" value="shanghai"/>
-            <el-option label="校级" value="hengyang"/>
+          <el-select v-model="form.rank" placeholder="请选择展示级别" @change="rankGet">
+            <el-option
+              v-for="item in showRank "
+              :label="item.label"
+              :key="item.id"
+              :value="item.value"/>
           </el-select>
         </el-form-item>
         <el-form-item label="授课时间">
           <el-col :span="11">
-            <el-date-picker v-model="form.date1" type="date" placeholder="选择日期" style="width: 80%;"/>
+            <el-date-picker v-model="form.date" type="date" placeholder="选择日期" style="width: 80%;"/>
           </el-col>
         </el-form-item>
         <el-form-item label="课题名称">
@@ -89,36 +91,181 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="classAdd">确 定</el-button>
+        <el-button type="primary" @click="setResearchData">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog :visible.sync="researchDialogFormVisible" title="修改研究课情况">
+      <el-form ref="form" :model="form" label-width="100px">
+        <el-form-item label="研究课类型">
+          <el-select v-model="form.type" placeholder="请选择研究课类型" @change="typeGet">
+            <el-option
+              v-for="item in keType "
+              :label="item.label"
+              :key="item.id"
+              :value="item.value"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="主办单位">
+          <el-input v-model="form.danwei"/>
+        </el-form-item>
+        <el-form-item label="展示级别">
+          <el-select v-model="form.rank" placeholder="请选择展示级别" @change="rankGet">
+            <el-option
+              v-for="item in showRank "
+              :label="item.label"
+              :key="item.id"
+              :value="item.value"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="授课时间">
+          <el-col :span="11">
+            <el-date-picker v-model="form.date" type="date" placeholder="选择日期" style="width: 80%;"/>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="课题名称">
+          <el-input v-model="form.name"/>
+        </el-form-item>
+        <el-form-item label="授课时长">
+          <el-input v-model="form.shichang"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateResearchData">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { inquireResearchCourse, increaseResearchCourse, deleteResearchCourse, updateResearchCourse } from '@/api/performanceWork'
 export default {
   name: 'TestTable',
   data() {
     return {
+      keType: [{ label: '公开课', value: 'gongkai' }, { label: '主题课', value: 'zhuti' }, { label: '观摩课', value: 'guanmo' }, { label: '班会展示', value: 'banhui' }],
+      showRank: [{ label: '国家级', value: 'guojia' }, { label: '市级', value: 'shiji' }, { label: '区级', value: 'quji' }, { label: '校级', value: 'xiaoji' }],
       dialogFormVisible: false,
+      researchDialogFormVisible: false,
+      tableData: [],
+      token: getToken(),
       form: {
         name: '',
-        people: '',
+        type: '',
         shichang: '',
-        region: '',
-        date1: '',
-        date2: '',
+        rank: '',
+        date: '',
         delivery: false,
-        type: [],
         resource: '',
-        desc: '',
-        apeople: ''
+        id: '',
+        danwei: ''
       }
     }
   },
+  mounted() {
+    this.getResearchData()
+  },
   methods: {
+    typeGet: function(value) {
+      let obj = {}
+      obj = this.keType.find((item) => {
+        return item.value === value
+      })
+      console.log(obj.label)
+      this.form.type = obj.label
+    },
+    rankGet: function(value) {
+      let obj = {}
+      obj = this.showRank.find((item) => {
+        return item.value === value
+      })
+      console.log(obj.label)
+      this.form.rank = obj.label
+    },
     add: function() {
       this.dialogFormVisible = true
+    },
+    getResearchData: function() {
+      // const prams = {
+      //   token: this.token
+      // }
+      inquireResearchCourse(this.token).then(response => {
+        this.tableData = response.data.researchCourse
+        console.log(this.tableData)
+      })
+    },
+    setResearchData: function() {
+      console.log(this.form)
+      const prams = {
+        research_course_type: this.form.type,
+        organizers_of_research_course: this.form.danwei,
+        course_display_level: this.form.rank,
+        teaching_time: this.form.date,
+        topic_name: this.form.name,
+        course_length: this.form.shichang
+      }
+      increaseResearchCourse({ ...prams, token: this.token }).then(response => {
+        inquireResearchCourse(this.token).then(response => {
+          this.tableData = response.data.researchCourse
+        })
+        this.$message({
+          message: '恭喜你，添加成功',
+          type: 'success'
+        })
+      })
+      this.dialogFormVisible = false
+    },
+    handleDelete(index, row) {
+      // console.log(index, row)
+      const prams = {
+        id: row
+      }
+      deleteResearchCourse({ ...prams, token: this.token }).then(response => {
+        if (response.data.code === 200) {
+          console.log('删除成功')
+        } else {
+          console.log('删除失败')
+        }
+        inquireResearchCourse(this.token).then(response => {
+          this.tableData = response.data.researchCourse
+        })
+        this.$message({
+          message: '恭喜你，删除成功',
+          type: 'success'
+        })
+      })
+    },
+    handleEdit: function(index, row) {
+      this.researchDialogFormVisible = true
+      this.form.id = row
+    },
+    updateResearchData: function() {
+      console.log('输出id看一看')
+      console.log(this.form.id)
+      const prams = {
+        research_course_type: this.form.type,
+        organizers_of_research_course: this.form.danwei,
+        course_display_level: this.form.rank,
+        teaching_time: this.form.date,
+        topic_name: this.form.name,
+        course_length: this.form.shichang
+      }
+      updateResearchCourse({ ...prams, token: this.token, id: this.form.id }).then(response => {
+        if (response.data.code === 200) {
+          console.log('更新成功')
+        } else {
+          console.log('更新失败')
+        }
+        inquireResearchCourse(this.token).then(response => {
+          this.tableData = response.data.researchCourse
+        })
+        this.$message({
+          message: '恭喜你，编辑成功',
+          type: 'success'
+        })
+      })
+      this.researchDialogFormVisible = false
     }
   }
 }

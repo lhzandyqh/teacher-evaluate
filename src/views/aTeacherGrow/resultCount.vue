@@ -30,10 +30,16 @@
     <!--      </el-col>-->
     <!--    </el-row>-->
     <el-row>
-      <teacher-grow-like-charts/>
+      <integration-sum-chart/>
     </el-row>
     <el-row>
       <teacher-grow-statistics/>
+    </el-row>
+    <el-row>
+      <teacher-grow-compared/>
+    </el-row>
+    <el-row>
+      <teacher-grow-like-charts/>
     </el-row>
   </div>
 </template>
@@ -44,10 +50,12 @@ import barChart from '@/components/Charts/barChart'
 import groupBarChart from '@/components/Charts/groupBarChart'
 import teacherGrowStatistics from '@/components/Charts/teacherGrowStatistics'
 import teacherGrowLikeCharts from '@/components/Charts/teacherGrowLikeChart'
+import teacherGrowCompared from '@/components/Charts/teacherGrowCompared'
+import integrationSumChart from '@/components/Charts/integrationSumChart'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'ResultCount',
-  components: { Chart, barChart, groupBarChart, teacherGrowStatistics, teacherGrowLikeCharts },
+  components: { Chart, barChart, groupBarChart, teacherGrowStatistics, teacherGrowLikeCharts, integrationSumChart, teacherGrowCompared },
   data: function() {
     return {
       token: getToken()

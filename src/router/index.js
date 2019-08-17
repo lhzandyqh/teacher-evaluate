@@ -194,7 +194,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/aTeacherEvaluate/teacherInfo'),
+        component: () => import('@/views/aTeacherEvaluate/teacherInformation'),
         name: 'TeacherInfo',
         meta: { title: '教师信息', icon: 'documentation', roles: ['教师', '教师组长', '系统管理员'] }
       }
@@ -291,6 +291,16 @@ export const asyncRouterMap = [
         component: () => import('@/views/aTeacherEvaluate/integrationConfig'),
         name: 'IntegrationConfig',
         meta: { title: '积分配置', icon: 'edit', roles: ['系统管理员'] }
+      },
+      {
+        path: 'integrationAdd',
+        component: () => import('@/views/aTeacherEvaluate/integrationAdd'),
+        name: 'integrationAdd',
+        hidden: true,
+        meta: {
+          title: '添加新的积分'
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
       }
     ]
   },
@@ -300,14 +310,22 @@ export const asyncRouterMap = [
     component: Layout,
     // hidden: true,
     meta: {
+      title: '工作任务',
+      icon: 'excel',
       roles: ['教师', '教师组长'] // you can set roles in root nav
     },
     children: [
       {
-        path: 'index',
+        path: 'elementWork',
         component: () => import('@/views/aTeacherGrow/workTask'),
         name: 'WorkTask',
-        meta: { title: '工作任务', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
+        meta: { title: '基本工作', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
+      },
+      {
+        path: 'jixiaoWork',
+        component: () => import('@/views/aTeacherGrow/basicWork'),
+        name: 'basicWork',
+        meta: { title: '绩效工作', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
       }
     ]
   },
