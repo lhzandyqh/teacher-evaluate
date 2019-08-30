@@ -11,6 +11,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -100,7 +101,13 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+
+    // // 修改
+    // new ExtractTextPlugin({
+    //   filename:utils.assetsPath('[name]/styles.[contenthash].css'),
+    //   allChunks:true
+    // })
   ],
   optimization: {
     splitChunks: {

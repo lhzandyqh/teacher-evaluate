@@ -40,11 +40,62 @@
           <!--</el-dropdown-item>-->
           <!--</a>-->
           <el-dropdown-item divided>
+            <span style="display:block;" @click="changeMyPassword">{{ myPassword }}</span>
+          </el-dropdown-item>
+          <el-dropdown-item divided>
             <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <el-dialog
+      :visible.sync="passwordFlag"
+      :before-close="handleClose"
+      title="修改我的密码"
+      width="40%">
+      <div class="changepasswordContainer">
+        <el-row :gutter="5">
+          <el-col :span="6">
+            <div class="title">
+              <span style="font-size: 16px;font-weight: bolder">输入我的旧密码</span>
+            </div>
+          </el-col>
+          <el-col :span="12" :offset="1">
+            <div class="input">
+              <el-input v-model="oldPassWord" placeholder="请输入旧密码" show-password/>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row :gutter="5">
+          <el-col :span="6">
+            <div class="title">
+              <span style="font-size: 16px;font-weight: bolder">输入我的新密码</span>
+            </div>
+          </el-col>
+          <el-col :span="12" :offset="1">
+            <div class="input">
+              <el-input v-model="newPassword" placeholder="请输入新密码" show-password/>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row :gutter="5">
+          <el-col :span="6">
+            <div class="title">
+              <span style="font-size: 16px;font-weight: bolder">确认新密码</span>
+            </div>
+          </el-col>
+          <el-col :span="12" :offset="1">
+            <div class="input">
+              <el-input v-model="confirmpassword" placeholder="请确认新密码" show-password/>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="passwordFlag = false">取 消</el-button>
+        <el-button type="primary" @click="confirmToChangePassword">修改</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -57,6 +108,8 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
+import { changeMyPassword } from '@/api/login'
+import { getToken } from '@/utils/auth'
 
 export default {
   components: {
@@ -67,6 +120,16 @@ export default {
     SizeSelect,
     LangSelect,
     ThemePicker
+  },
+  data() {
+    return {
+      token: getToken(),
+      newPassword: '',
+      myPassword: '修改密码',
+      passwordFlag: false,
+      oldPassWord: '',
+      confirmpassword: ''
+    }
   },
   computed: {
     ...mapGetters([
@@ -84,6 +147,38 @@ export default {
       this.$store.dispatch('LogOut').then(() => {
         location.reload()// In order to re-instantiate the vue-router object to avoid bugs
       })
+    },
+    changeMyPassword: function() {
+      this.passwordFlag = true
+    },
+    confirmToChangePassword: function() {
+      if (this.newPassword === '' || this.confirmpassword === '') {
+        this.$message.error('密码不能为空')
+      } else {
+        if (this.newPassword !== this.confirmpassword) {
+          this.$message({
+            message: '两次密码输入不同',
+            type: 'warning'
+          })
+        } else {
+          const prams = {
+            oldpassword: this.oldPassWord,
+            newpassword: this.newPassword,
+            assertpassword: this.confirmpassword
+          }
+          console.log('检查token')
+          console.log(this.token)
+          changeMyPassword({ ...prams, token: this.token }).then(respone => {
+            this.$message({
+              message: '修改密码成功,请重新登录',
+              type: 'success',
+              duration: 5000
+            })
+            this.passwordFlag = false
+            this.logout()
+          })
+        }
+      }
     }
   }
 }

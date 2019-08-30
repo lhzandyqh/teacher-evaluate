@@ -9,11 +9,17 @@
 
 <script>
 import echarts from 'echarts'
+import { getToken } from '@/utils/auth'
 require('echarts/theme/macarons') // echarts theme
+import { getChartShareCount, getChartCollectCount, getChartLikeCount } from '@/api/chartsGetData'
 export default {
   name: 'TeacherGrowLikeChart',
   data() {
     return {
+      token: getToken(),
+      shareArray: [],
+      collectArray: [],
+      likeArray: [],
       option: {
         title: {
         },
@@ -48,7 +54,7 @@ export default {
           {
             name: '我分享的文章数',
             type: 'bar',
-            data: [2, 3, 4, 2, 1, 4, 3, 1, 3, 2, 4, 3],
+            data: [], // 2, 3, 4, 2, 1, 4, 3, 1, 3, 2, 4, 3
             markPoint: {
               data: [
                 { type: 'max', name: '最大值' },
@@ -64,7 +70,7 @@ export default {
           {
             name: '我收藏的文章数',
             type: 'bar',
-            data: [2, 3, 4, 2, 1, 4, 3, 1, 3, 2, 4, 3],
+            data: [], // 2, 3, 4, 2, 1, 4, 3, 1, 3, 2, 4, 3
             markPoint: {
               data: [
                 { name: '年最高', value: 182.2, xAxis: 7, yAxis: 183 },
@@ -80,7 +86,7 @@ export default {
           {
             name: '我点赞的文章数',
             type: 'bar',
-            data: [6, 5, 4, 3, 2, 7, 2, 4, 6, 8, 2, 3],
+            data: [], // 6, 5, 4, 3, 2, 7, 2, 4, 6, 8, 2, 3
             markPoint: {
               data: [
                 { name: '年最高', value: 182.2, xAxis: 7, yAxis: 183 },
@@ -118,8 +124,39 @@ export default {
   },
   methods: {
     initChart: function() {
-      this.chart = echarts.init(document.getElementById('like'), 'macarons')
-      this.chart.setOption(this.option)
+      getChartShareCount(this.token).then(response => {
+        this.shareArray = response.data.statisticSharingByMon
+        console.log('我要看图里面的分享数据')
+        console.log(this.shareArray)
+        var k = ''
+        for (k in this.shareArray) {
+          this.option.series[0].data.push(this.shareArray[k].sharing_count)
+        }
+        this.chart = echarts.init(document.getElementById('like'), 'macarons')
+        this.chart.setOption(this.option)
+      })
+      getChartCollectCount(this.token).then(response => {
+        this.collectArray = response.data.statisticCollectByMon
+        console.log('我要看图里面的收藏数据')
+        console.log(this.collectArray)
+        var k = ''
+        for (k in this.collectArray) {
+          this.option.series[1].data.push(this.collectArray[k].collect_count)
+        }
+        this.chart = echarts.init(document.getElementById('like'), 'macarons')
+        this.chart.setOption(this.option)
+      })
+      getChartLikeCount(this.token).then(response => {
+        this.likeArray = response.data.statisticLikeByMon
+        console.log('我要看图里面的点赞数据')
+        console.log(this.likeArray)
+        var k = ''
+        for (k in this.likeArray) {
+          this.option.series[2].data.push(this.likeArray[k].like_count)
+        }
+        this.chart = echarts.init(document.getElementById('like'), 'macarons')
+        this.chart.setOption(this.option)
+      })
     }
   }
 }

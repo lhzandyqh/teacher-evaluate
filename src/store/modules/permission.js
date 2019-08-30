@@ -50,16 +50,17 @@ const permission = {
       return new Promise(resolve => {
         const { roles } = data
         let accessedRouters
-        if (roles.includes('admin')) {
-          accessedRouters = asyncRouterMap
-        } else {
-          const role = window.localStorage.getItem('userRole')
-          // if (roles.indexOf('elv') > -1) {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, [role])
-          // } else {
-          // accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
-          // }
-        }
+        // if (roles.includes('admin')) {
+        //   accessedRouters = asyncRouterMap
+        // } else {
+        const role = window.localStorage.getItem('userRole')
+        // if (roles.indexOf('elv') > -1) {
+        // eslint-disable-next-line
+        accessedRouters = filterAsyncRouter(asyncRouterMap, [role])
+        // } else {
+        // accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
+        // }
+        // }
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

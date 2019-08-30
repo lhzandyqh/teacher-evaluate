@@ -1,11 +1,67 @@
 <template>
   <div class="app-container">
     <div style="margin-bottom: 20px;">
-      <el-button type="primary" >自动审核</el-button>
+      <!--      <el-button type="primary" >自动审核</el-button>-->
+      <div class="select">
+        <el-row :gutter="5">
+          <el-col :span="3">
+            <div class="title">
+              <span style="font-size: 14px;font-weight: bolder">选择积分项目类型</span>
+            </div>
+          </el-col>
+          <el-col :span="6">
+            <div class="select">
+              <el-select v-model="type_select_value" placeholder="请选择您的积分项目类型" @change="changeZiZhi">
+                <el-option label="学术成果积分配置" value="xueshu"/>
+                <el-option label="项目课题积分配置" value="yanjiuke"/>
+                <el-option label="学术讲座与经验分享积分配置" value="jinyan"/>
+                <el-option label="教育教学评比竞赛积分配置" value="jingsai"/>
+                <el-option label="研究课积分配置" value="yanjiu"/>
+                <el-option label="教育教学成果获奖积分配置" value="jiaoyu"/>
+                <el-option label="教师指导学生参加学科比赛获奖情况积分配置" value="xueke"/>
+                <el-option label="艺科体社团积分配置" value="yike"/>
+                <el-option label="行政获奖积分配置" value="xinzheng"/>
+                <el-option label="校本培训积分配置" value="xiaoben"/>
+              </el-select>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
     </div>
+    <el-divider/>
+    <el-row v-if="type_select_value === 'jingsai'">
+      <apprasial-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xueshu'">
+      <academic-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'yanjiu'">
+      <research-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'jinyan'">
+      <experience-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'jiaoyu'">
+      <education-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'yanjiuke'">
+      <project-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xiaoben'">
+      <school-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xinzheng'">
+      <administrative-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'yike'">
+      <art-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xueke'">
+      <student-auditing-table/>
+    </el-row>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
 
-      <el-table-column align="center" label="资质编号" width="80">
+      <el-table-column align="center" label="积分编号" width="80">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
@@ -118,9 +174,22 @@
 // import { getAuditingList, getAuditing, editAuditing } from '@/api/teacherEvaluate'
 import { getAuditingList, editAuditing, getAuditing } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
+import academicAuditingTable from '@/views/aTeacherGrow/auditingListTable/academicAuditingTable'
+import projectAuditingTable from '@/views/aTeacherGrow/auditingListTable/projectAuditingTable'
+import experienceAuditingTable from '@/views/aTeacherGrow/auditingListTable/experienceAuditingTable'
+import apprasialAuditingTable from '@/views/aTeacherGrow/auditingListTable/apprasialAuditingTable'
+import researchAuditingTable from '@/views/aTeacherGrow/auditingListTable/researchAuditingTable'
+import educationAuditingTable from '@/views/aTeacherGrow/auditingListTable/educationAuditingTable'
+import studentAuditingTable from '@/views/aTeacherGrow/auditingListTable/studentAuditingTable'
+import artAuditingTable from '@/views/aTeacherGrow/auditingListTable/artAuditingTable'
+import administrativeAuditingTable from '@/views/aTeacherGrow/auditingListTable/administrativeAuditingTable'
+import schoolAuditingTable from '@/views/aTeacherGrow/auditingListTable/schoolAuditingTable'
 
 export default {
   name: 'InlineEditTable',
+  components: { academicAuditingTable, projectAuditingTable, experienceAuditingTable, apprasialAuditingTable,
+    researchAuditingTable, educationAuditingTable, studentAuditingTable, artAuditingTable, administrativeAuditingTable,
+    schoolAuditingTable },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -133,6 +202,7 @@ export default {
   },
   data() {
     return {
+      type_select_value: '',
       list: null,
       listLoading: true,
       listQuery: {
@@ -218,5 +288,8 @@ export default {
     position: absolute;
     right: 15px;
     top: 10px;
+  }
+  .title{
+    margin-top: 10px;
   }
 </style>

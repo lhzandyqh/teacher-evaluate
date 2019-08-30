@@ -46,3 +46,11 @@ export function getSchoolNotices() {
   })
 }
 
+// 修改密码
+export function changeMyPassword(parems) {
+  return request({
+    url: '/api/login/editpassword',
+    method: 'post',
+    params: parems
+  })
+}

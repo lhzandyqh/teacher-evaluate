@@ -22,22 +22,22 @@
           prop="publication_time"
           align="center"
           label="发表时间（出版时间）"
-          width="180"/>
+          width="170"/>
         <el-table-column
           prop="is_first_author"
           align="center"
           label="是否第一作者"
-          width="140"/>
+          width="120"/>
         <el-table-column
           prop="name_of_publications"
           align="center"
           label="刊物名称（出版社）"
-          width="180"/>
+          width="160"/>
         <el-table-column
           prop="number_of_academic"
           align="center"
           label="刊号（书号）"
-          width="140"/>
+          width="150"/>
         <el-table-column
           prop="level_of_publisher"
           align="center"

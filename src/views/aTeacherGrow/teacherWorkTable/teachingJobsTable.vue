@@ -5,7 +5,7 @@
         <h4>完成教学工作情况</h4>
       </div>
       <div class="out" >
-        <el-button type="success" plain @click="showUpload">导出全年表格</el-button>
+        <!--        <el-button type="success" plain @click="showUpload">导出全年表格</el-button>-->
       </div>
       <el-table
         :data="teachJobData"

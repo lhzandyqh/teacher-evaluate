@@ -1,49 +1,61 @@
 <template>
   <div class="app-container">
     <div v-if="role === '教师'">
-      <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-        <div class="title">{{ barChartData.title }}</div>
-        <div style="display: flex;justify-content: space-between;align-items: center">
-          <div style="display: flex;align-items: center;margin: 15px 0;">
-            <div style="font-size: 14px;margin-right: 15px;">请选择时间:</div>
-            <div>
-              <el-date-picker
-                v-model="value6"
-                type="daterange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"/>
-            </div>
-          </div>
-          <div><el-button type="primary" @click="initData">生成个人详情表格</el-button></div>
-        </div>
-        <bar-chart :chart-data="barChartData"/>
+      <el-row>
+        <integration-sum-chart/>
       </el-row>
-      <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-        <div class="title">{{ lineChartData1.title }}</div>
-        <div style="display: flex;">
-          <div style="display: flex;align-items: center;margin: 15px 0;">
-            <div style="font-size: 14px;margin-right: 15px;">请选择指标:</div>
-            <div>
-              <el-select v-model="listQuery" clearable class="filter-item" @change="setList">
-                <el-option v-for="item in list" :label="item" :value="item" :key="item"/>
-              </el-select>
-            </div>
-          </div>
-          <div style="display: flex;align-items: center;margin: 15px;">
-            <div style="font-size: 14px;margin-right: 15px;">请选择时间:</div>
-            <div>
-              <el-date-picker
-                v-model="value7"
-                type="daterange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"/>
-            </div>
-          </div>
-        </div>
-        <line-chart :chart-data="lineChartData" />
+      <el-row>
+        <teacher-grow-statistics/>
       </el-row>
+      <el-row>
+        <teacher-grow-compared/>
+      </el-row>
+      <el-row>
+        <teacher-grow-like-charts/>
+      </el-row>
+      <!--      <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">-->
+      <!--        <div class="title">{{ barChartData.title }}</div>-->
+      <!--        <div style="display: flex;justify-content: space-between;align-items: center">-->
+      <!--          <div style="display: flex;align-items: center;margin: 15px 0;">-->
+      <!--            <div style="font-size: 14px;margin-right: 15px;">请选择时间:</div>-->
+      <!--            <div>-->
+      <!--              <el-date-picker-->
+      <!--                v-model="value6"-->
+      <!--                type="daterange"-->
+      <!--                range-separator="至"-->
+      <!--                start-placeholder="开始日期"-->
+      <!--                end-placeholder="结束日期"/>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--          <div><el-button type="primary" @click="initData">生成个人详情表格</el-button></div>-->
+      <!--        </div>-->
+      <!--        <bar-chart :chart-data="barChartData"/>-->
+      <!--      </el-row>-->
+      <!--      <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">-->
+      <!--        <div class="title">{{ lineChartData1.title }}</div>-->
+      <!--        <div style="display: flex;">-->
+      <!--          <div style="display: flex;align-items: center;margin: 15px 0;">-->
+      <!--            <div style="font-size: 14px;margin-right: 15px;">请选择指标:</div>-->
+      <!--            <div>-->
+      <!--              <el-select v-model="listQuery" clearable class="filter-item" @change="setList">-->
+      <!--                <el-option v-for="item in list" :label="item" :value="item" :key="item"/>-->
+      <!--              </el-select>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--          <div style="display: flex;align-items: center;margin: 15px;">-->
+      <!--            <div style="font-size: 14px;margin-right: 15px;">请选择时间:</div>-->
+      <!--            <div>-->
+      <!--              <el-date-picker-->
+      <!--                v-model="value7"-->
+      <!--                type="daterange"-->
+      <!--                range-separator="至"-->
+      <!--                start-placeholder="开始日期"-->
+      <!--                end-placeholder="结束日期"/>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <line-chart :chart-data="lineChartData" />-->
+      <!--      </el-row>-->
     </div>
     <div v-if="role === '教师组长'">
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
@@ -70,7 +82,7 @@
             <el-date-picker
               v-model="value8"
               type="daterange"
-              range-separator="至"
+              range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"/>
           </div>
@@ -86,7 +98,7 @@
             <el-date-picker
               v-model="value12"
               type="daterange"
-              range-separator="至"
+              range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"/>
           </div>
@@ -107,7 +119,7 @@
             <el-date-picker
               v-model="value13"
               type="daterange"
-              range-separator="至"
+              range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"/>
           </div>
@@ -128,7 +140,7 @@
             <el-date-picker
               v-model="value9"
               type="daterange"
-              range-separator="至"
+              range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"/>
           </div>
@@ -156,7 +168,7 @@
             <el-date-picker
               v-model="value10"
               type="daterange"
-              range-separator="至"
+              range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"/>
           </div>
@@ -171,7 +183,7 @@
             <el-date-picker
               v-model="value11"
               type="daterange"
-              range-separator="至"
+              range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"/>
           </div>
@@ -245,11 +257,16 @@ import LineChart from './components/LineChart'
 import BarChart from './components/BarChart'
 import BarChartMuite from './components/BarChartMuite'
 import Pagination from '@/components/Pagination'
+import teacherGrowStatistics from '@/components/Charts/teacherGrowStatistics'
+import teacherGrowLikeCharts from '@/components/Charts/teacherGrowLikeChart'
+import teacherGrowCompared from '@/components/Charts/teacherGrowCompared'
+import integrationSumChart from '@/components/Charts/integrationSumChart'
 /* eslint-disable */
 export default {
   name: 'CountInfo',
   data() {
     return {
+      userRole: '',
       total: 4,
       listQuery: {
         page: 1,
@@ -326,12 +343,21 @@ export default {
     LineChart,
     BarChart,
     BarChartMuite,
-    Pagination
+    Pagination,
+    teacherGrowStatistics, teacherGrowLikeCharts, integrationSumChart, teacherGrowCompared
   },
   created() {
     console.log(this.role)
   },
+  mounted() {
+    this.getUserRole()
+  },
   methods: {
+    getUserRole: function(){
+      console.log('输出用户角色')
+      console.log(window.localStorage.getItem('userRole'))
+      this.userRole = window.localStorage.getItem('userRole')
+    },
     getList() {
     },
     seaech() {

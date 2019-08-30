@@ -10,7 +10,7 @@ export function integrationConfigList(token) {
 // 积分详情
 export function integrationInfoList(token) {
   return request({
-    url: '/api/qualification',
+    url: '/api/qualificationinfo',
     method: 'get',
     params: { token }
   })

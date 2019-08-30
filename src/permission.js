@@ -21,7 +21,7 @@ router.beforeEach((to, from, next) => {
   if (getToken()) { // determine if there has token
     /* has token*/
     if (to.path === '/login') {
-      next({ path: '/countInfo' })
+      next({ path: '/countInfo/index' })
       // next()
       NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
     } else {
@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
             if(to.name){
               next({ ...to, replace: true })
             }else{
-              next({ path: '/'+window.localStorage.getItem('prePath')+'/index' })
+              next({ path: '/' })
             }
           })
         }).catch((err) => {

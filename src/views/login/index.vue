@@ -148,7 +148,7 @@ export default {
       }
     }
     return {
-      schna: ['http://58.119.112.11:11005/cd82b763-708f-42a4-9eeb-cd6c54e59981.jpg', 'http://58.119.112.11:11005/e58a0ba5-a7bd-4f7b-bcc9-5e268e2887ed.jpg'],
+      schna: ['http://58.119.112.11:11005/4c51e799-3fdd-4f68-8cbb-efadd9ba2efe.jpg', 'http://58.119.112.11:11005/cca1839d-8dbe-4359-99df-b6b3a99ea202.jpg'],
       noteInfo: { noticeContext: '' },
       dialogNote: false,
       dialogNew: false,
@@ -222,7 +222,8 @@ export default {
             })
             // this.$router.push({ path: this.redirect || '/' })
             this.$router.push({ path: '/' })
-          }).catch((msg) => {
+          }
+          ).catch((msg) => {
             this.$message.error(msg)
             this.loading = false
           })

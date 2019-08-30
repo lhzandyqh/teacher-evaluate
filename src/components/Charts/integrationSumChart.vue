@@ -28,7 +28,7 @@ export default {
         },
         series: [
           {
-            name: '访问来源',
+            name: '',
             type: 'pie',
             selectedMode: 'single',
             radius: [0, '30%'],
@@ -49,15 +49,15 @@ export default {
             ]
           },
           {
-            name: '访问来源',
+            name: '',
             type: 'pie',
             radius: ['40%', '55%'],
             label: {
               normal: {
                 formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-                backgroundColor: '#eee',
+                backgroundColor: '#ffffff',
                 borderColor: '#aaa',
-                borderWidth: 1,
+                borderWidth: 0,
                 borderRadius: 4,
                 // shadowBlur:3,
                 // shadowOffsetX: 2,
@@ -80,12 +80,12 @@ export default {
                   hr: {
                     borderColor: '#aaa',
                     width: '100%',
-                    borderWidth: 0.5,
+                    borderWidth: 0,
                     height: 0
                   },
                   b: {
                     fontSize: 16,
-                    lineHeight: 33
+                    lineHeight: 10
                   },
                   per: {
                     color: '#eee',

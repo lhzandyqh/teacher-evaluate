@@ -1,879 +1,305 @@
 <template>
   <div class="app-container">
-    <el-row :gutter="20">
-      <el-col :span="12">
+    <el-row>
+      <el-col :span="24">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span style="font-weight: bolder;color:#409EFF ">基本信息</span>
-            <el-button style="float: right; padding: 3px 0" type="text">导出</el-button>
+            <!--            <el-button style="float: right; padding: 3px 0" type="text" @click="changeAll">修改</el-button>-->
           </div>
           <div class="card-container">
-            <el-row>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">教师姓名:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">刘老师</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">曾用名:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">性别:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">男</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">国籍/地区:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">中国</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">邮箱:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">lannisteryqh@163.com</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
+            <el-row :gutter="20">
               <el-col :span="8">
-                <div style="display: inline-block">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">身份证件类型:</span>
-                    </div>
+                    <span style="font-weight: bolder">人员姓名：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">身份证</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="16">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">身份证件号码:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">430482188509230114</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="8">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">出生日期:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">1885-09-23</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="5">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">籍贯:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">北京</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="5">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">户籍地:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">北京</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="5">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">民族:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">汉</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">政治面貌:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">党员</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">婚姻状况:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">已婚</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">健康状况:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">良好</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">特长:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">唱歌，运动</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">兴趣爱好:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">足球，游戏，看书</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">最高学历:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">硕士</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">最高学位:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">硕士</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">参加工作时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2010-09-11</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">进入本校时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2010-08-11</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">教职工来源:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">社会招聘</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">岗位分类:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">技术</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="10">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">岗位级别:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">技术五级</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否专任教师:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否班主任:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ username }}</span>
                   </div>
                 </div>
               </el-col>
               <el-col :span="8">
-                <div style="display: inline-block">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">担任班主任年限:</span>
-                    </div>
+                    <span style="font-weight: bolder">曾用名：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">0</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">人员状态:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">在职</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">学段:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">4</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">部门:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">信息中心</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">劳动关系:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">合同</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">所在年级:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">高一</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">分管工作:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">职务:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">主任</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">信息技术应用能力:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">优秀</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">用人形式:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">全职</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">签订合同情况:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">已签合同</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">合同开始时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2010-09-20</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">合同结束时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2020-09-20</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span style="font-weight: bolder;color:#409EFF ">专业能力</span>
-            <el-button style="float: right; padding: 3px 0" type="text">导出</el-button>
-          </div>
-          <div class="card-container">
-            <el-row>
-              <el-col :span="6">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否特级教师:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="10">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否县级及以上骨干教师:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>无</span>
                   </div>
                 </div>
               </el-col>
               <el-col :span="8">
-                <div style="display: inline-block">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否心里健康教育教师:</span>
-                    </div>
+                    <span style="font-weight: bolder">性别：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">是</span>
+                    <span>{{ gender }}</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得特级教师专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">出生年月：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ born_time }}</span>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得特级教师称号时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">国籍/地区：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">2009-07-20</span>
+                    <span>{{ country }}</span>
                   </div>
                 </div>
               </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得市学科专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">民族：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得市学科称号时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ nation }}</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得市骨干专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">籍贯：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ native_place }}</span>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">得市骨干称号时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">政治面目：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ political_status }}</span>
                   </div>
                 </div>
               </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得紫金杯班主任专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">入党团时间：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得紫金杯班主任称号时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ political_time }}</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得区学科专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">身份证号：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ id_num }}</span>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得区学科称号时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">家庭电话：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span v-if="homeTeleFlag === '否'">{{ homeTele }}</span>
+                    <el-input v-else v-model="homeTeleVale" placeholder="请输入家庭电话"/>
+                  </div>
+                  <div class="button">
+                    <el-button v-if="homeTeleFlag === '否'" type="text" @click="editHomeTelephone">修改</el-button>
+                    <div v-else class="twoButton">
+                      <el-button type="text" @click="updateHomeTelephone">完成</el-button>
+                      <el-button type="text" @click="cancelHomeTelephone">取消</el-button>
+                    </div>
                   </div>
                 </div>
               </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得区班主任专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">家庭邮编：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span v-if="zipCodeFlag === '否'">{{ zipCode }}</span>
+                    <el-input v-else v-model="zipCodeValue" placeholder="请输入家庭邮编"/>
                   </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得区班主任称号时间:</span>
+                  <div class="button">
+                    <el-button v-if="zipCodeFlag === '否'" type="text" @click="editZipCode">修改</el-button>
+                    <div v-else class="twoButton">
+                      <el-button type="text" @click="updateZipCode">完成</el-button>
+                      <el-button type="text" @click="cancelZipCode">取消</el-button>
                     </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 0px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得区骨干专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">家庭住址：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span v-if="addressFlag === '否'">{{ address }}</span>
+                    <el-input v-else v-model="addressValue" placeholder="请输入家庭住址"/>
+                  </div>
+                  <div class="button">
+                    <el-button v-if="addressFlag === '否'" type="text" @click="editHomeAddress">修改</el-button>
+                    <div v-else class="twoButton">
+                      <el-button type="text" @click="updateHomeAddress">完成</el-button>
+                      <el-button type="text" @click="cancelHomeAddress">取消</el-button>
+                    </div>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得区骨干称号时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">手机号码：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span v-if="phoneFlag === '否'">{{ phone }}</span>
+                    <el-input v-else v-model="phoneValue" placeholder="请输入手机号码"/>
+                  </div>
+                  <div class="button">
+                    <el-button v-if="phoneFlag === '否'" type="text" @click="editPhone">修改</el-button>
+                    <div v-else class="twoButton">
+                      <el-button type="text" @click="updatePhone">完成</el-button>
+                      <el-button type="text" @click="cancelPhone">取消</el-button>
+                    </div>
                   </div>
                 </div>
               </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得校学科专业发展称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">Email：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span v-if="emailFlag === '否'">{{ myEmail }}</span>
+                    <el-input v-else v-model="emailValue" placeholder="请输入email地址"/>
                   </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得校学科称号时间:</span>
+                  <div class="button">
+                    <el-button v-if="emailFlag === '否'" type="text" @click="editEmail">修改</el-button>
+                    <div v-else class="twoButton">
+                      <el-button type="text" @click="updateEmail">完成</el-button>
+                      <el-button type="text" @click="cancelEmail">取消</el-button>
                     </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得全国先进荣誉称号:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得全国先进荣誉称号时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得市级先进荣誉称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">任教学科：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ t_subject }}</span>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得市级先进荣誉称号时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">部门：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ tDept }}</span>
                   </div>
                 </div>
               </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得区级先进荣誉:</span>
-                    </div>
+                    <span style="font-weight: bolder">参加工作时间：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得区级先进荣誉称号时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ job_time }}</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否获得区级教委荣誉称号:</span>
-                    </div>
+                    <span style="font-weight: bolder">工作状态：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ status }}</span>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">获得教委先进荣誉称号时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">教师资格证书：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ quali_cert }}</span>
+                  </div>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="single">
+                  <div class="biaoqian">
+                    <span style="font-weight: bolder">教师资格证书编号：</span>
+                  </div>
+                  <div class="content">
+                    <span>{{ quali_cert_num }}</span>
                   </div>
                 </div>
               </el-col>
             </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
+            <el-row :gutter="20" style="padding-top: 10px">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">职称:</span>
-                    </div>
+                    <span style="font-weight: bolder">岗位分类：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>{{ staffCategory }}</span>
                   </div>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
+              <el-col :span="8">
+                <div class="single">
                   <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">职称评定时间:</span>
-                    </div>
+                    <span style="font-weight: bolder">聘用合同起始时间：</span>
                   </div>
                   <div class="content">
-                    <span style="font-size: 15px">否</span>
+                    <span>无</span>
+                  </div>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="single">
+                  <div class="biaoqian">
+                    <span style="font-weight: bolder">聘用合同终止时间：</span>
+                  </div>
+                  <div class="content">
+                    <span>无</span>
                   </div>
                 </div>
               </el-col>
@@ -882,486 +308,661 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row :gutter="20" style="padding-top: 30px">
-      <el-col :span="18">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span style="font-weight: bolder;color:#409EFF ">工作经历</span>
-            <el-button style="float: right; padding: 3px 0" type="text">导出</el-button>
-          </div>
-          <div class="card-container">
-            <el-row>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否参加过基层服务项目:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">是</span>
-                  </div>
+    <el-row style="padding-top: 10px">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span style="font-weight: bolder;color:#409EFF ">专业能力</span>
+        </div>
+        <div class="card-container">
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否专任教师：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">参加基层服务项目起始时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-07-10</span>
-                  </div>
+                <div class="content">
+                  <!--                  <span>{{ professionalAbility[0].is_full_time_teacher }}</span>-->
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">参加基层服务项目结束时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否班主任：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">一般校工作经历的工作学校:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].is_head_teacher }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">一般校工作经历的任教学科:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">职称：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">一般校工作经历总课时</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].zhicheng }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过班主任:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">职称评定时间：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任班主任起始时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].zhichengTime }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任班主任结束时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">岗位级别：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过年级组长</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].position_level }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任年级组长起始时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否特级教师：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任年级组长结束时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].super_teacher }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过教研组长:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否县级以上骨干教师：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任教研组长起始时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].important_teacher }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任教研组长结束时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否心里健康教育老师：</span>
                 </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过行政干部</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
+                <div class="content">
+                  <span>{{ professionalAbility[0].mentalhealth_teacher }}</span>
                 </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任行政干部起始时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过学科组长</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任学科组长起始时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任任现职以来担任学科组长结束时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过备课组长:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任备课组长起始时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任备课组长结束时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任社团辅导员起始时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来担任社团辅导员结束时间</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2008-09-01</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">任现职以来是否担任过社团辅导员</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">无</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span style="font-weight: bolder;color:#409EFF ">学习经历</span>
-            <el-button style="float: right; padding: 3px 0" type="text">导出</el-button>
-          </div>
-          <div class="card-container">
-            <el-row>
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">毕业院校:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">中国科学院大学</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">毕业专业:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">计算机科学与技术</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">毕业时间:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">2009-07-20</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否全日制师范专业毕业:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否全日制学前教育专业毕业:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px">否</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否接受过学前教育专业培养培训:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <span style="font-size: 15px;text-align: right">否</span>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row class="row-container">
-              <el-col :span="24">
-                <div style="display: inline-block">
-                  <div class="biaoqian">
-                    <div>
-                      <span style="font-size: 15px;font-weight: bolder;">是否属于免费（公费）师范生:</span>
-                    </div>
-                  </div>
-                  <div class="content">
-                    <div>
-                      <span style="font-size: 15px;text-align: right">否</span>
-                    </div>
-                  </div>
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-        </el-card>
-      </el-col>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </el-card>
     </el-row>
+    <el-row style="padding-top: 10px">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span style="font-weight: bolder;color:#409EFF ">学习经历</span>
+        </div>
+        <div class="card-container">
+          <el-row :gutter="20">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">原毕业院校：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].former_grad_college }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">原学制：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].former_edu }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">原毕业时间：</span>
+                </div>
+                <div class="content">
+                  <span/>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">原专业：</span>
+                </div>
+                <div class="content">
+                  <!--                  <span>{{ learningExprience[0].former_major }}</span>-->
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">最高毕业院校：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].highest_grad_college }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">最高学历：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].higeducation }}</span>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">最高学制：</span>
+                </div>
+                <div class="content">
+                  <span>无</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">最高专业：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].highest_major }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">最高学位：</span>
+                </div>
+                <div class="content">
+                  <span>无</span>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">原学历：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].high_degree }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">最高毕业时间：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].highest_grad_time }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否全日制师范专业毕业：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].fulltime_teacher }}</span>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否全日制学前教育专业毕业：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].fulltime_preschool }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否接受过学前教育专业培养培训：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].preschool_train }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">是否属于免费（公费）师范生：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].is_free }}</span>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </el-card>
+    </el-row>
+    <el-row style="padding-top:10px">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span style="font-weight: bolder;color:#409EFF ">工作经历</span>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="openDialog">增加</el-button>
+        </div>
+        <div class="card-container">
+          <div v-for=" (item, i) in workExperience" :key="item" class="itemContainer">
+            <el-row :gutter="40" style="padding-top: 10px">
+              <el-col :span="2">
+                <span style="font-weight: bolder">{{ i+1 }}.</span>
+              </el-col>
+              <el-col :span="5">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">工作单位：</span>
+                </div>
+                <div class="content">
+                  <span>{{ item.danwei }}</span>
+                </div>
+              </el-col>
+              <el-col :span="5">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">担任职务：</span>
+                </div>
+                <div class="content">
+                  <span>{{ item.zhiwu }}</span>
+                </div>
+              </el-col>
+              <el-col :span="5">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">开始时间：</span>
+                </div>
+                <div class="content">
+                  <span>{{ item.begindate }}</span>
+                </div>
+              </el-col>
+              <el-col :span="5">
+                <div class="biaoqian">
+                  <span style="font-weight: bolder">结束时间：</span>
+                </div>
+                <div class="content">
+                  <span>{{ item.overdate }}</span>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+      </el-card>
+    </el-row>
+    <div>
+      <el-dialog :visible.sync="dialogVisible" title="增加工作经历">
+        <el-form ref="form" :model="form" label-width="100px">
+          <el-form-item label="工作单位">
+            <el-input v-model="form.danwei"/>
+          </el-form-item>
+          <el-form-item label="担任职务">
+            <el-input v-model="form.zhiwu"/>
+          </el-form-item>
+          <el-form-item label="开始时间">
+            <el-col :span="11">
+              <el-date-picker v-model="form.begindate" type="date" placeholder="选择日期" style="width: 60%;"/>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="结束时间">
+            <el-col :span="11">
+              <el-date-picker v-model="form.overdate" type="date" placeholder="选择日期" style="width: 60%;"/>
+            </el-col>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="updateWorkExperience">确 定</el-button>
+        </div>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { getTeacherInformationData, updateTeacherInformationData } from '@/api/teacherInformation'
 export default {
-  name: 'TeacherInformation'
+  name: 'TeacherInformation',
+  data() {
+    return {
+      workExperience: [{
+        danwei: '某某附中',
+        zhiwu: '英语老师',
+        begindate: '2015-05-05',
+        overdate: '2010-11-5'
+      },
+      {
+        danwei: '某某二中',
+        zhiwu: '英语教研组组长',
+        begindate: '2016-05-05',
+        overdate: '2019-11-5'
+      }],
+      dialogVisible: false,
+      homeTeleFlag: '否',
+      homeTeleVale: '',
+      homeTele: '',
+      addressFlag: '否',
+      addressValue: '',
+      address: '',
+      zipCodeFlag: '否',
+      zipCodeValue: '',
+      zipCode: '',
+      emailFlag: '否',
+      emailValue: '',
+      myEmail: '',
+      phoneFlag: '否',
+      phoneValue: '',
+      phone: '',
+      token: getToken(),
+      basicInformation: [],
+      learningExprience: [],
+      workingExprience: [],
+      professionalAbility: [],
+      form: {
+        zhiwu: '',
+        begindate: '',
+        overdate: '',
+        danwei: ''
+      },
+      // 基本信息的展示内容
+      country: '',
+      username: '',
+      gender: '',
+      born_time: '',
+      nation: '',
+      native_place: '',
+      political_status: '',
+      political_time: '',
+      id_num: '',
+      t_subject: '',
+      tDept: '',
+      job_time: '',
+      status: '',
+      quali_cert: '',
+      quali_cert_num: '',
+      staffCategory: ''
+    }
+  },
+  mounted() {
+    this.getAllInformation()
+  },
+  methods: {
+    updateWorkExperience: function() {
+      const arr = {
+        danwei: this.form.danwei,
+        zhiwu: this.form.zhiwu,
+        begindate: this.form.begindate,
+        overdate: this.form.overdate
+      }
+      this.workExperience.push(arr)
+      this.$message({
+        message: '添加成功',
+        type: 'success'
+      })
+      this.dialogVisible = false
+    },
+    openDialog: function() {
+      console.log('我点了')
+      this.dialogVisible = true
+    },
+    getAllInformation: function() {
+      const informationType = ['基础信息', '学习经历', '工作经历', '专业能力']
+      const prams = {
+        infotype: informationType[0]
+      }
+      getTeacherInformationData({ ...prams, token: this.token }).then(response => {
+        this.basicInformation = response.data.basic_info
+        console.log('输出基础信息')
+        console.log(this.basicInformation)
+        this.homeTele = this.basicInformation[0].home_phone
+        this.address = this.basicInformation[0].home_address
+        this.zipCode = this.basicInformation[0].home_zipcode
+        this.myEmail = this.basicInformation[0].email
+        this.phone = this.basicInformation[0].mobile
+        this.username = this.basicInformation[0].username
+        this.gender = this.basicInformation[0].gender
+        this.born_time = this.basicInformation[0].born_time
+        this.nation = this.basicInformation[0].nation
+        this.native_place = this.basicInformation[0].native_place
+        this.political_status = this.basicInformation[0].political_status
+        this.political_time = this.basicInformation[0].political_time
+        this.id_num = this.basicInformation[0].id_num
+        this.t_subject = this.basicInformation[0].t_subject
+        this.tDept = this.basicInformation[0].tDept
+        this.job_time = this.basicInformation[0].job_time
+        this.status = this.basicInformation[0].status
+        this.quali_cert = this.basicInformation[0].quali_cert
+        this.quali_cert_num = this.basicInformation[0].quali_cert_num
+        this.staffCategory = this.basicInformation[0].staffCategory
+        this.country = this.basicInformation[0].country
+      })
+      const pramsa = {
+        infotype: informationType[1]
+      }
+      getTeacherInformationData({ ...pramsa, token: this.token }).then(response => {
+        this.learningExprience = response.data.learn_experience
+        console.log('输出学习经历')
+        console.log(this.learningExprience)
+      })
+      const pramsb = {
+        infotype: informationType[2]
+      }
+      getTeacherInformationData({ ...pramsb, token: this.token }).then(response => {
+        this.basicInformation = response.data.work_experience
+        console.log('输出工作经历')
+        console.log(this.basicInformation)
+      })
+      const pramsc = {
+        infotype: informationType[3]
+      }
+      getTeacherInformationData({ ...pramsc, token: this.token }).then(response => {
+        this.professionalAbility = response.data.professional
+        console.log('输出专业能力')
+        console.log(this.professionalAbility)
+        console.log(this.professionalAbility[0].zhicheng)
+      })
+    },
+    editHomeTelephone: function() {
+      this.homeTeleFlag = '是'
+    },
+    cancelHomeTelephone: function() {
+      this.homeTeleFlag = '否'
+    },
+    updateHomeTelephone: function() {
+      if (this.homeTeleVale === '') {
+        this.$message({
+          message: '您未填写内容,无法修改',
+          type: 'warning'
+        })
+      } else {
+        const prams = {
+          home_phone: this.homeTeleVale
+        }
+        console.log(prams.home_phone)
+        updateTeacherInformationData({ ...prams, token: this.token }).then(response => {
+          console.log('更新成功')
+        })
+        this.homeTele = this.homeTeleVale
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+        this.homeTeleFlag = '否'
+      }
+    },
+    editHomeAddress: function() {
+      this.addressFlag = '是'
+    },
+    cancelHomeAddress: function() {
+      this.addressFlag = '否'
+    },
+    updateHomeAddress: function() {
+      if (this.addressFlag === '') {
+        this.$message({
+          message: '您未填写内容,无法修改',
+          type: 'warning'
+        })
+      } else {
+        const prams = {
+          home_address: this.addressValue
+        }
+        console.log(prams.home_address)
+        updateTeacherInformationData({ ...prams, token: this.token }).then(response => {
+          console.log('更新成功')
+        })
+        this.address = this.addressValue
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+        this.addressFlag = '否'
+      }
+    },
+    editZipCode: function() {
+      this.zipCodeFlag = '是'
+    },
+    cancelZipCode: function() {
+      this.zipCodeFlag = '否'
+    },
+    updateZipCode: function() {
+      if (this.zipCodeValue === '') {
+        this.$message({
+          message: '您未填写内容,无法修改',
+          type: 'warning'
+        })
+      } else {
+        const prams = {
+          home_zip_code: this.zipCodeValue
+        }
+        console.log(prams.home_zip_code)
+        updateTeacherInformationData({ ...prams, token: this.token }).then(response => {
+          console.log('更新成功')
+        })
+        this.zipCode = this.zipCodeValue
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+        this.zipCodeFlag = '否'
+      }
+    },
+    editEmail: function() {
+      this.emailFlag = '是'
+    },
+    cancelEmail: function() {
+      this.emailFlag = '否'
+    },
+    updateEmail: function() {
+      if (this.emailValue === '') {
+        this.$message({
+          message: '您未填写内容,无法修改',
+          type: 'warning'
+        })
+      } else {
+        const prams = {
+          Email: this.emailValue
+        }
+        console.log(prams.Email)
+        updateTeacherInformationData({ ...prams, token: this.token }).then(response => {
+          console.log('更新成功')
+        })
+        this.myEmail = this.emailValue
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+        this.emailFlag = '否'
+      }
+    },
+    editPhone: function() {
+      this.phoneFlag = '是'
+    },
+    cancelPhone: function() {
+      this.phoneFlag = '否'
+    },
+    updatePhone: function() {
+      if (this.phoneValue === '') {
+        this.$message({
+          message: '您未填写内容,无法修改',
+          type: 'warning'
+        })
+      } else {
+        const prams = {
+          Phone: this.phoneValue
+        }
+        console.log(prams.Phone)
+        updateTeacherInformationData({ ...prams, token: this.token }).then(response => {
+          console.log('更新成功')
+        })
+        this.phone = this.phoneValue
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+        this.phoneFlag = '否'
+      }
+    },
+    changeAll: function() {
+      this.homeTeleFlag = '否'
+    }
+  }
 }
 </script>
 
 <style scoped>
+  .single{
+    display: inline-block;
+  }
   .biaoqian{
     display: inline-block;
   }
   .content{
     display: inline-block;
-    margin-left: 30px;
-    text-align: right;
   }
   .row-container{
     padding-top: 10px;
+  }
+  .button{
+    display: inline-block;
+    margin-left: 80px;
+  }
+  .card-container{
+    margin-top: 10px;
+  }
+  .twoButton{
+    display: inline-block;
   }
 
 </style>

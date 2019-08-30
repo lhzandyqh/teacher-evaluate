@@ -89,7 +89,7 @@ const user = {
           }
 
           console.log('getUserInfo')
-          commit('SET_AVATAR', 'http://58.119.112.11:11001/img/avatar.jpg')
+          commit('SET_AVATAR', 'http://58.119.112.11:11005/b9be8be2-ad8c-4eed-ac9d-e83711334efe.jpg')
           // if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
           // commit('SET_ROLES', data.roles)
           // } else {
