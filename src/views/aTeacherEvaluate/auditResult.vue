@@ -4,90 +4,88 @@
       <div style="display: flex;align-items: center;margin: 15px 0;">
         <div style="font-size: 14px;margin-right: 15px;font-weight: bolder">请选择审核类别:</div>
         <div>
-          <el-select v-model="value" placeholder="请选择审核类别">
-            <el-option
-              v-for="item in option"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"/>
+          <el-select v-model="type_select_value" placeholder="请选择审核类别">
+            <el-option label="学术成果" value="xueshu"/>
+            <el-option label="项目课题" value="yanjiuke"/>
+            <el-option label="学术讲座与经验分享" value="jinyan"/>
+            <el-option label="教育教学评比竞赛" value="jingsai"/>
+            <el-option label="研究课" value="yanjiu"/>
+            <el-option label="教育教学成果获奖" value="jiaoyu"/>
+            <el-option label="教师指导学生参加学科比赛获奖情况" value="xueke"/>
+            <el-option label="艺科体社团积分" value="yike"/>
+            <el-option label="行政获奖积分" value="xinzheng"/>
+            <el-option label="校本培训积分" value="xiaoben"/>
           </el-select>
-        </div>
-        <div>
-          <el-button type="primary" style="margin-left:15px">查询</el-button>
         </div>
       </div>
     </el-row>
     <el-divider/>
-    <el-row>
-      <el-table
-        :data="tableData"
-        border
-        style="width: 100%">
-        <el-table-column
-          prop="type"
-          label="审核类别"
-          align="center"
-          width="250"/>
-        <el-table-column
-          prop="name"
-          label= "审核名称"
-          align="center"
-          width="200"/>
-        <el-table-column
-          prop="people"
-          label="审核人"
-          align="center"
-          width="200"/>
-        <el-table-column
-          prop="upload_time"
-          label="提交时间"
-          align="center"
-          width="200"/>
-        <el-table-column
-          prop="audit_time"
-          label="审核时间"
-          align="center"
-          width="200"/>
-        <el-table-column
-          prop="audit_result"
-          label="审核结果"
-          align="center"/>
-      </el-table>
+    <el-row v-if="type_select_value === 'jingsai'">
+      <apprasial-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xueshu'">
+      <academic-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'yanjiu'">
+      <research-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'jinyan'">
+      <experience-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'jiaoyu'">
+      <education-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'yanjiuke'">
+      <project-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xiaoben'">
+      <school-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xinzheng'">
+      <administrative-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'yike'">
+      <art-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'xueke'">
+      <student-outcome-table/>
     </el-row>
   </div>
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import academicOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/academicOutcomeTable'
+import administrativeOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/administrativeOutcomeTable'
+import apprasialOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/apprasialOutcomeTable'
+import artOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/artOutcomeTable'
+import educationOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/educationOutcomeTable'
+import experienceOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/experienceOutcomeTable'
+import ProjectOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/ProjectOutcomeTable'
+import researchOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/researchOutcomeTable'
+import schoolOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/schoolOutcomeTable'
+import studentOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/studentOutcomeTable'
+
 export default {
   name: 'AuditResult',
+  components: { academicOutcomeTable, administrativeOutcomeTable, apprasialOutcomeTable,
+    artOutcomeTable, educationOutcomeTable, experienceOutcomeTable, ProjectOutcomeTable, researchOutcomeTable,
+    schoolOutcomeTable, studentOutcomeTable },
   data() {
     return {
-      mylabel: '1111',
+      type_select_value: '',
       value: '',
-      tableData: [{
-        type: '艺科体社团',
-        name: '校园文化节获奖',
-        people: '王老师',
-        upload_time: '2017-05-02',
-        audit_time: '2017-06-02',
-        audit_result: '通过'
-      }, {
-        type: '学术成果',
-        name: '教育期刊发表文章',
-        people: '王老师',
-        upload_time: '2018-11-02',
-        audit_time: '2018-12-01',
-        audit_result: '不通过'
-      }],
+      token: getToken(),
+      tableData: [],
       option: [{ label: '学术成果', value: 'xueshu' },
-        { label: '研究课题', value: 'yanjiuke' },
-        { label: '学术讲座与经验分享', value: 'xueshu' },
-        { label: '教育教学评比竞赛', value: 'jiaoyu' },
+        { label: '项目课题', value: 'yanjiuke' },
+        { label: '学术讲座与经验分享', value: 'jinyan' },
+        { label: '教育教学评比竞赛', value: 'jingsai' },
         { label: '研究课', value: 'yanjiu' },
-        { label: '教育教学成果获奖', value: 'chengguo' },
-        { label: '教师指导学生参加学科比赛情况获奖', value: 'huojiang' },
+        { label: '教育教学成果获奖', value: 'jiaoyu' },
+        { label: '教师指导学生参加学科比赛情况获奖', value: 'xueke' },
         { label: '艺科体社团', value: 'yike' },
-        { label: '行政获奖', value: 'xingzheng' },
+        { label: '行政获奖', value: 'xinzheng' },
         { label: '校本培训', value: 'xiaoben' }]
     }
   }

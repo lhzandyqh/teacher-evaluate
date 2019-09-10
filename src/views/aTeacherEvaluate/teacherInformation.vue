@@ -54,16 +54,6 @@
               <el-col :span="8">
                 <div class="single">
                   <div class="biaoqian">
-                    <span style="font-weight: bolder">国籍/地区：</span>
-                  </div>
-                  <div class="content">
-                    <span>{{ country }}</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="single">
-                  <div class="biaoqian">
                     <span style="font-weight: bolder">民族：</span>
                   </div>
                   <div class="content">
@@ -382,20 +372,10 @@
             <el-col :span="8">
               <div class="single">
                 <div class="biaoqian">
-                  <span style="font-weight: bolder">是否县级以上骨干教师：</span>
+                  <span style="font-weight: bolder">是否区级以上骨干教师：</span>
                 </div>
                 <div class="content">
                   <span>{{ professionalAbility[0].important_teacher }}</span>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">是否心里健康教育老师：</span>
-                </div>
-                <div class="content">
-                  <span>{{ professionalAbility[0].mentalhealth_teacher }}</span>
                 </div>
               </div>
             </el-col>
@@ -523,48 +503,6 @@
                 </div>
                 <div class="content">
                   <span>{{ learningExprience[0].highest_grad_time }}</span>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">是否全日制师范专业毕业：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].fulltime_teacher }}</span>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="padding-top: 10px">
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">是否全日制学前教育专业毕业：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].fulltime_preschool }}</span>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">是否接受过学前教育专业培养培训：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].preschool_train }}</span>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">是否属于免费（公费）师范生：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].is_free }}</span>
                 </div>
               </div>
             </el-col>

@@ -12,16 +12,16 @@
           <el-col :span="6">
             <div class="select">
               <el-select v-model="type_select_value" placeholder="请选择您的积分项目类型" @change="changeZiZhi">
-                <el-option label="学术成果积分配置" value="xueshu"/>
-                <el-option label="项目课题积分配置" value="yanjiuke"/>
-                <el-option label="学术讲座与经验分享积分配置" value="jinyan"/>
-                <el-option label="教育教学评比竞赛积分配置" value="jingsai"/>
-                <el-option label="研究课积分配置" value="yanjiu"/>
-                <el-option label="教育教学成果获奖积分配置" value="jiaoyu"/>
-                <el-option label="教师指导学生参加学科比赛获奖情况积分配置" value="xueke"/>
-                <el-option label="艺科体社团积分配置" value="yike"/>
-                <el-option label="行政获奖积分配置" value="xinzheng"/>
-                <el-option label="校本培训积分配置" value="xiaoben"/>
+                <el-option label="学术成果" value="xueshu"/>
+                <el-option label="项目课题" value="yanjiuke"/>
+                <el-option label="学术讲座与经验分享" value="jinyan"/>
+                <el-option label="教育教学评比竞赛" value="jingsai"/>
+                <el-option label="研究课" value="yanjiu"/>
+                <el-option label="教育教学成果获奖" value="jiaoyu"/>
+                <el-option label="教师指导学生参加学科比赛获奖情况" value="xueke"/>
+                <el-option label="艺科体社团" value="yike"/>
+                <el-option label="行政获奖" value="xinzheng"/>
+                <el-option label="校本培训" value="xiaoben"/>
               </el-select>
             </div>
           </el-col>
@@ -59,81 +59,81 @@
     <el-row v-if="type_select_value === 'xueke'">
       <student-auditing-table/>
     </el-row>
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+    <!--    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">-->
 
-      <el-table-column align="center" label="积分编号" width="80">
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column align="center" label="积分编号" width="80">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.id }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="80" align="center" label="资质名称">
-        <template slot-scope="scope">
-          <span>{{ scope.row.tQualificationName }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="80" align="center" label="资质名称">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.tQualificationName }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="150" align="center" label="资质类型">
-        <template slot-scope="scope">
-          <span>{{ scope.row.certType }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="150" align="center" label="资质类型">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.certType }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="150" align="center" label="隶属级别">
-        <template slot-scope="scope">
-          <span>{{ scope.row.deptLevel }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="150" align="center" label="隶属级别">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.deptLevel }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="150" align="center" label="资质等级">
-        <template slot-scope="scope">
-          <span>{{ scope.row.certLevel }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="150" align="center" label="资质等级">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.certLevel }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="60" align="center" label="积分">
-        <template slot-scope="scope">
-          <span>{{ scope.row.point }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="60" align="center" label="积分">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.point }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="180" align="center" label="申请时间">
-        <template slot-scope="scope">
-          <span>{{ scope.row.certIssuedTime }}</span>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="180" align="center" label="申请时间">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.certIssuedTime }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <el-table-column width="180" align="center" label="审核状态">
-        <template slot-scope="scope">
-          <el-button v-if="scope.row.status==='-1'" type="primary" size="small" plain>审核待通过</el-button>
-          <el-button v-if="scope.row.status==='1'" type="success" size="small" plain>审核通过</el-button>
-          <el-button v-if="scope.row.status==='0'" type="danger" size="small" plain>审核未通过</el-button>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column width="180" align="center" label="审核状态">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <el-button v-if="scope.row.status==='-1'" type="primary" size="small" plain>审核待通过</el-button>-->
+    <!--          <el-button v-if="scope.row.status==='1'" type="success" size="small" plain>审核通过</el-button>-->
+    <!--          <el-button v-if="scope.row.status==='0'" type="danger" size="small" plain>审核未通过</el-button>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-      <!--<el-table-column class-name="status-col" label="审核状态" width="110">-->
-      <!--<template slot-scope="scope">-->
-      <!--<el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+    <!--      &lt;!&ndash;<el-table-column class-name="status-col" label="审核状态" width="110">&ndash;&gt;-->
+    <!--      &lt;!&ndash;<template slot-scope="scope">&ndash;&gt;-->
+    <!--      &lt;!&ndash;<el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>&ndash;&gt;-->
+    <!--      &lt;!&ndash;</template>&ndash;&gt;-->
+    <!--      &lt;!&ndash;</el-table-column>&ndash;&gt;-->
 
-      <!--<el-table-column min-width="300px" label="Title">-->
-      <!--<template slot-scope="scope">-->
-      <!--<template v-if="scope.row.edit">-->
-      <!--<el-input v-model="scope.row.title" class="edit-input" size="small"/>-->
-      <!--<el-button class="cancel-btn" size="small" icon="el-icon-refresh" type="warning" @click="cancelEdit(scope.row)">cancel</el-button>-->
-      <!--</template>-->
-      <!--<span v-else>{{ scope.row.title }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+    <!--      &lt;!&ndash;<el-table-column min-width="300px" label="Title">&ndash;&gt;-->
+    <!--      &lt;!&ndash;<template slot-scope="scope">&ndash;&gt;-->
+    <!--      &lt;!&ndash;<template v-if="scope.row.edit">&ndash;&gt;-->
+    <!--      &lt;!&ndash;<el-input v-model="scope.row.title" class="edit-input" size="small"/>&ndash;&gt;-->
+    <!--      &lt;!&ndash;<el-button class="cancel-btn" size="small" icon="el-icon-refresh" type="warning" @click="cancelEdit(scope.row)">cancel</el-button>&ndash;&gt;-->
+    <!--      &lt;!&ndash;</template>&ndash;&gt;-->
+    <!--      &lt;!&ndash;<span v-else>{{ scope.row.title }}</span>&ndash;&gt;-->
+    <!--      &lt;!&ndash;</template>&ndash;&gt;-->
+    <!--      &lt;!&ndash;</el-table-column>&ndash;&gt;-->
 
-      <el-table-column align="center" label="操作" width="220">
-        <template slot-scope="scope">
-          <el-button type="primary" size="small" icon="el-icon-zoom-in" @click="getAuditing(scope.row.id)">查看</el-button>
-        </template>
-      </el-table-column>
+    <!--      <el-table-column align="center" label="操作" width="220">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <el-button type="primary" size="small" icon="el-icon-zoom-in" @click="getAuditing(scope.row.id)">查看</el-button>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
 
-    </el-table>
+    <!--    </el-table>-->
 
     <!--查看弹框-->
     <el-dialog :visible.sync="dialogPvVisible" title="审核详情">
@@ -202,7 +202,7 @@ export default {
   },
   data() {
     return {
-      type_select_value: '',
+      type_select_value: 'xueshu',
       list: null,
       listLoading: true,
       listQuery: {

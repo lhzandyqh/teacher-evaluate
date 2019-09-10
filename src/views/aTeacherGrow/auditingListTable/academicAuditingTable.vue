@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+    <el-table v-loading="listLoading" :data="tableData" border fit highlight-current-row style="width: 100%">
 
       <el-table-column align="center" label="积分编号" width="80">
         <template slot-scope="scope">
@@ -10,13 +10,13 @@
 
       <el-table-column width="300" align="center" label="文章题目（专著名称）">
         <template slot-scope="scope">
-          <span>{{ scope.row.tQualificationName }}</span>
+          <span>{{ scope.row.academic_name }}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="150" align="center" label="申请人">
         <template slot-scope="scope">
-          <span>{{ scope.row.certType }}</span>
+          <span>{{ scope.row.personnel_name }}</span>
         </template>
       </el-table-column>
 
@@ -34,9 +34,9 @@
 
       <el-table-column width="180" align="center" label="审核状态">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.status==='-1'" type="primary" size="small" plain>审核待通过</el-button>
-          <el-button v-if="scope.row.status==='1'" type="success" size="small" plain>审核通过</el-button>
-          <el-button v-if="scope.row.status==='0'" type="danger" size="small" plain>审核未通过</el-button>
+          <el-button v-if="scope.row.audit_status==='待审核'" type="primary" size="small" plain>审核待通过</el-button>
+          <el-button v-if="scope.row.audit_status==='1'" type="success" size="small" plain>审核通过</el-button>
+          <el-button v-if="scope.row.audit_status==='0'" type="danger" size="small" plain>审核未通过</el-button>
         </template>
       </el-table-column>
 
@@ -52,28 +52,44 @@
     <el-dialog :visible.sync="dialogPvVisible" title="审核详情">
       审核详情
       <el-table :data="pvData" fit highlight-current-row style="width: 100%">
-        <el-table-column prop="tQualificationName" label="资质名称"/>
-        <el-table-column prop="certLevel" label="资质等级"/>
-        <el-table-column prop="certType" label="资质类型"/>
-        <el-table-column prop="deptLevel" label="隶属级别"/>
+        <el-table-column prop="type_of_carriers" label="学术成果载体类型"/>
+        <el-table-column prop="academic_name" label="文章题目（专著名称）"/>
+        <el-table-column prop="publication_time" label="发表时间（出版时间）"/>
+        <el-table-column prop="is_first_author" label="是否第一作者"/>
         <!--<el-table-column prop="certType" label="证书颁发日期"/>-->
-        <el-table-column prop="issuingAgency" label="颁发机构"/>
-        <el-table-column prop="tQualificationNum" label="证书编号"/>
+        <el-table-column prop="name_of_publications" label="刊物名称（出版社）"/>
+        <el-table-column prop="number_of_academic" label="刊号（书号）"/>
+        <el-table-column prop="level_of_publisher" label="刊物等级（出版社等级）"/>
+        <el-table-column prop="submit_time" label="提交审核时间"/>
         <el-table-column label="审核状态" align="center">
           <template slot-scope="scope">
-            <div v-if="scope.row.status==='-1'">审核待通过</div>
+            <div v-if="scope.row.audit_status==='待审核'">审核待通过</div>
             <div v-if="scope.row.status==='1'">审核通过</div>
             <div v-if="scope.row.status==='0'">审核未通过</div>
           </template>
         </el-table-column>
       </el-table>
-      <el-table :data="formAuditing" fit highlight-current-row style="width: 100%;margin-top: 40px;">
-        <el-table-column align="center" label="审核原因">
-          <template slot-scope="scope">
-            <textarea id="" v-model="scope.row.auditingReson" name="" style="width: 100%;" rows="10"/>
-          </template>
-        </el-table-column>
-      </el-table>
+      <!--      <el-table fit highlight-current-row style="width: 100%;margin-top: 40px;">-->
+      <!--        <el-table-column align="center" label="审核原因">-->
+      <!--          <el-input-->
+      <!--            :rows="2"-->
+      <!--            v-model="textarea"-->
+      <!--            type="textarea"-->
+      <!--            placeholder="请输入内容"/>-->
+      <!--        </el-table-column>-->
+      <!--      </el-table>-->
+      <div>
+        <el-row style="padding-top: 10px">
+          <span>审核原因</span>
+        </el-row>
+        <el-row style="padding-top: 10px">
+          <el-input
+            :rows="4"
+            v-model="myStatus.remark"
+            type="textarea"
+            placeholder="请输入内容"/>
+        </el-row>
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="success" @click="editAuditing(1)">审核通过</el-button>
         <el-button type="danger" @click="editAuditing(0)">审核不通过</el-button>
@@ -84,8 +100,91 @@
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { getAuditingListData, getAcademicAchieveAuditingListDetail, auditingAcademicAchievements } from '@/api/getAuditingData'
 export default {
-  name: 'AcademicAuditingTable'
+  name: 'AcademicAuditingTable',
+  data() {
+    return {
+      token: getToken(),
+      tableData: [],
+      dialogPvVisible: false,
+      pvData: [],
+      myStatus: {
+        id: '',
+        status: '',
+        remark: ''
+      }
+    }
+  },
+  mounted() {
+    this.getListData()
+  },
+  methods: {
+    getListData: function() {
+      const prams = {
+        project_name: '学术成果'
+      }
+      getAuditingListData({ ...prams, token: this.token }).then(response => {
+        this.tableData = response.data.acadeAchieveAuditList
+        console.log(this.tableData)
+      })
+    },
+    getAuditing(id) {
+      this.myStatus.id = id
+
+      this.dialogPvVisible = true
+      const prams = {
+        id: id
+      }
+      getAcademicAchieveAuditingListDetail({ ...prams, token: this.token }).then(response => {
+        this.pvData = response.data.academicAchieve
+        console.log('输出PV数据')
+        console.log(this.pvData)
+      })
+
+      // this.thisId = id
+      // const that = this
+      // getAuditing({ token: this.token, id: id }).then(response => {
+      //   console.log(response.data)
+      //   this.dialogPvVisible = true
+      //   that.pvData = [response.data]
+      // })
+    },
+    editAuditing: function(num) {
+      if (num === '0') {
+        this.myStatus.status = '审核不通过'
+      } else {
+        this.myStatus.status = '审核通过'
+      }
+      const prams = {
+        qualification_id: this.myStatus.id,
+        status: this.myStatus.status,
+        remark: this.myStatus.remark
+      }
+      auditingAcademicAchievements({ ...prams, token: this.token }).then(response => {
+        this.$message({
+          message: '审核完成',
+          type: 'success'
+        })
+        const prams = {
+          project_name: '学术成果'
+        }
+        getAuditingListData({ ...prams, token: this.token }).then(response => {
+          this.tableData = response.data.acadeAchieveAuditList
+          console.log(this.tableData)
+        })
+        // const prams = {
+        //   project_name: '学术成果'
+        // }
+        // getAuditingListData({ ...prams, token: this.token }).then(response => {
+        //   this.tableData = response.data.acadeAchieveAuditList
+        //   console.log('刷新数据')
+        // })
+      })
+      this.dialogPvVisible = false
+    }
+  }
 }
 </script>
 
