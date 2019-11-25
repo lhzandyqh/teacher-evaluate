@@ -54,11 +54,11 @@
           label="总课时数"
           prop="total_hours"
           width="100"/>
-        <el-table-column
-          align="center"
-          label="成绩效果"
-          prop="score_result"
-          width="100"/>
+        <!--        <el-table-column-->
+        <!--          align="center"-->
+        <!--          label="成绩效果"-->
+        <!--          prop="score_result"-->
+        <!--          width="100"/>-->
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button
@@ -98,9 +98,9 @@
         <el-form-item :label-width="formLabelWidth" label="总课时数">
           <el-input v-model="form.totalclass" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="成绩效果">
-          <el-input v-model="form.achievementeffect" autocomplete="off"/>
-        </el-form-item>
+        <!--        <el-form-item :label-width="formLabelWidth" label="成绩效果">-->
+        <!--          <el-input v-model="form.achievementeffect" autocomplete="off"/>-->
+        <!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -130,9 +130,9 @@
         <el-form-item :label-width="formLabelWidth" label="总课时数">
           <el-input v-model="editForm.totalclass" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="成绩效果">
-          <el-input v-model="editForm.achievementeffect" autocomplete="off"/>
-        </el-form-item>
+        <!--        <el-form-item :label-width="formLabelWidth" label="成绩效果">-->
+        <!--          <el-input v-model="editForm.achievementeffect" autocomplete="off"/>-->
+        <!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="updateDialogFormVisible = false">取 消</el-button>

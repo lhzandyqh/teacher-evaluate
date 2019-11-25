@@ -1,7 +1,14 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import router from '../../router'
+import store from '../index'
 
 const user = {
+  loginInfo: {
+    username: '',
+    password: ''
+  },
+
   state: {
     user: '',
     status: '',
@@ -51,6 +58,8 @@ const user = {
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
+          console.log('测试登录返回的data')
+          console.log(data)
           if (data.code === 405) {
             reject(data.msg)
           }
@@ -75,13 +84,14 @@ const user = {
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         // commit('SET_ROLES', ['admin'])
+        // state.token 原getUserInfo参数
         getUserInfo(state.token).then(response => {
           // 由于mockjs 不支持自定义状态码只能这样hack
           if (!response.data) {
             reject('Verification failed, please login again.')
           }
           // const data = response.data
-          const role = window.localStorage.getItem('role')
+          const role = window.localStorage.getItem('userRole')
           if (role) {
             commit('SET_ROLES', [role])
           } else {
@@ -158,18 +168,60 @@ const user = {
 
     // 动态修改权限
     ChangeRoles({ commit, dispatch }, role) {
+      var name = ''
+      if (role === '教师') {
+        name = '教师'
+      } else if (role === '教师组长') {
+        name = '教师组长'
+      } else if (role === '系统管理员') {
+        name = '系统管理员'
+      }
       return new Promise(resolve => {
-        commit('SET_TOKEN', role)
-        setToken(role)
-        getUserInfo(role).then(response => {
+        // commit('SET_TOKEN', role)
+        // setToken(role)
+        console.log('测试不太好拿的token')
+        console.log(user.state.token)
+        getUserInfo(user.state.token).then(response => {
+          console.log('测试修改后getUserInfo请求到的data')
           const data = response.data
-          commit('SET_ROLES', data.roles)
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
-          dispatch('GenerateRoutes', data) // 动态修改权限后 重绘侧边菜单
-          resolve()
+          user.loginInfo.username = response.data.staff_number
+          user.loginInfo.password = response.data.password
+          console.log(data.userRole)
+          console.log('测试切换的权限在权限数组中是否存在')
+          console.log(data.userRole.includes(name))
+          if (data.userRole.includes(name)) {
+            window.localStorage.setItem('userRole', name)
+            // var roles = []
+            // roles.push(data.userRole)
+            commit('SET_ROLES', data.roles)
+            commit('SET_NAME', data.name)
+            commit('SET_AVATAR', data.avatar)
+            commit('SET_INTRODUCTION', data.introduction)
+            // dispatch('GenerateRoutes', data) // 动态修改权限后 重绘侧边菜单
+            store.dispatch('GenerateRoutes', { name }).then(accessRoutes => {
+              // 根据roles权限生成可访问的路由表
+              router.addRoutes(accessRoutes) // 动态添加可访问路由表
+              // next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+            })
+            resolve()
+            history.go(0)
+          }
+          // }
         })
+        // loginByUsername('10001', '123456').then((response) => {
+        //   const data = response.data
+        //   console.log('测试登录返回的data')
+        //   console.log(data)
+        //   // if (data.code === 405) {
+        //   //   reject(data.msg)
+        //   // }
+        //   // 权限角色
+        //   // 1.学生 2.教师 3.审核员 4.系统管理员 5.教师组长
+        //   // window.localStorage.setItem('userRole', name)
+        //   commit('SET_TOKEN', data.result.token)
+        //   setToken(data.result.token)
+        //   history.go(0)
+        // })
       })
     }
   }

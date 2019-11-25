@@ -13,6 +13,7 @@
             <div class="select">
               <el-select v-model="type_select_value" placeholder="请选择您的积分项目类型" @change="changeZiZhi">
                 <el-option label="学术成果" value="xueshu"/>
+                <el-option label="基本工作" value="jiben"/>
                 <el-option label="项目课题" value="yanjiuke"/>
                 <el-option label="学术讲座与经验分享" value="jinyan"/>
                 <el-option label="教育教学评比竞赛" value="jingsai"/>
@@ -31,6 +32,9 @@
     <el-divider/>
     <el-row v-if="type_select_value === 'jingsai'">
       <apprasial-auditing-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'jiben'">
+      <personal-basic-work-auditing-table/>
     </el-row>
     <el-row v-if="type_select_value === 'xueshu'">
       <academic-auditing-table/>
@@ -184,12 +188,13 @@ import studentAuditingTable from '@/views/aTeacherGrow/auditingListTable/student
 import artAuditingTable from '@/views/aTeacherGrow/auditingListTable/artAuditingTable'
 import administrativeAuditingTable from '@/views/aTeacherGrow/auditingListTable/administrativeAuditingTable'
 import schoolAuditingTable from '@/views/aTeacherGrow/auditingListTable/schoolAuditingTable'
+import personalBasicWorkAuditingTable from '@/views/aTeacherGrow/auditingListTable/personalBasicWorkAuditingTable'
 
 export default {
   name: 'InlineEditTable',
   components: { academicAuditingTable, projectAuditingTable, experienceAuditingTable, apprasialAuditingTable,
     researchAuditingTable, educationAuditingTable, studentAuditingTable, artAuditingTable, administrativeAuditingTable,
-    schoolAuditingTable },
+    schoolAuditingTable, personalBasicWorkAuditingTable },
   filters: {
     statusFilter(status) {
       const statusMap = {

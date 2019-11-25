@@ -2,19 +2,9 @@
   <div class="app-container">
     <el-row :gutter="20">
       <div style="display: flex;align-items: center;margin: 15px 0;">
-        <div style="font-size: 14px;margin-right: 15px;font-weight: bolder">请选择年级:</div>
+        <div style="font-size: 14px;margin: 0 15px;font-weight: bolder">请选择年级组:</div>
         <div>
-          <el-select v-model="value" placeholder="请选择年级">
-            <el-option
-              v-for="item in optionsone"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"/>
-          </el-select>
-        </div>
-        <div style="font-size: 14px;margin: 0 15px;font-weight: bolder">请选择教研组:</div>
-        <div>
-          <el-select v-model="valuea" placeholder="请选择教研组">
+          <el-select v-model="valuea" placeholder="请选择年级组">
             <el-option
               v-for="item in optionstwo"
               :key="item.value"
@@ -23,8 +13,12 @@
               :disabled="item.disabled"/>
           </el-select>
         </div>
+        <div style="font-size: 14px;margin-right: 15px;font-weight: bolder;margin-left: 15px">请输入教师姓名:</div>
         <div>
-          <el-button type="primary" style="margin-left:15px">查询</el-button>
+          <el-input v-model="input" placeholder="请输入姓名"/>
+        </div>
+        <div>
+          <el-button type="primary" style="margin-left:15px" @click="findTeacher">查询</el-button>
         </div>
       </div>
     </el-row>
@@ -91,7 +85,7 @@
 </template>
 
 <script>
-import { getAuthorityList, editAuthority } from '@/api/teacherEvaluate'
+import { getAuthorityList, editAuthority, getAllTeachGroup, getAuthorityListWithPrams } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -108,6 +102,7 @@ export default {
   },
   data() {
     return {
+      input: '',
       optionsone: [{
         value: '一',
         label: '高一'
@@ -118,35 +113,7 @@ export default {
         value: '三',
         label: '高三'
       }],
-      optionstwo: [{
-        value: '选项1',
-        label: '语文教研组'
-      }, {
-        value: '选项2',
-        label: '数学教研组'
-      }, {
-        value: '选项3',
-        label: '英语教研组'
-      },
-      {
-        value: '选项4',
-        label: '物理教研组'
-      }, {
-        value: '选项5',
-        label: '化学教研组'
-      }, {
-        value: '选项6',
-        label: '生物教研组'
-      }, {
-        value: '选项7',
-        label: '历史教研组'
-      }, {
-        value: '选项8',
-        label: '政治教研组'
-      }, {
-        value: '选项9',
-        label: '地理教研组'
-      }],
+      optionstwo: [],
       value: '',
       valuea: '',
       list: null,
@@ -162,12 +129,78 @@ export default {
   },
   created() {
     this.getList()
+    this.getTeachGroupList()
   },
   methods: {
+    findTeacher: function() {
+      console.log('我要根据参数找老师了')
+      if (this.valuea === '') {
+        this.$message({
+          message: ' 请选择年级组',
+          type: 'warning'
+        })
+      } else if (this.input === '') {
+        const prams = {
+          // username: this.input,
+          dept: this.valuea
+        }
+        console.log('测试参数')
+        console.log(prams)
+        getAuthorityListWithPrams({ ...prams, token: this.token }).then(response => {
+          console.log('测试根据姓名和年级组获取权限列表data不带名字')
+          console.log(response.data)
+          if (response.data.teacherRoleInfo === '暂无教师角色信息!') {
+            this.$message({
+              message: '暂无教师角色信息',
+              type: 'warning'
+            })
+          } else {
+            this.list = response.data.teacherRoleInfo
+          }
+          this.listLoading = false
+        })
+      } else {
+        const prams = {
+          username: this.input,
+          dept: this.valuea
+        }
+        console.log('测试参数')
+        console.log(prams)
+        getAuthorityListWithPrams({ ...prams, token: this.token }).then(response => {
+          console.log('测试根据姓名和年级组获取权限列表data带名字')
+          console.log(response.data)
+          if (response.data.teacherRoleInfo === '暂无教师角色信息!') {
+            this.$message({
+              message: '暂无教师角色信息',
+              type: 'warning'
+            })
+          } else {
+            this.list = response.data.teacherRoleInfo
+          }
+          this.listLoading = false
+        })
+      }
+    },
+    getTeachGroupList: function() {
+      getAllTeachGroup(this.token).then(response => {
+        console.log('测试返回的教研组')
+        console.log(response.data)
+        // eslint-disable-next-line no-empty
+        for (let i = 0; i < response.data.allDeptName.length; i++) {
+          const obj = {
+            value: response.data.allDeptName[i],
+            label: response.data.allDeptName[i]
+          }
+          this.optionstwo.push(obj)
+        }
+      })
+    },
     getList() {
       this.listLoading = true
       getAuthorityList(this.token).then(response => {
-        this.list = response.data
+        console.log('测试1权限列表data')
+        console.log(response.data)
+        this.list = response.data.teacherRoleInfo
         // this.list = items.map(v => {
         //   this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
         //   v.originalTitle = v.title //  will be used when user click the cancel botton

@@ -166,12 +166,30 @@ export function getAuthorityList(token) {
   })
 }
 
+// 权限列表（带参数）
+export function getAuthorityListWithPrams(parmes) {
+  return request({
+    url: '/api/userrole/getTecRoleInfo',
+    method: 'get',
+    params: parmes
+  })
+}
+
 // 修改权限
 export function editAuthority(parmes) {
   return request({
     url: '/api/userrole/setTeacherRole',
     method: 'post',
     params: parmes
+  })
+}
+
+// 获取所有的教研组名称
+export function getAllTeachGroup(token) {
+  return request({
+    url: '/api/getTecInfoLabel/getAllDeptName',
+    method: 'get',
+    params: { token }
   })
 }
 
@@ -215,4 +233,4 @@ export function updateArticle(data) {
     data
   })
 }
-// 添加我的新的分支
+

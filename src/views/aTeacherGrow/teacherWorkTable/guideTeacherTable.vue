@@ -44,11 +44,11 @@
           label="内容"
           prop="content"
           width="220"/>
-        <el-table-column
-          align="center"
-          label="成绩效果"
-          prop="score_results"
-          width="140"/>
+        <!--        <el-table-column-->
+        <!--          align="center"-->
+        <!--          label="成绩效果"-->
+        <!--          prop="score_results"-->
+        <!--          width="140"/>-->
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button
@@ -82,9 +82,9 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="内容">
           <el-input v-model="form.teachcontent" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
-          <el-input v-model="form.achievementeffect" autocomplete="off"/>
-        </el-form-item>
+        <!--        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">-->
+        <!--          <el-input v-model="form.achievementeffect" autocomplete="off"/>-->
+        <!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -108,9 +108,9 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="内容">
           <el-input v-model="formEdit.teachcontent" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">
-          <el-input v-model="formEdit.achievementeffect" autocomplete="off"/>
-        </el-form-item>
+        <!--        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="成绩效果">-->
+        <!--          <el-input v-model="formEdit.achievementeffect" autocomplete="off"/>-->
+        <!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>

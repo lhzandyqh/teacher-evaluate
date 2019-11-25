@@ -57,6 +57,10 @@ const permission = {
         // if (roles.indexOf('elv') > -1) {
         // eslint-disable-next-line
         accessedRouters = filterAsyncRouter(asyncRouterMap, [role])
+        console.log('输出GenerateRoutes中的role看一看')
+        console.log(role)
+        console.log('输出accessedRouters')
+        console.log(accessedRouters)
         // } else {
         // accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
         // }

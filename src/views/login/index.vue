@@ -1,43 +1,75 @@
 <template>
-  <div class="login-container">
-    <!-- 登录弹框 -->
-    <el-dialog :title="loginTitle" :visible.sync="showDialog" width="30%">
-      <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-        <el-form-item prop="user_name">
-          <span class="svg-container">
-            <svg-icon icon-class="user" />
-          </span>
-          <el-input
-            v-model="loginForm.user_name"
-            placeholder="用户名"
-            name="user_name"
-            type="text"
-            auto-complete="on"
-          />
-        </el-form-item>
-
-        <el-form-item prop="password">
-          <span class="svg-container">
-            <svg-icon icon-class="password" />
-          </span>
-          <el-input
-            :type="passwordType"
-            v-model="loginForm.password"
-            placeholder="密码"
-            name="password"
-            auto-complete="on"
-            @keyup.enter.native="handleLogin" />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon icon-class="eye" />
-          </span>
-        </el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">{{ $t('login.logIn') }}</el-button>
-      </el-form>
+  <div class="container">
+    <!-- 找回密码弹框 -->
+    <el-dialog :visible.sync="dialogFindPasswordVisible" width="40%" title="找回我的密码">
+      <div class="frist_step">
+        <el-form :model="form">
+          <el-form-item :label-width="formLabelWidth" label="输入账号绑定的手机号码">
+            <el-input v-model="form.telephone" placeholder="请输入手机号码" autocomplete="off" style="width: 200px"/>
+          </el-form-item>
+          <el-form-item :label-width="formLabelWidth" label="输入验证码">
+            <el-input v-model="form.verificationCode" autocomplete="off" style="width: 200px"/>
+            <el-button v-show="show" type="success" plain style="margin-left: 20px" @click="getCode">{{ buttonText }}</el-button>
+            <el-button v-show="!show" type="success" disabled="true" plain style="margin-left: 20px">重新发送（{{ count }}）</el-button>
+          </el-form-item>
+          <el-form-item :label-width="formLabelWidth" label="输入新的密码">
+            <el-input v-model="form.newpassword" placeholder="请输入新的密码" autocomplete="off" style="width: 200px"/>
+          </el-form-item>
+          <el-form-item :label-width="formLabelWidth" label="再次输入新的密码">
+            <el-input v-model="form.comfirmPassword" placeholder="请输入新的密码" autocomplete="off" style="width: 200px"/>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="findMyPassword">确定</el-button>
+      </div>
     </el-dialog>
+    <!-- 登录弹框 -->
+    <div class="login-container">
+      <el-dialog :title="loginTitle" :visible.sync="showDialog" width="30%">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+          <el-form-item prop="user_name">
+            <span class="svg-container">
+              <svg-icon icon-class="user" />
+            </span>
+            <el-input
+              v-model="loginForm.user_name"
+              placeholder="用户名"
+              name="user_name"
+              type="text"
+              auto-complete="on"
+            />
+          </el-form-item>
+
+          <el-form-item prop="password">
+            <span class="svg-container">
+              <svg-icon icon-class="password" />
+            </span>
+            <el-input
+              :type="passwordType"
+              v-model="loginForm.password"
+              placeholder="密码"
+              name="password"
+              auto-complete="on"
+              @keyup.enter.native="handleLogin" />
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon icon-class="eye" />
+            </span>
+          </el-form-item>
+          <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">{{ $t('login.logIn') }}</el-button>
+          <div class="find_password_container">
+            <span style="color: deepskyblue;cursor: pointer;" @click="beginFindMyPassword">找回密码</span>
+          </div>
+        </el-form>
+      </el-dialog>
+    </div>
     <!--页面内容-->
     <el-container>
       <el-header>
         <img :src="require('./img/headlogo.png')" alt="">
+        <!--        <img :src="require('./img/logofinal.png')" style="width: 8%;height: 120%" alt="">-->
+        <!--        <img :src="require('./img/zhongke.png')" style="width: 10%;height: 120%;margin-left: -80%">-->
         <el-button type="primary" @click="showDialog=true">登录</el-button>
       </el-header>
       <el-container>
@@ -128,6 +160,7 @@ import SocialSign from './socialsignin'
 import { getNewsList, getSchoolNotices } from '@/api/login'
 import banner01 from './img/banner01.jpg'
 import banner02 from './img/banner02.jpg'
+import { getVerificationCode, useCodeFindPassword } from '@/api/findMyPassword'
 
 export default {
   name: 'Login',
@@ -148,6 +181,21 @@ export default {
       }
     }
     return {
+      yanzhenCode: '',
+      show: true,
+      count: '',
+      timer: null,
+      buttonText: '获取验证码',
+      begin: true,
+      formLabelWidth: '200px',
+      form: {
+        telephone: '',
+        verificationCode: '',
+        newpassword: '',
+        comfirmPassword: ''
+      },
+      active: 0,
+      dialogFindPasswordVisible: false,
       schna: ['http://58.119.112.11:11005/4c51e799-3fdd-4f68-8cbb-efadd9ba2efe.jpg', 'http://58.119.112.11:11005/cca1839d-8dbe-4359-99df-b6b3a99ea202.jpg'],
       noteInfo: { noticeContext: '' },
       dialogNote: false,
@@ -193,6 +241,68 @@ export default {
     this.getSchoolNotices()
   },
   methods: {
+    findMyPassword: function() {
+      if (this.form.verificationCode !== this.yanzhenCode) {
+        this.$message({
+          message: '验证码错误',
+          type: 'warning'
+        })
+      } else if (this.form.newpassword !== this.form.comfirmPassword) {
+        this.$message({
+          message: '两次密码输入不一致',
+          type: 'warning'
+        })
+      } else {
+        const prams = {
+          myphone: this.form.telephone,
+          validateCode: this.form.verificationCode,
+          password: this.form.newpassword
+        }
+        useCodeFindPassword(prams).then(response => {
+          console.log('测试找回密码')
+          console.log(response)
+          this.$message({
+            message: '密码修改成功',
+            type: 'success'
+          })
+        })
+        this.dialogFindPasswordVisible = false
+      }
+    },
+    getCode() {
+      console.log('我要开始获取验证码了')
+      const TIME_COUNT = 60
+      if (!this.timer) {
+        this.count = TIME_COUNT
+        this.show = false
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            this.count--
+          } else {
+            this.show = true
+            clearInterval(this.timer)
+            this.timer = null
+          }
+        }, 1000)
+      }
+      const prmas = {
+        phone: this.form.telephone
+      }
+      getVerificationCode(prmas).then(response => {
+        console.log('测试发送验证码')
+        console.log(response)
+        this.yanzhenCode = response.data.result.code
+        console.log('测试本地暂存的验证码')
+        console.log(this.yanzhenCode)
+        this.$message({
+          message: '恭喜你,验证码成功发送',
+          type: 'success'
+        })
+      })
+    },
+    beginNextStep: function() {
+      this.begin = false
+    },
     getNewList() {
       getNewsList().then((res) => {
         this.newList = res.data.schoolnews
@@ -250,6 +360,10 @@ export default {
     openNoteDialog(index) {
       this.dialogNote = true
       this.noteInfo = this.schoolNotices[index]
+    },
+    beginFindMyPassword: function() {
+      this.showDialog = false
+      this.dialogFindPasswordVisible = true
     },
     afterQRScan() {
       // const hash = window.location.hash.slice(1)
@@ -485,5 +599,8 @@ $light_gray:#eee;
     padding-top: 20px;
     text-align: center;
     margin-bottom: 20px;
+  }
+  .find_password_container{
+    text-align: center;
   }
 </style>

@@ -26,7 +26,7 @@ export function logout() {
 
 export function getUserInfo(token) {
   return request({
-    url: '/api/teacher',
+    url: '/api/teacher/teacherbaseinfo',
     method: 'get',
     params: { token }
   })

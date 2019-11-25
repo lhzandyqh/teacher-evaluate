@@ -5,6 +5,8 @@
         <div style="font-size: 14px;margin-right: 15px;font-weight: bolder">请选择审核类别:</div>
         <div>
           <el-select v-model="type_select_value" placeholder="请选择审核类别">
+            <el-option label="个人信息" value="geren"/>
+            <el-option label="基本工作" value="jiben"/>
             <el-option label="学术成果" value="xueshu"/>
             <el-option label="项目课题" value="yanjiuke"/>
             <el-option label="学术讲座与经验分享" value="jinyan"/>
@@ -20,6 +22,12 @@
       </div>
     </el-row>
     <el-divider/>
+    <el-row v-if="type_select_value === 'geren'">
+      <personal-information-outcome-table/>
+    </el-row>
+    <el-row v-if="type_select_value === 'jiben'">
+      <basic-work-outcome/>
+    </el-row>
     <el-row v-if="type_select_value === 'jingsai'">
       <apprasial-outcome-table/>
     </el-row>
@@ -65,19 +73,22 @@ import ProjectOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/ProjectOut
 import researchOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/researchOutcomeTable'
 import schoolOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/schoolOutcomeTable'
 import studentOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/studentOutcomeTable'
+import personalInformationOutcomeTable from '@/views/aTeacherGrow/auditingOutcome/personalInformationOutcomeTable'
+import basicWorkOutcome from '@/views/aTeacherGrow/auditingOutcome/basicWorkOutcome'
 
 export default {
   name: 'AuditResult',
   components: { academicOutcomeTable, administrativeOutcomeTable, apprasialOutcomeTable,
     artOutcomeTable, educationOutcomeTable, experienceOutcomeTable, ProjectOutcomeTable, researchOutcomeTable,
-    schoolOutcomeTable, studentOutcomeTable },
+    schoolOutcomeTable, studentOutcomeTable, personalInformationOutcomeTable, basicWorkOutcome },
   data() {
     return {
-      type_select_value: '',
+      type_select_value: 'xueshu',
       value: '',
       token: getToken(),
       tableData: [],
-      option: [{ label: '学术成果', value: 'xueshu' },
+      option: [
+        { label: '学术成果', value: 'xueshu' },
         { label: '项目课题', value: 'yanjiuke' },
         { label: '学术讲座与经验分享', value: 'jinyan' },
         { label: '教育教学评比竞赛', value: 'jingsai' },

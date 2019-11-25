@@ -46,11 +46,11 @@
           label="完成课时"
           prop="finish_hours"
           width="140"/>
-        <el-table-column
-          align="center"
-          label="学习成绩"
-          prop="fur_edu_score"
-          width="100"/>
+        <!--        <el-table-column-->
+        <!--          align="center"-->
+        <!--          label="学习成绩"-->
+        <!--          prop="fur_edu_score"-->
+        <!--          width="100"/>-->
         <el-table-column
           align="center"
           label="结业时间"
@@ -96,9 +96,9 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="完成课时">
           <el-input v-model="form.achievementclass" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="学习成绩">
-          <el-input v-model="form.studygrade" autocomplete="off"/>
-        </el-form-item>
+        <!--        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="学习成绩">-->
+        <!--          <el-input v-model="form.studygrade" autocomplete="off"/>-->
+        <!--        </el-form-item>-->
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="结业时间">
           <el-date-picker v-model="form.completetime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatOverTime"/>
         </el-form-item>
@@ -128,9 +128,9 @@
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="完成课时">
           <el-input v-model="formEdit.achievementclass" autocomplete="off"/>
         </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="学习成绩">
-          <el-input v-model="formEdit.studygrade" autocomplete="off"/>
-        </el-form-item>
+        <!--        <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="学习成绩">-->
+        <!--          <el-input v-model="formEdit.studygrade" autocomplete="off"/>-->
+        <!--        </el-form-item>-->
         <el-form-item :label-width="formLabelWidth" label-position="labelPosition" label="结业时间">
           <el-date-picker v-model="formEdit.completetime" value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="formatOverEditTime"/>
         </el-form-item>

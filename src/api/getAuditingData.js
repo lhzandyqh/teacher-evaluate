@@ -188,3 +188,147 @@ export function auditingSchoolTrain(parems) {
     params: parems
   })
 }
+
+// 获取学术成果审核结果（教师角色）
+export function getAchOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultAcadeAchi',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取项目课题审核结果（教师角色）
+export function getTopicsOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultTopics',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取学术讲座和经验分享审核结果（教师角色）
+export function getLecExpOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultLecExp',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取教育教学评比竞赛审核结果（教师角色）
+export function getEduTeachCompetOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultEduTeachCompet',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取研究课审核结果（教师角色）
+export function getResearchCourseOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultResearchCourse',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取教育教学成果获奖审核结果（教师角色）
+export function getEduTeachAchiOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultEduTeachAchi',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取教师指导学生参加学科比赛获奖情况审核结果（教师角色）
+export function getStuSubCompetOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultStuSubCompet',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取艺科体社团审核结果（教师角色）
+export function getArtAssocOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultArtAssoc',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取行政获奖审核结果（教师角色）
+export function getAdminAwardOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultAdminAward',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取校本培训审核结果（教师角色）
+export function getSchoolTrainOutcome(token) {
+  return request({
+    url: '/api/auditResult/auditResultSchoolTrain',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取完成教学工作情况审核结果
+export function getTeacherSituationOutcome(token) {
+  return request({
+    url: '/api/teachWork/showTeachWorkAuditResult',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取完成教育工作情况审核结果
+export function getEducationSituationOutcome(token) {
+  return request({
+    url: '/api/EduWork/showEduWorkAuditResult',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取汇报课 观摩课 研究课情况审核结果
+export function getHuibaoClassSituationOutcome(token) {
+  return request({
+    url: '/api/ReporObsResearch/showRepObsResAuditResult',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取组织指导课外活动情况审核结果
+export function getActivitySituationOutcome(token) {
+  return request({
+    url: '/api/organizeExtraWork/showOrganizeExtraAuditResult',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取参加系统进修或继续教育情况审核结果
+export function getContinueEducationSituationOutcome(token) {
+  return request({
+    url: '/api/furLearnContinueEduWork/showFurLearnContinueEduAuditResult',
+    method: 'post',
+    params: { token }
+  })
+}
+
+// 获取指导 培养教师情况审核结果
+export function getTrainTeacherSituationOutcome(token) {
+  return request({
+    url: '/api/guidTrainTeacWork/showGuidTrainTeacAuditResult',
+    method: 'post',
+    params: { token }
+  })
+}

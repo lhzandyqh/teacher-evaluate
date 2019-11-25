@@ -12,7 +12,11 @@ export default{
   components: { SwitchRoles },
   methods: {
     handleRolesChange() {
-      this.$router.push({ path: '/permission/index?' + +new Date() })
+      this.$message({
+        message: '切换权限成功',
+        type: 'success'
+      })
+      this.$router.push({ path: 'aTeacherEvaluate/countInfo' })
     }
   }
 }

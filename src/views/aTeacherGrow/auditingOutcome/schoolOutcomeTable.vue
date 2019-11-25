@@ -1,5 +1,5 @@
 <template>
-  <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+  <el-table v-loading="listLoading" :data="tableData" border fit highlight-current-row style="width: 100%">
 
     <el-table-column align="center" label="积分编号" width="80">
       <template slot-scope="scope">
@@ -9,13 +9,13 @@
 
     <el-table-column width="300" align="center" label="校级发起人">
       <template slot-scope="scope">
-        <span>{{ scope.row.tQualificationName }}</span>
+        <span>{{ scope.row.school_sponsors }}</span>
       </template>
     </el-table-column>
 
     <el-table-column width="150" align="center" label="审核人">
       <template slot-scope="scope">
-        <span>{{ scope.row.certType }}</span>
+        <span>{{ scope.row.who_audit }}</span>
       </template>
     </el-table-column>
 
@@ -27,20 +27,20 @@
 
     <el-table-column width="180" align="center" label="提交时间">
       <template slot-scope="scope">
-        <span>{{ scope.row.certIssuedTime }}</span>
+        <span>{{ scope.row.submit_time }}</span>
       </template>
     </el-table-column>
     <el-table-column width="180" align="center" label="审核时间">
       <template slot-scope="scope">
-        <span>{{ scope.row.certIssuedTime }}</span>
+        <span>{{ scope.row.audit_time }}</span>
       </template>
     </el-table-column>
 
     <el-table-column width="180" align="center" label="审核状态">
       <template slot-scope="scope">
-        <el-button v-if="scope.row.status==='-1'" type="primary" size="small" plain>审核待通过</el-button>
-        <el-button v-if="scope.row.status==='1'" type="success" size="small" plain>审核通过</el-button>
-        <el-button v-if="scope.row.status==='0'" type="danger" size="small" plain>审核未通过</el-button>
+        <el-button v-if="scope.row.audit_status==='审核待通过'" type="primary" size="small" plain>审核待通过</el-button>
+        <el-button v-if="scope.row.audit_status==='审核通过'" type="success" size="small" plain>审核通过</el-button>
+        <el-button v-if="scope.row.audit_status==='审核未通过'" type="danger" size="small" plain>审核未通过</el-button>
       </template>
     </el-table-column>
 
@@ -54,8 +54,29 @@
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { getSchoolTrainOutcome } from '@/api/getAuditingData'
 export default {
-  name: 'SchoolOutcomeTable'
+  name: 'SchoolOutcomeTable',
+  data() {
+    return {
+      token: getToken(),
+      tableData: []
+    }
+  },
+  mounted() {
+    this.getAuditingData()
+  },
+  methods: {
+    getAuditingData: function() {
+      getSchoolTrainOutcome(this.token).then(response => {
+        // // this.tableData = response.data
+        console.log(response)
+        console.log(response.data.artAssocAuditResult)
+        this.tableData = response.data.artAssocAuditResult
+      })
+    }
+  }
 }
 </script>
 
