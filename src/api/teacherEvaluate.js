@@ -234,3 +234,11 @@ export function updateArticle(data) {
   })
 }
 
+// 配置教师权限（多个权限）
+export function setManyRoles(parems) {
+  return request({
+    url: '/api/userrole/setTecRole',
+    method: 'get',
+    params: parems
+  })
+}

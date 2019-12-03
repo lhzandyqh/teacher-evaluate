@@ -44,22 +44,8 @@
           label="刊物等级（出版社等级）"
           width="200"/>
         <el-table-column align="center" label="照片证明">
-          <!--          <template slot-scope="scope">-->
-          <!--            <div v-if="scope.row.imageurl" class="demo-image__preview">-->
-          <!--              <el-image-->
-          <!--                :src="scope.row.imageurl"-->
-          <!--                preview-src-list="srcList"-->
-          <!--                style="width: 100px; height: 100px"/>-->
-          <!--            </div>-->
-          <!--            <div v-else>-->
-          <!--              <el-image-->
-          <!--                :src="noPicture"-->
-          <!--                :preview-src-list="noPicture"-->
-          <!--                style="width: 100px; height: 100px"/>-->
-          <!--            </div>-->
-          <!--          </template>-->
           <template slot-scope="scope">
-            <div v-if="scope.row.imageurl.length>0" class="demo-image__preview">
+            <div v-if="scope.row.imageurl[0]!=''" class="demo-image__preview">
               <el-button type="text" size="medium" @click="lookImages(scope.$index, scope.row)">查看图片</el-button>
             </div>
             <div v-else>
@@ -308,7 +294,6 @@ export default {
       })
     },
     actionSecond(params) {
-      this.form.imageurl = []
       const formData = new FormData()
       formData.append('file', params.file)
       axios.post('http://58.119.112.11:11028/api/upload', formData).then((res) => {
@@ -390,6 +375,14 @@ export default {
           type: 'success'
         })
       })
+      this.form.type = ''
+      this.form.title = ''
+      this.form.date = ''
+      this.form.first = ''
+      this.form.booknumber = ''
+      this.form.publishinghouse = ''
+      this.form.rank = ''
+      this.form.imageurl = []
       this.dialogFormVisible = false
     },
     handleDelete(index, row) {
@@ -415,9 +408,9 @@ export default {
     handleEdit: function(index, row) {
       this.editDialogFormVisible = true
       this.form = row
+      this.form.imageurl = []
       console.log('测试form')
       console.log(this.form)
-      this.form.id = row.id
     },
     updateAcademicAchevementsData: function() {
       console.log('输出要编辑的数据看一看')
@@ -457,6 +450,14 @@ export default {
           type: 'success'
         })
       })
+      this.form.type_of_carriers = ''
+      this.form.academic_name = ''
+      this.form.publication_time = ''
+      this.form.is_first_author = ''
+      this.form.number_of_academic = ''
+      this.form.name_of_publications = ''
+      this.form.level_of_publisher = ''
+      this.form.imageurl = []
       this.editDialogFormVisible = false
     },
     handleRemove(file, fileList) {

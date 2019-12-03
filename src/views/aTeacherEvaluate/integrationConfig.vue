@@ -23,25 +23,39 @@
       <el-row>
         <div class="container">
           <div class="select">
-            <el-row :gutter="5">
+            <el-row :gutter="1">
               <el-col :span="3">
                 <div class="title">
                   <span style="font-size: 14px;font-weight: bolder">选择积分项目类型</span>
                 </div>
               </el-col>
+              <el-col :span="3">
+                <el-select v-model="classValue" placeholder="请选择" @change="getTypes">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"/>
+                </el-select>
+              </el-col>
               <el-col :span="6">
                 <div class="select">
                   <el-select v-model="type_select_value" placeholder="请选择您的积分项目类型" @change="changeZiZhi">
-                    <el-option label="学术成果积分配置" value="xueshu"/>
-                    <el-option label="项目课题积分配置" value="yanjiuke"/>
-                    <el-option label="学术讲座与经验分享积分配置" value="jinyan"/>
-                    <el-option label="教育教学评比竞赛积分配置" value="jingsai"/>
-                    <el-option label="研究课积分配置" value="yanjiu"/>
-                    <el-option label="教育教学成果获奖积分配置" value="jiaoyu"/>
-                    <el-option label="教师指导学生参加学科比赛获奖情况积分配置" value="xueke"/>
-                    <el-option label="艺科体社团积分配置" value="yike"/>
-                    <el-option label="行政获奖积分配置" value="xinzheng"/>
-                    <el-option label="校本培训积分配置" value="xiaoben"/>
+                    <el-option
+                      v-for="item in finalOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"/>
+                      <!--                    <el-option label="学术成果积分配置" value="xueshu"/>-->
+                      <!--                    <el-option label="项目课题积分配置" value="yanjiuke"/>-->
+                      <!--                    <el-option label="学术讲座与经验分享积分配置" value="jinyan"/>-->
+                      <!--                    <el-option label="教育教学评比竞赛积分配置" value="jingsai"/>-->
+                      <!--                    <el-option label="研究课积分配置" value="yanjiu"/>-->
+                      <!--                    <el-option label="教育教学成果获奖积分配置" value="jiaoyu"/>-->
+                      <!--                    <el-option label="教师指导学生参加学科比赛获奖情况积分配置" value="xueke"/>-->
+                      <!--                    <el-option label="艺科体社团积分配置" value="yike"/>-->
+                      <!--                    <el-option label="行政获奖积分配置" value="xinzheng"/>-->
+                      <!--                    <el-option label="校本培训积分配置" value="xiaoben"/>-->
                   </el-select>
                 </div>
               </el-col>
@@ -458,6 +472,28 @@ export default {
   },
   data() {
     return {
+      classValue: '教育教学',
+      finalOptions: [],
+      options: [{
+        value: '教育教学',
+        label: '教育教学'
+      }, {
+        value: '行政获奖',
+        label: '行政获奖'
+      }, {
+        value: '校本培训',
+        label: '校本培训'
+      }],
+      jiaoyuOptions: [{ label: '学术成果积分配置', value: 'xueshu' },
+        { label: '研究课题积分配置', value: 'yanjiuke' },
+        { label: '学术讲座与经验分享积分配置', value: 'jinyan' },
+        { label: '教育教学评比竞赛积分配置', value: 'jingsai' },
+        { label: '研究课积分配置', value: 'yanjiu' },
+        { label: '教育教学成果获奖积分配置', value: 'jiaoyu' },
+        { label: '教师指导学生参加学科比赛情况获奖积分配置', value: 'xueke' },
+        { label: '艺科体社团积分配置', value: 'yike' }],
+      xingzhenOptions: [{ label: '行政获奖积分配置', value: 'xinzheng' }],
+      xiaoebengOptions: [{ label: '校本培训积分配置', value: 'xiaoben' }],
       academicData: [],
       jifenType: [
         { label: '学术成果积分配置', value: 'xueshu' },
@@ -539,9 +575,23 @@ export default {
     }
   },
   created() {
+    this.finalOptions = this.jiaoyuOptions
     this.getList()
   },
   methods: {
+    getTypes: function() {
+      this.finalOptions = []
+      if (this.classValue === '教育教学') {
+        this.type_select_value = 'xueshu'
+        this.finalOptions = this.jiaoyuOptions
+      } else if (this.classValue === '行政获奖') {
+        this.type_select_value = 'xinzheng'
+        this.finalOptions = this.xingzhenOptions
+      } else {
+        this.type_select_value = 'xiaoben'
+        this.finalOptions = this.xiaoebengOptions
+      }
+    },
     getList() {
       this.listLoading = true
       integrationConfigList(this.token).then(response => {

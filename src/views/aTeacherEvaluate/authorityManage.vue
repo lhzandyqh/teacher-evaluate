@@ -68,16 +68,38 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" label="权限设置">
+        <el-table-column align="center" label="权限展示">
+          <!--          <template slot-scope="scope">-->
+          <!--            <el-select v-model="scope.row.userrole" placeholder="权限" @change="eidtAuthority(scope.row.userid, scope.row.userrole)">-->
+          <!--              <el-option label="教师" value="教师"/>-->
+          <!--              <el-option label="审核员" value="审核员"/>-->
+          <!--              <el-option label="系统管理员" value="系统管理员"/>-->
+          <!--            </el-select>-->
+          <!--          </template>-->
           <template slot-scope="scope">
-            <el-select v-model="scope.row.userrole" placeholder="权限" @change="eidtAuthority(scope.row.userid, scope.row.userrole)">
-              <el-option label="教师" value="教师"/>
-              <el-option label="审核员" value="审核员"/>
-              <el-option label="系统管理员" value="系统管理员"/>
-            </el-select>
+            <div v-for="(item,i) in scope.row.userrole" :key="i">
+              <span>{{ item }}</span>
+            </div>
           </template>
         </el-table-column>
 
+        <el-table-column align="center" label="权限设置">
+          <!--          <template slot-scope="scope">-->
+          <!--            <el-select v-model="scope.row.userrole" placeholder="权限" @change="eidtAuthority(scope.row.userid, scope.row.userrole)">-->
+          <!--              <el-option label="教师" value="教师"/>-->
+          <!--              <el-option label="审核员" value="审核员"/>-->
+          <!--              <el-option label="系统管理员" value="系统管理员"/>-->
+          <!--            </el-select>-->
+          <!--          </template>-->
+          <template slot-scope="scope">
+            <el-select v-model="scope.row.edit" multiple placeholder="请选择权限">
+              <el-option label="教师" value="教师"/>
+              <el-option label="教师组长" value="教师组长"/>
+              <el-option label="系统管理员" value="系统管理员"/>
+            </el-select>
+            <el-button type="primary" style="margin-top: 10px" @click="editRoles(scope.row.userid, scope.row.edit)">确认修改</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-row>
 
@@ -85,7 +107,7 @@
 </template>
 
 <script>
-import { getAuthorityList, editAuthority, getAllTeachGroup, getAuthorityListWithPrams } from '@/api/teacherEvaluate'
+import { getAuthorityList, editAuthority, getAllTeachGroup, getAuthorityListWithPrams, setManyRoles } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 
 export default {
@@ -102,6 +124,7 @@ export default {
   },
   data() {
     return {
+      value1: [],
       input: '',
       optionsone: [{
         value: '一',
@@ -132,6 +155,44 @@ export default {
     this.getTeachGroupList()
   },
   methods: {
+    editRoles: function(id, roles) {
+      // console.log(roles[6])
+      if (roles.length < 1) {
+        this.$message({
+          showClose: true,
+          message: '未选择权限！',
+          type: 'warning'
+        })
+      } else {
+        var roleString = ''
+        for (let i = 0; i < roles.length; i++) {
+          roleString = roleString + roles[i]
+          if (roles[i + 1] !== 'undefined') {
+            roleString = roleString + ','
+          } else {
+            break
+          }
+        }
+        console.log('测试roleString')
+        console.log(roleString)
+        setManyRoles({ token: this.token, userid: id, rolename: roleString }).then(response => {
+          if (response.data.code === 200) {
+            this.$message({
+              showClose: true,
+              message: '用户角色编辑成功！',
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              message: '用户角色编辑失败！',
+              type: 'warning'
+            })
+          }
+          this.getList()
+        })
+      }
+    },
     findTeacher: function() {
       console.log('我要根据参数找老师了')
       if (this.valuea === '') {

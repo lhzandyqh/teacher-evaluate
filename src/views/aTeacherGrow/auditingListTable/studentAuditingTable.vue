@@ -60,6 +60,11 @@
         <el-table-column prop="award_level" label="获奖级别"/>
         <el-table-column prop="award_grade" label="获奖等级"/>
         <el-table-column prop="submit_time" label="提交审核时间"/>
+        <el-table-column align="center" label="照片证明">
+          <template slot-scope="scope">
+            <el-button type="text" size="medium" @click="lookImages(scope.$index, scope.row)">查看图片</el-button>
+          </template>
+        </el-table-column>
         <el-table-column label="审核状态" align="center">
           <template slot-scope="scope">
             <div v-if="scope.row.audit_status==='待审核'">审核待通过</div>
@@ -101,10 +106,14 @@
 <script>
 import { getToken } from '@/utils/auth'
 import { getAuditingListData, getGuideStuSubAwardDetail, auditingGuideStuSubAward } from '@/api/getAuditingData'
+import imgPreview from '@/views/aTeacherGrow/auditingListTable/imgPreview'
 export default {
   name: 'StudentAuditingTable',
+  components: { imgPreview },
   data() {
     return {
+      imgs: [],
+      isShowImageDialog: false,
       token: getToken(),
       tableData: [],
       dialogPvVisible: false,
@@ -120,6 +129,15 @@ export default {
     this.getListData()
   },
   methods: {
+    closeHandle() {
+      this.isShowImageDialog = false // 控制取消和X按钮，关闭弹窗
+    },
+    lookImages: function(index, row) {
+      console.log('检查图片数据')
+      console.log(row)
+      this.imgs = row.imageurl
+      this.isShowImageDialog = true
+    },
     getListData: function() {
       const prams = {
         project_name: '教师指导学生参加学科比赛获奖情况'

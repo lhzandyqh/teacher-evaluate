@@ -248,6 +248,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'index',
+        component: () => import('@/views/aTeacherEvaluate/engageManage'),
         name: 'EngageManage',
         meta: { title: '聘任管理', icon: 'edit', roles: ['系统管理员'] }
       }
@@ -446,6 +447,7 @@ export const asyncRouterMap = [
       {
         path: 'elementWorktwo',
         name: 'WorkTask',
+        component: () => import('@/views/aTeacherEvaluate/batchImport'),
         meta: { title: '批量导入', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
       }
     ]
