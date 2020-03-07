@@ -22,7 +22,12 @@
       </div>
     </el-row>
     <el-divider/>
-    <wage-table/>
+    <div v-if="typeValue=='工资信息'">
+      <wage-table/>
+    </div>
+    <div v-if="typeValue=='职称信息'">
+      <job-title-table/>
+    </div>
     <el-dialog :visible.sync="excelImportShow" width="21%" title="导入文件">
       <div><el-button type="text" @click="downloadText">点击下载</el-button>Excel模板 </div>
       <el-upload
@@ -56,9 +61,10 @@
 
 <script>
 import wageTable from '@/views/aTeacherEvaluate/batchImportTable/wageTable'
+import jobTitleTable from '@/views/aTeacherEvaluate/batchImportTable/jobTitleTable'
 export default {
   name: 'BatchImport',
-  components: { wageTable },
+  components: { wageTable, jobTitleTable },
   data() {
     return {
       excelImportShow: false,
@@ -67,6 +73,10 @@ export default {
         {
           value: '工资信息',
           label: '工资信息'
+        },
+        {
+          value: '职称信息',
+          label: '职称信息'
         }
       ]
     }

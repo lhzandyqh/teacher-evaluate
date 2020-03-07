@@ -129,51 +129,37 @@
     </div>
     <div v-if="role === '系统管理员'">
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-        <div class="title">{{ barChartData.title }}</div>
-        <div style="display: flex;align-items: center;margin: 15px 0;">
-          <div style="font-size: 14px;margin: 0 15px;">请输入教师名称:</div>
-          <div>
-            <el-input/>
-          </div>
-          <div style="font-size: 14px;margin: 0 15px;">请选择时间:</div>
-          <div>
-            <el-date-picker
-              v-model="value9"
-              type="daterange"
-              range-separator="-"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"/>
-          </div>
-          <div><el-button type="primary" style="margin-left:15px" @click="seaech">查询</el-button></div>
-        </div>
-        <bar-chart :chart-data="barChartData"/>
+        <div class="title">教师各类绩效指标展示</div>
+        <new-bar-chart/>
       </el-row>
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-        <div class="title">{{ lineChartData1.title }}</div>
-        <div style="display: flex;align-items: center;margin: 15px 0;">
-          <div style="font-size: 14px;margin-right: 15px;">请选择指标:</div>
-          <div>
-            <el-select v-model="listQuery" clearable class="filter-item" @change="setList">
-              <el-option v-for="item in list" :label="item" :value="item" :key="item"/>
-            </el-select>
-          </div>
-          <div style="font-size: 14px;margin: 0 15px;">请选择部门:</div>
-          <div>
-            <el-select v-model="listQuery1" clearable class="filter-item" @change="setList">
-              <el-option v-for="item in list2" :label="item" :value="item" :key="item"/>
-            </el-select>
-          </div>
-          <div style="font-size: 14px;margin: 0 15px;">请选择时间:</div>
-          <div>
-            <el-date-picker
-              v-model="value10"
-              type="daterange"
-              range-separator="-"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"/>
-          </div>
-        </div>
-        <line-chart :chart-data="lineChartData1" />
+        <!--        <div class="title">{{ lineChartData1.title }}</div>-->
+        <!--        <div style="display: flex;align-items: center;margin: 15px 0;">-->
+        <!--          <div style="font-size: 14px;margin-right: 15px;">请选择指标:</div>-->
+        <!--          <div>-->
+        <!--            <el-select v-model="listQuery" clearable class="filter-item" @change="setList">-->
+        <!--              <el-option v-for="item in list" :label="item" :value="item" :key="item"/>-->
+        <!--            </el-select>-->
+        <!--          </div>-->
+        <!--          <div style="font-size: 14px;margin: 0 15px;">请选择部门:</div>-->
+        <!--          <div>-->
+        <!--            <el-select v-model="listQuery1" clearable class="filter-item" @change="setList">-->
+        <!--              <el-option v-for="item in list2" :label="item" :value="item" :key="item"/>-->
+        <!--            </el-select>-->
+        <!--          </div>-->
+        <!--          <div style="font-size: 14px;margin: 0 15px;">请选择时间:</div>-->
+        <!--          <div>-->
+        <!--            <el-date-picker-->
+        <!--              v-model="value10"-->
+        <!--              type="daterange"-->
+        <!--              range-separator="-"-->
+        <!--              start-placeholder="开始日期"-->
+        <!--              end-placeholder="结束日期"/>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <line-chart :chart-data="lineChartData1" />-->
+        <div class="title">教研组，全校比较各项指标</div>
+        <new-line-chart />
       </el-row>
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
         <div class="title">全校教师详情展示</div>
@@ -190,31 +176,41 @@
           <div style="margin-left: 15px;"><el-button type="primary" @click="handleDownload1">导出Excel</el-button></div>
         </div>
         <el-table
-          :data="tableData1"
+          :data="tableData1.slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
           style="width: 100%"
           border>
           <el-table-column
             align="center"
-            prop="name"
+            prop="username"
             label="教师"/>
           <el-table-column
             align="center"
-            prop="date"
-            label="教学成果"/>
+            prop="eduTeachScore"
+            label="教育教学"/>
           <el-table-column
             align="center"
-            prop="count"
-            label="发表论文个数"/>
+            prop="adminAwardScore"
+            label="行政获奖"/>
           <el-table-column
             align="center"
-            prop="address"
-            label="资质获奖"/>
+            prop="schoolBasedTrainScore"
+            label="校本培训"/>
           <el-table-column
             align="center"
-            prop="all"
+            prop="totalScore"
             label="总数"/>
         </el-table>
-        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+        <!--        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />-->
+        <div class="fenye">
+          <el-pagination
+            :current-page="currentPage4"
+            :page-sizes="[10, 20, 40]"
+            :page-size="10"
+            :total="tableData1.length"
+            layout="total, sizes, prev, pager, next, jumper"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"/>
+        </div>
       </el-row>
     </div>
     <el-dialog
@@ -254,18 +250,28 @@
 import { getCountListAll, getCountList, getCountListGaiyao } from '@/api/teacherEvaluate'
 import { getToken } from '@/utils/auth'
 import LineChart from './components/LineChart'
+import newLineChart from './components/newLineChart'
 import BarChart from './components/BarChart'
+import newBarChart from './components/newBarChart'
 import BarChartMuite from './components/BarChartMuite'
 import Pagination from '@/components/Pagination'
 import teacherGrowStatistics from '@/components/Charts/teacherGrowStatistics'
 import teacherGrowLikeCharts from '@/components/Charts/teacherGrowLikeChart'
 import teacherGrowCompared from '@/components/Charts/teacherGrowCompared'
 import integrationSumChart from '@/components/Charts/integrationSumChart'
+import { adminTeacherKPI, adminCompare, adminAllTeacherShow } from '@/api/chartsGetData'
+import { getAllTeachGroup } from '@/api/teacherEvaluate'
 /* eslint-disable */
 export default {
   name: 'CountInfo',
   data() {
     return {
+      pagesize: 10,
+      currentPage4: 1,
+      optionstwo: [],
+      token: getToken(),
+      teachername: '',
+      jiaoyanzu: '',
       userRole: '',
       total: 4,
       listQuery: {
@@ -332,25 +338,29 @@ export default {
       list1: ['教学成果', '发表论文个数', '资质获奖'],
       role: window.localStorage.getItem('userRole'),
       tableData1: [
-        {name: '李二奎', date: 85, count: 50, address: 35, all: 150},
-        {name: '赵玉梅', date: 35, count: 57, address: 25, all: 145},
-        {name: '张海', date: 45, count: 20, address: 39, all: 140},
-        {name: '刘海柱', date: 25, count: 20, address: 45, all: 120},
+        // {name: '李二奎', date: 85, count: 50, address: 35, all: 150},
+        // {name: '赵玉梅', date: 35, count: 57, address: 25, all: 145},
+        // {name: '张海', date: 45, count: 20, address: 39, all: 140},
+        // {name: '刘海柱', date: 25, count: 20, address: 45, all: 120},
       ]
     }
   },
   components: {
+    newBarChart,
     LineChart,
     BarChart,
     BarChartMuite,
     Pagination,
-    teacherGrowStatistics, teacherGrowLikeCharts, integrationSumChart, teacherGrowCompared
+    teacherGrowStatistics, teacherGrowLikeCharts, integrationSumChart, teacherGrowCompared,
+    newLineChart
   },
   created() {
     console.log(this.role)
   },
   mounted() {
     this.getUserRole()
+    this.getTeachGroupList()
+    this.getAllTeacherData()
   },
   methods: {
     getUserRole: function(){
@@ -469,6 +479,65 @@ export default {
           return v[j]
         }
       }))
+    },
+    getTeachGroupList: function() {
+      getAllTeachGroup(this.token).then(response => {
+        console.log('测试返回的教研组')
+        console.log(response.data)
+        // eslint-disable-next-line no-empty
+        for (let i = 0; i < response.data.allDeptName.length; i++) {
+          const obj = {
+            value: response.data.allDeptName[i],
+            label: response.data.allDeptName[i]
+          }
+          this.optionstwo.push(obj)
+        }
+      })
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pagesize = val
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.currentPage4 = val
+    },
+    getKPIData: function () {
+      console.log("检查时间")
+      console.log(this.value9)
+      const prams = {
+        teachername: this.teachername,
+        deptname: this.jiaoyanzu,
+        startDate: this.value9[0],
+        endDate: this.value9[1]
+      }
+      // adminTeacherKPI({ ...prams, token: this.token }).then(response => {
+      //   console.log("检查获取KPI数据")
+      //   console.log(response.data.performWorkScoreByTec)
+      //   this.barChartData.x = []
+      //   // for( let i = 0; i < response.data.performWorkScoreByTec.length; i++  ) {
+      //   //   this.barChartData.x = []
+      //   // }
+      // })
+      // console.log(this.barChartData.x)
+      // this.$refs.mychild.initChart()
+      this.barChartData.title = 'zuanren'
+      this.barChartData.legend = ['教果', '发表个数', '质获奖']
+
+    },
+    getAllTeacherData: function () {
+      console.log("获取所有老师的信息")
+      console.log("检查时间")
+      console.log(this.value11)
+      const prams = {
+        startdate: this.value11[0],
+        enddate: this.value11[1]
+      }
+      adminAllTeacherShow({ ...prams, token: this.token }).then(response => {
+        console.log("检查获取所有老师数据")
+        console.log(response.data)
+        this.tableData1 = response.data.alltecscoreDetailSorted
+      })
     }
   }
 }

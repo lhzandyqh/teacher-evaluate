@@ -624,7 +624,14 @@
             <el-input v-model="form.danwei"/>
           </el-form-item>
           <el-form-item label="担任职务">
-            <el-input v-model="form.zhiwu"/>
+            <!--            <el-input v-model="form.zhiwu"/>-->
+            <el-select v-model="form.zhiwu" placeholder="请选择">
+              <el-option
+                v-for="item in zhiwuoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"/>
+            </el-select>
           </el-form-item>
           <el-form-item label="证明人">
             <el-input v-model="form.people"/>
@@ -638,6 +645,9 @@
             <el-col :span="11">
               <el-date-picker v-model="form.overdate" value-format=" yyyy-MM-dd " format="yyyy-MM-dd " type="date" placeholder="选择日期" style="width: 60%;"/>
             </el-col>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input v-model="form.beizhu"/>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -653,7 +663,14 @@
             <el-input v-model="editform.danwei"/>
           </el-form-item>
           <el-form-item label="担任职务">
-            <el-input v-model="editform.zhiwu"/>
+            <!--            <el-input v-model="editform.zhiwu"/>-->
+            <el-select v-model="editform.zhiwu" placeholder="请选择">
+              <el-option
+                v-for="item in zhiwuoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"/>
+            </el-select>
           </el-form-item>
           <el-form-item label="证明人">
             <el-input v-model="editform.people"/>
@@ -1247,6 +1264,28 @@ export default {
   name: 'TeacherInformation',
   data() {
     return {
+      zhiwuoptions: [{
+        value: '无',
+        label: '无'
+      }, {
+        value: '班主任',
+        label: '班主任'
+      }, {
+        value: '年级组长',
+        label: '年级组长'
+      }, {
+        value: '教研组长',
+        label: '教研组长'
+      }, {
+        value: '行政干部',
+        label: '行政干部'
+      }, {
+        value: '备课组长',
+        label: '备课组长'
+      }, {
+        value: '社团指导教师',
+        label: '社团指导教师'
+      }],
       basicDialogVisible: false,
       value: '',
       valuetwo: '',
@@ -1347,7 +1386,8 @@ export default {
         begindate: '',
         overdate: '',
         danwei: '',
-        people: ''
+        people: '',
+        beizhu: ''
       },
       editform: {
         zhiwu: '',

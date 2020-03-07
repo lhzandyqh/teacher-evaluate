@@ -417,14 +417,16 @@ export const asyncRouterMap = [
         meta: { title: '年度考核表', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
       },
       {
-        path: 'jixiaoWork',
-        name: 'basicWork',
+        path: 'titleEvaluationTable',
+        name: 'zhicheng',
+        component: () => import('@/views/aTeacherGrow/intelligentExportPart/titleEvaluation'),
         meta: { title: '职称评定表', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
       },
       {
-        path: 'jixiaoWork',
-        name: 'basicWork',
-        meta: { title: '教师积分表', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
+        path: 'jobEvaluation',
+        name: 'jobeva',
+        component: () => import('@/views/aTeacherGrow/intelligentExportPart/jobEvaluation'),
+        meta: { title: '职评申报表', icon: 'excel', roles: ['教师', '教师组长', '系统管理员'] }
       }
     ]
   },

@@ -220,7 +220,7 @@ const user = {
         //   // window.localStorage.setItem('userRole', name)
         //   commit('SET_TOKEN', data.result.token)
         //   setToken(data.result.token)
-        //   history.go(0)
+        history.go(0)
         // })
       })
     }

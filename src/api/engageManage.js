@@ -26,3 +26,12 @@ export function findTeacherContractByNameOrGroup(parems) {
     params: parems
   })
 }
+
+// 新增教师合同
+export function increaseNewContract(parems) {
+  return request({
+    url: '/api/tecInfoManagerment/addTeacherInfo',
+    method: 'get',
+    params: parems
+  })
+}

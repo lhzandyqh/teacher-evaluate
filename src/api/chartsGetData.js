@@ -60,3 +60,49 @@ export function getGuidTrainTeacCount(token) {
     params: { token }
   })
 }
+
+// 管理员首页 教师各类绩效指标展示
+export function adminTeacherKPI(parems) {
+  return request({
+    url: '/api/IntelligentAnalysisOfManager/teacherKPI',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 管理员首页 教研组，全校比较各项指标
+export function adminCompare(parems) {
+  return request({
+    url: '/api/IntelligentAnalysisOfManager/getSchoolAndDeptCompare',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 全校教师详情展示
+export function adminAllTeacherShow(parems) {
+  return request({
+    url: '/api/IntelligentAnalysisOfManager/getAllTecDetails',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 全校教师详情展示（无参）
+export function adminCompareNoPrams(token) {
+  return request({
+    url: '/api/IntelligentAnalysisOfManager/getSchoolAndDeptCompare',
+    method: 'get',
+    params: { token }
+  })
+}
+
+// 教师个人绩效大图
+export function teacherPersonalChart(token) {
+  return request({
+    url: '/api/integralStatistics/scoreStatistics',
+    method: 'get',
+    params: { token }
+  })
+}
+

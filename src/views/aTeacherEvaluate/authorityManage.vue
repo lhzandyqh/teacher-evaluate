@@ -24,7 +24,7 @@
     </el-row>
     <el-divider/>
     <el-row>
-      <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+      <el-table v-loading="listLoading" :data="list.slice((currentPage-1)*pagesize,currentPage*pagesize)" border fit highlight-current-row style="width: 100%">
 
         <el-table-column align="center" label="序号">
           <template slot-scope="scope">
@@ -101,6 +101,18 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="fenye">
+        <el-pagination
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30]"
+          :page-size="10"
+          :total="list.length"
+          style="margin-top:20px;"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </div>
     </el-row>
 
   </div>
@@ -124,6 +136,8 @@ export default {
   },
   data() {
     return {
+      pagesize: 10,
+      currentPage: 1,
       value1: [],
       input: '',
       optionsone: [{
@@ -196,9 +210,28 @@ export default {
     findTeacher: function() {
       console.log('我要根据参数找老师了')
       if (this.valuea === '') {
-        this.$message({
-          message: ' 请选择年级组',
-          type: 'warning'
+        // this.$message({
+        //   message: ' 请选择年级组',
+        //   type: 'warning'
+        // })
+        const prams = {
+          username: this.input
+          // dept: this.valuea
+        }
+        console.log('测试参数')
+        console.log(prams)
+        getAuthorityListWithPrams({ ...prams, token: this.token }).then(response => {
+          console.log('测试根据姓名和年级组获取权限列表data带名字不带教研组')
+          console.log(response.data)
+          if (response.data.teacherRoleInfo === '暂无教师角色信息!') {
+            this.$message({
+              message: '暂无教师角色信息',
+              type: 'warning'
+            })
+          } else {
+            this.list = response.data.teacherRoleInfo
+          }
+          this.listLoading = false
         })
       } else if (this.input === '') {
         const prams = {
@@ -286,6 +319,14 @@ export default {
         type: 'success'
       })
     },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`)
+      this.pagesize = val
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`)
+      this.currentPage = val
+    },
     eidtAuthority(id, role) {
       // this.thisId = id
       // let that = this
@@ -318,5 +359,8 @@ export default {
     position: absolute;
     right: 15px;
     top: 10px;
+  }
+  .fenye {
+    text-align: center;
   }
 </style>

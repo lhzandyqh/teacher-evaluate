@@ -10,12 +10,15 @@
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
+import { teacherPersonalChart } from '@/api/chartsGetData'
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 export default {
   name: 'IntegrationSumChart',
   data() {
     return {
+      token: getToken(),
       option: {
         tooltip: {
           trigger: 'item',
@@ -119,11 +122,35 @@ export default {
   },
   mounted() {
     this.initChart()
+    this.getChartData()
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('test'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    getChartData: function() {
+      teacherPersonalChart(this.token).then(response => {
+        console.log('测试教师首页大绩效图')
+        console.log(response.data)
+        this.option.series[0].data[0].value = response.data[0].baseworkScore
+        this.option.series[0].data[1].value = response.data[0].performWorkScore
+        this.option.series[1].data[0].value = response.data[0].teachWorkScore
+        this.option.series[1].data[1].value = response.data[0].eduWorkScore
+        this.option.series[1].data[2].value = response.data[0].reportObsResearch
+        this.option.series[1].data[3].value = response.data[0].organizeExtraActivity
+        this.option.series[1].data[4].value = response.data[0].furLearnContinusEdu
+        this.option.series[1].data[5].value = response.data[0].guide_stu_score
+        this.option.series[1].data[6].value = response.data[0].academic_score
+        this.option.series[1].data[7].value = response.data[0].project_topic_score
+        this.option.series[1].data[8].value = response.data[0].lec_exp_share_score
+        this.option.series[1].data[9].value = response.data[0].edu_teach_compet_score
+        this.option.series[1].data[10].value = response.data[0].research_score
+        this.option.series[1].data[11].value = response.data[0].edu_teach_ach_score
+        this.option.series[1].data[12].value = response.data[0].guide_stu_score
+        this.option.series[1].data[13].value = response.data[0].assoication_score
+        this.initChart()
+      })
     }
   }
 }
