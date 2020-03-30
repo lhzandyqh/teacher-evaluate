@@ -428,7 +428,7 @@ export default {
     export2Excel() {
       var that = this;
       require.ensure([], () => {
-        const { export_json_to_excel } = require('C:\\Users\\lanni\\WebstormProjects\\teacher-evaluate\\src\\excel\\Export2Excel.js'); //这里必须使用绝对路径
+        const { export_json_to_excel } = require('H:\\GIT-Hub\\teacher-evaluate\\src\\excel\\Export2Excel.js'); //这里必须使用绝对路径
         const tHeader = ['起始时间','终止时间', '任教学校', '任教年级', '任教学科', '每周课时', '总课时数', '成绩效果']; // 导出的表头名
         const filterVal = ['start_time','end_time','teach_chool', 'teach_grade', 'teach_subject', 'hour_per_week','total_hours','score_result']; // 导出的表头字段名
         const list = that.excelData;
