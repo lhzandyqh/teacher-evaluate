@@ -58,7 +58,7 @@
           <el-table-column align="center" label="审核状态">
             <template slot-scope="scope">
               <el-button v-if="scope.row.audit_status==='审核通过'" type="success" size="small" plain>审核通过</el-button>
-              <el-button v-if="scope.row.audit_status==='审核不通过'" type="danger" size="small" plain>审核未通过</el-button>
+              <el-button v-if="scope.row.audit_status==='审核不通过'" type="danger" size="small" plain>审核不通过</el-button>
             </template>
           </el-table-column>
 

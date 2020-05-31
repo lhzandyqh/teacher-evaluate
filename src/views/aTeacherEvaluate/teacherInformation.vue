@@ -471,6 +471,18 @@
             <el-col :span="8">
               <div class="single">
                 <div class="biaoqian">
+                  <span style="font-weight: bolder">原学历：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].former_edu }}</span>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
                   <span style="font-weight: bolder">最高毕业院校：</span>
                 </div>
                 <div class="content">
@@ -478,18 +490,6 @@
                 </div>
               </div>
             </el-col>
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">最高学历：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].higeducation }}</span>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="padding-top: 10px">
             <el-col :span="8">
               <div class="single">
                 <div class="biaoqian">
@@ -503,6 +503,18 @@
             <el-col :span="8">
               <div class="single">
                 <div class="biaoqian">
+                  <span style="font-weight: bolder">最高毕业时间：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].highest_grad_time }}</span>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="padding-top: 10px">
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
                   <span style="font-weight: bolder">最高专业：</span>
                 </div>
                 <div class="content">
@@ -513,32 +525,20 @@
             <el-col :span="8">
               <div class="single">
                 <div class="biaoqian">
+                  <span style="font-weight: bolder">最高学历：</span>
+                </div>
+                <div class="content">
+                  <span>{{ learningExprience[0].higeducation }}</span>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="single">
+                <div class="biaoqian">
                   <span style="font-weight: bolder">最高学位：</span>
                 </div>
                 <div class="content">
                   <span>{{ learningExprience[0].high_degree }}</span>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="padding-top: 10px">
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">原学历：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].former_edu }}</span>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="single">
-                <div class="biaoqian">
-                  <span style="font-weight: bolder">最高毕业时间：</span>
-                </div>
-                <div class="content">
-                  <span>{{ learningExprience[0].highest_grad_time }}</span>
                 </div>
               </div>
             </el-col>
@@ -698,17 +698,17 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">原毕业院校：</span>
+                <span style="font-weight: bolder">&#12288;原毕业院校：</span>
               </div>
               <div class="content">
-                <el-input v-model="editLearningExprience[0].former_grad_college" placeholder="请输入内容"/>
+                <el-input v-model="editLearningExprience[0].former_grad_college" placeholder="请输入学校完整名称"/>
               </div>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">原学制：</span>
+                <span style="font-weight: bolder"> &#12288;原学制：</span>
               </div>
               <div class="content">
                 <el-input v-model="editLearningExprience[0].former_system" placeholder="请输入内容"/>
@@ -733,7 +733,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">原专业：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;&#12288;原专业：</span>
               </div>
               <div class="content">
                 <el-input v-model="editLearningExprience[0].former_major" placeholder="请输入内容"/>
@@ -743,25 +743,25 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">最高毕业院校：</span>
+                <span style="font-weight: bolder">&#12288;原学历：</span>
               </div>
               <div class="content">
-                <el-input v-model="editLearningExprience[0].highest_grad_college" placeholder="请输入内容"/>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="single">
-              <div class="biaoqian">
-                <span style="font-weight: bolder">最高学历：</span>
-              </div>
-              <div class="content">
-                <el-input v-model="editLearningExprience[0].higeducation" placeholder="请输入内容"/>
+                <el-input v-model="editLearningExprience[0].former_edu" placeholder="请输入内容"/>
               </div>
             </div>
           </el-col>
         </el-row>
         <el-row style="padding-top: 20px">
+          <el-col :span="8">
+            <div class="single">
+              <div class="biaoqian">
+                <span style="font-weight: bolder">最高毕业院校：</span>
+              </div>
+              <div class="content">
+                <el-input v-model="editLearningExprience[0].highest_grad_college" placeholder="请输入学校完整名称"/>
+              </div>
+            </div>
+          </el-col>
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
@@ -775,7 +775,19 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">最高专业：</span>
+                <span style="font-weight: bolder">最高毕业时间：</span>
+              </div>
+              <div class="content" style="width: 230px">
+                <el-date-picker v-model="editLearningExprience[0].highest_grad_time" value-format=" yyyy-MM-dd " format="yyyy-MM-dd " type="date" placeholder="选择日期" style="width: 60%;"/>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row style="padding-top: 20px">
+          <el-col :span="8">
+            <div class="single">
+              <div class="biaoqian">
+                <span style="font-weight: bolder">&#12288;&#12288;最高专业：</span>
               </div>
               <div class="content">
                 <el-input v-model="editLearningExprience[0].highest_major" placeholder="请输入内容"/>
@@ -785,36 +797,21 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
+                <span style="font-weight: bolder">最高学历：</span>
+              </div>
+              <div class="content">
+                <el-input v-model="editLearningExprience[0].higeducation" placeholder="请输入内容"/>
+              </div>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="single">
+              <div class="biaoqian">
                 <span style="font-weight: bolder">最高学位：</span>
               </div>
-              <div class="content">
+              <div class="content" style="width: 165px">
                 <el-input v-model="editLearningExprience[0].high_degree" placeholder="请输入内容"/>
               </div>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row style="padding-top: 20px">
-          <el-col :span="8">
-            <div class="single">
-              <div class="biaoqian">
-                <span style="font-weight: bolder">原学历：</span>
-              </div>
-              <div class="content">
-                <el-input v-model="editLearningExprience[0].former_edu" placeholder="请输入内容"/>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="single">
-              <div class="biaoqian">
-                <span style="font-weight: bolder">最高毕业时间：</span>
-              </div>
-              <div class="content" style="width: 250px">
-                <el-date-picker v-model="editLearningExprience[0].highest_grad_time" value-format=" yyyy-MM-dd " format="yyyy-MM-dd " type="date" placeholder="选择日期" style="width: 60%;"/>
-              </div>
-              <!--              <div class="content">-->
-              <!--                <el-input v-model="editLearningExprience[0].highest_grad_time" placeholder="请输入内容"/>-->
-              <!--              </div>-->
             </div>
           </el-col>
         </el-row>
@@ -832,19 +829,27 @@
               <div class="biaoqian">
                 <span style="font-weight: bolder">是否专任教师：</span>
               </div>
-              <div class="content">
-                <el-input v-model="editProfessionalAbility[0].is_full_time_teacher" placeholder="请输入内容"/>
-              </div>
+              <el-select v-model="editProfessionalAbility[0].is_full_time_teacher" placeholder="请选择">
+                <el-option
+                  v-for="item in teacheroptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"/>
+              </el-select>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">是否班主任：</span>
+                <span style="font-weight: bolder">&#12288;是否班主任：</span>
               </div>
-              <div class="content">
-                <el-input v-model="editProfessionalAbility[0].is_head_teacher" placeholder="请输入内容"/>
-              </div>
+              <el-select v-model="editProfessionalAbility[0].is_head_teacher" placeholder="请选择">
+                <el-option
+                  v-for="item in teacheroptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"/>
+              </el-select>
             </div>
           </el-col>
           <el-col :span="8">
@@ -872,9 +877,9 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">岗位级别：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;岗位级别：</span>
               </div>
-              <div class="content">
+              <div class="content" style="width: 200px">
                 <el-input v-model="editProfessionalAbility[0].position_level" placeholder="请输入内容"/>
               </div>
             </div>
@@ -932,7 +937,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">荣誉称号：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;荣誉称号：</span>
               </div>
               <div class="content">
                 <el-select v-model="editProfessionalAbility[0].honor_title" placeholder="请选择">
@@ -1016,7 +1021,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">曾用名：</span>
+                <span style="font-weight: bolder">&#12288;曾用名：</span>
               </div>
               <div class="content">
                 <el-input v-model="editBasicInformation[0].nickname" placeholder="请输入内容"/>
@@ -1026,7 +1031,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">性别：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;性别：</span>
               </div>
               <div class="content">
                 <el-input v-model="editBasicInformation[0].gender" placeholder="请输入内容"/>
@@ -1040,7 +1045,7 @@
               <div class="biaoqian">
                 <span style="font-weight: bolder">出生年月：</span>
               </div>
-              <div class="content" style="width: 250px">
+              <div class="content" style="width: 240px">
                 <el-date-picker v-model="editBasicInformation[0].born_time" type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" placeholder="选择日期" style="width: 60%;"/>
               </div>
             </div>
@@ -1048,7 +1053,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">民族：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;民族：</span>
               </div>
               <div class="content">
                 <el-input v-model="editBasicInformation[0].nation" placeholder="请输入内容"/>
@@ -1060,7 +1065,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">籍贯：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;籍贯：</span>
               </div>
               <div class="content">
                 <el-input v-model="editBasicInformation[0].native_place" placeholder="请输入内容"/>
@@ -1072,8 +1077,14 @@
               <div class="biaoqian">
                 <span style="font-weight: bolder">政治面目：</span>
               </div>
-              <div class="content">
-                <el-input v-model="editBasicInformation[0].political_status" placeholder="请输入内容"/>
+              <div class="content" style="width: 185px">
+                <el-select v-model="editBasicInformation[0].political_status" placeholder="请选择政治面目">
+                  <el-option
+                    v-for="item in politicaloptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"/>
+                </el-select>
               </div>
             </div>
           </el-col>
@@ -1144,7 +1155,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">Email：</span>
+                <span style="font-weight: bolder">&emsp;&ensp;Email：</span>
               </div>
               <div class="content">
                 <el-input v-model="editBasicInformation[0].email" placeholder="请输入内容"/>
@@ -1166,7 +1177,7 @@
           <el-col :span="8">
             <div class="single">
               <div class="biaoqian">
-                <span style="font-weight: bolder">部门：</span>
+                <span style="font-weight: bolder">&#12288;&#12288;部门：</span>
               </div>
               <div class="content">
                 <el-input v-model="editBasicInformation[0].tDept" placeholder="请输入内容"/>
@@ -1200,7 +1211,7 @@
               <div class="biaoqian">
                 <span style="font-weight: bolder">教师资格证书：</span>
               </div>
-              <div class="content">
+              <div class="content" style="width: 155px">
                 <el-input v-model="editBasicInformation[0].quali_cert" placeholder="请输入内容"/>
               </div>
             </div>
@@ -1210,7 +1221,7 @@
               <div class="biaoqian">
                 <span style="font-weight: bolder">教师资格证书编号：</span>
               </div>
-              <div class="content">
+              <div class="content" style="width: 128px">
                 <el-input v-model="editBasicInformation[0].quali_cert_num" placeholder="请输入内容"/>
               </div>
             </div>
@@ -1264,6 +1275,24 @@ export default {
   name: 'TeacherInformation',
   data() {
     return {
+      teacheroptions: [{
+        value: '是',
+        label: '是'
+      }, {
+        value: '否',
+        label: '否'
+      }
+      ],
+      politicaloptions: [{
+        value: '共青团员',
+        label: '共青团员'
+      }, {
+        value: '党员',
+        label: '党员'
+      }, {
+        value: '其他',
+        label: '其他'
+      }],
       zhiwuoptions: [{
         value: '无',
         label: '无'

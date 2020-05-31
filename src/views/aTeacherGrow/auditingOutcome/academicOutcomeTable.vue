@@ -60,8 +60,10 @@ export default {
   name: 'AcademicOutcomeTable',
   data() {
     return {
+      dialogVisible: false,
       token: getToken(),
-      tableData: []
+      tableData: [],
+      AuditingReason: ''
     }
   },
   mounted() {
@@ -74,6 +76,24 @@ export default {
         console.log(response.data.acadeAchAuditResult)
         this.tableData = response.data.acadeAchAuditResult
       })
+    },
+    getAuditing: function(data) {
+      console.log('测试审核结果的每一条数据')
+      console.log(data)
+      if (data.verify_status === '待审核') {
+        this.$message({
+          message: '正在审核，暂无信息，请等待',
+          type: 'warning'
+        })
+      } else if (data.verify_status === '审核通过') {
+        this.$message({
+          message: '恭喜你，审核通过',
+          type: 'success'
+        })
+      } else {
+        this.AuditingReason = data.verify_desc
+        this.dialogVisible = true
+      }
     }
   }
 }
